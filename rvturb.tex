@@ -1,0 +1,414 @@
+\documentclass[12pt]{article}
+\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage{newtxtext}
+\usepackage{libertine}
+\usepackage{inconsolata}
+\usepackage{nicefrac}
+\usepackage[libertine,cmintegrals,cmbraces]{newtxmath}
+\usepackage[T1]{fontenc}
+\usepackage[small,compact]{titlesec}
+\usepackage{natbib}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{cancel}
+\usepackage[pdftex,colorlinks=true,%
+   urlcolor=blue,
+   linkcolor=blue,
+   citecolor=blue,
+   filecolor=blue]{hyperref}
+\usepackage{comment}
+\input{math.tex}
+
+\title{Deterministic and stochastic views of turbulence.}
+\author{Nelson L Dias}
+\date{\textcolor{blue}{Updated on \today}}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+I want to understand the connection between dynamical systems and stochastic processes.
+\end{abstract}
+
+\section{Introduction}
+
+This presentation is about two questions that I have always asked myself (and a
+few other people), for which I never obtained statisfactory answers:
+\begin{enumerate}
+   \item Why do we generate random numbers in a computer in a completely
+     deterministic way, and still ``get away'' with it?
+   \item Why do we take averages and moments of the quantitities in the
+     Navier-Stokes and scalar transport equations, and, again,
+``get away'' with the statistics?
+\end{enumerate}
+
+
+It turns out that fairly reasonable answers for these questions are available,
+even though there is much more open to learning and researching.  The answers
+lie in the intertwined fields of \emph{stochastic processes}, \emph{dynamical
+  systems}, and \emph{ergodic theory}. 
+
+I am not qualified to talk about those things at any decent level of knowledge
+and depth. Therefore, this talk is little more than a sketch of what I can
+\emph{glimpse} to be answers.
+
+
+In the most basic and perhaps brutal sense, it is profitable to \emph{regard}
+turbulence data as realizations of an underlying stochastic process:
+\begin{itemize}
+\item We can do all kinds of statistical manipulations: means, standard
+  deviations, covariances, correlation functions, structure functions, spectra.
+\item This is in principle no different than modeling streamflow or
+  precipitation as stochastic processes, or fluctuations in the stock market.
+\end{itemize}
+
+In this very simple approach, statistics is a \emph{tool} used to analyze a very
+complicated phenomenon.  Rather than go into its intricacies, we are content
+with a statistical description. Therefore, this approach can be called
+``pragmatic'': we forfeit any hope of discussing the underlying \emph{nature} of
+the phenomenon, and instead use descriptors of its variability: all we want is
+to make statements about the probability of finding values related to the
+phenomenon within a specified range.
+
+In many cases, such as the throw of a coin or of a die, although we \emph{know}
+that there are equations of motion governing the process, we also think that the
+complications of the motion and (most often) the initial conditions are so big
+that we are justified in \emph{regarding} the outcome as stochastic: see the
+nice figure \ref{fig:dice}.  There, the statistical description boils down to
+(perhaps) some experiments at actually throwing dice, and then summing up with
+the statement that, for a balanced or fair die, we must have:
+\begin{align}
+P\{ X = 1\} &=
+P\{ X = 2\} =
+P\{ X = 3\} =\nonumber \\
+P\{ X = 4\} &=
+P\{ X = 5\} =
+P\{ X = 6\} = 1/6. \label{eq:probdice}
+\end{align}
+Note the slight circular argument here: a fair die is one that lands on each
+face with the same probability!  From (\ref{eq:probdice}), then, we can make
+statements such as
+\begin{align}
+\Exv\{ X\} &= \sum_{i=1}^6 \frac{i}{6} = \frac{21}{6} = \frac{7}{2}, \\
+\Var\{ X\} &= \sum_{i=1}^6 \left( i - \nicefrac{7}{2}\right)^2\frac{1}{6} = \frac{35}{12}.
+\end{align}
+
+At this point, therefore, we identify two completely separated ways to approach
+a problem:
+\begin{description}
+\item[Deterministically,] by solving the equations for its dynamics, and
+  analyzing a certain number of results.
+\item[Stochastically,] by \emph{not even employing dynamical equations}, and
+  proposing instead statistical descriptors, parametric or not, based on which
+  probabilistic statements can be made.
+\end{description}
+
+\emph{Statistical mechanics}, on the other hand, tries to employ both
+approaches: starting with dynamical equations, we try to derive the
+probabilistic laws for the phenomenom that somehow are compatible, from the
+beginning, with the dynamics.
+
+Most of the successful approaches to turbulence problems are of this ``mixed''
+type. Yet, very seldom do we find in the books and papers an explicit
+justification for the approach. More specifically, 
+\begin{enumerate}
+\item We almost never find a direct mention to the \emph{source} of randomness
+  in  a statistical mechanical description: it is usually assumed just to ``be there''.
+\item We almost never find a justification for treating the outcome of a
+  deterministic dynamical system stochastically.  We take averages of the
+  equations, in many senses, and ``get used to it''.
+\item The emergence of irreversibility and therefore the second law of
+  thermodynamics from deterministic and time-reversible equations (such as the
+  laws of motion of classical mechanics) remains a mystery.
+\end{enumerate}
+
+A complete solution to these shortcomings is not in sight, and in the current
+notes we cannot promise really anything: at the end of the day, we will be
+essentially back to 1--3 above.  However, we hope to give enough background
+here for one to \emph{undertsand} better the shortcomings of our current
+approaches to both the deterministic and the stochastic views of turbulence.
+
+
+
+
+\begin{figure}\centering
+\includegraphics[width=0.25\textwidth]{dice}
+\caption{Physical dice thrown on a table obey the deterministic equations of
+  motion: how come the outcome is ``random''?\label{fig:dice}}
+\end{figure}
+
+\begin{comment}
+But is this enough?
+
+Is a physical coin a good enough surrogate for a zero-one, equal-probability,
+random variable?
+
+Is a computer able to generate such surrogates of random variables? On what
+basis do we accept computer-generated randomness as ``good enough randomness''?
+
+And equally important: are the Navier-Stokes equations able to generate an
+output that is \emph{really} indistinguishable from stochastic?
+
+I should not talk one hour about that: I will try to talk 5 minutes or 7.5
+minutes, and then I must move on.  But I should leave the audiences at least a
+reasonable number of good enough answers for us to move on confidently with out
+statistical tools.
+\end{comment}
+
+\section{Cases where we mix up random and deterministic}
+
+\cite{einstein--uber.molekularkinetischen}'s theory of Brownian motion is a good
+example. 
+
+\section{Why do we need an axiomatic approach}
+
+Very good discussion in
+\begin{center}
+\url{http://scientopia.org/blogs/goodmath/2013/08/24/kolmogorovs-axioms-of-probability/}
+\end{center}
+
+and
+
+\url{http://www.ma.utexas.edu/users/mks/statmistakes/probability.html}
+
+
+\section{State space}
+
+So physicists talk about the space state $\Omega$. In our case, the state space
+is the whole field of fluid velocities $U_i$, temperature $T$, density $\Rho$,
+and pressure $P$ in a region of physical space where the flow takes place.
+
+The time evolution of the system configuration in state space is a really
+interesting thing.  Let the state of the system at $t=0$ be $\vet{x}_0 \in
+\Omega$. Although mathematicians don't bother, I am assuming that $\vet{x}_0$ is some
+kind of vetor in state space. In a discrete-time evolution, the dynamical system
+will evolve according to some rule $T: \Omega \rightarrow \Omega$, so that:
+\begin{align*}
+\vet{x}_1 &= T(\vet{x}_0),\\
+\vet{x}_2 &= T(\vet{x}_1) = T(T\vet{x}_0)), \\
+\vet{x}_n &= T(T(\ldots T(\vet{x}_0))) = T^n(\vet{x}_0).
+\end{align*}
+
+In a continuous-time evolution, we must have
+\begin{align*}
+T_0(\vet{x}_0) &= \vet{x}_0, \\
+T_s(T_t(\vet{x}_0) &= \vet{x}_{s+t} = T_{s+t}(\vet{x}_0).
+\end{align*}
+
+The simplest example, and probably the most interesting to us, is the system of
+ordinary differential equations
+\[
+\mderiva{\vet{x}}{t} = \vet{F}(\vet{x},t).
+\]
+Numerical solutions of partial differential equations, like the Navier-Stokes
+equations, can in principle always be cast in this form.
+
+\section{Examples, from  Collet}
+
+Let $\Omega = [0,1]$ and 
+\begin{equation}
+f(x) = 2x \bmod 1 \label{eq:omeg-2x}
+\end{equation}
+We can actually write a simple program, and plot the result.  It is shown in
+figure \ref{fig:omeg-2x}.
+
+\begin{figure}
+\centering
+\includegraphics[width=0.6\textwidth]{omeg-2x}
+\caption{The dynamical system (\protect\ref{eq:omeg-2x}). For any initial
+  condition (4 shown), it locks to 0 after $t \sim 50$.\label{fig:omeg-2x}}
+\end{figure}
+
+Our second example is the map
+\begin{equation}
+f(x) = 16807 x \bmod 2^{31} - 1.  \label{eq:rnum}
+\end{equation}
+It is shown in figure \ref{fig:rnum}, normalized by $2^{31}$. It is a random
+number generator!
+
+
+\begin{figure}
+\centering
+\includegraphics[width=0.6\textwidth]{rnum}
+\caption{The dynamical system (\protect\ref{eq:rnum}), a simple random number
+  generator.}
+\label{fig:rnum}
+\end{figure}
+
+In both examples above, $T$ (or $f$) makes $\vet{x}$ re-visit the points of
+$\Omega$ on and on. In some loose sense, the relative frequency with which
+different regions of $\Omega$ are visited will produce a probability measure on
+$\Omega$ (I think).
+
+
+Then, on p. 8 of Collet: the Navier-Stokes equations are a dynamical system!
+
+So what is the difference between the NS equations and the simple random number
+generator (\ref{eq:rnum})?  Maybe not that great!
+
+\begin{verbatim}
+Fractional kinetic equations: solutions and applications
+BUY: US$ 28,00
+RENT: $4.00
+Alexander I. Saichev1 and George M. Zaslavsky2
++ VIEW AFFILIATIONS
+Chaos 7, 753 (1997); http://dx.doi.org/10.1063/1.166272
+\end{verbatim}
+
+According to Collet, there are basically to approaches to understand the time
+evolution of a dynamical system:
+\begin{description}
+\item[The topological, or geometric description,] concerned with orbits,
+  attractors, bifurcations, etc.
+\item[The ergodic description,] concerned with measures, (and I add:
+  probabilities, averages, etc.)
+\end{description}
+
+Let us proceed slowly, because Collet is a good source!
+
+Given $A \subset \Omega$, let us define the indicator function $\Chi_A(\vet{x}),
+\; \vet{x} \in \Omega$:
+\[
+\Chi_A(\vet{x}) \equiv \begin{cases}
+   1, & \vet{x} \in A, \\
+   0, & \vet{x} \not\in A.
+\end{cases}
+\]
+Now let a (discrete-time) dynamical system start at $\vet{x}_0$.  
+Note that I don't know whether $\vet{x}_0$ is in $A$.
+The average
+time that it spends in $A$ until time $N$ is
+\begin{equation}
+m_N(\vet{x}_0,A) = \frac{1}{N+1}\sum_{j=0}^N \Chi_A(T^j(\vet{x}_0)).
+\end{equation}
+Then define, assuming its existence:
+\begin{equation}
+\mu_{\vet{x}_0}(A) = \lim_{N\to\infty} m_N(\vet{x}_0,A). \label{eq:def-mu-x0A}
+\end{equation}
+First I would like to verify that the limit also exists for $T(\vet{x}_0)$: how
+do I do it?
+
+
+\begin{align*}
+m_N(T(\vet{x}_0),A) &= \frac{1}{N+1}\sum_{j=0}^N \Chi_A(T^j(T(\vet{x}_0)))\\
+                    &= \frac{1}{N+1}\sum_{j=0}^N \Chi_A(T^{j+1}(\vet{x}_0))
+\end{align*}
+I want to prove $\mu_{\vet{x}_0}(A) = \mu_{T(\vet{x}_0)}(A)$. I make the
+observation that removing finitely many elements from an infinite sum should not
+change the limit. Let's try:
+\begin{align*}
+\mu_{\vet{x}_0}(A) &= \lim_{N\to\infty} \frac{1}{N+1}\sum_{j=0}^N \Chi_A(T^j(\vet{x}_0))\\
+                   &= \cancelto{0}{\lim_{N\to\infty} \frac{1}{N+1} \Chi_A(\vet{x}_0)} + 
+                      \lim_{N\to\infty} \frac{1}{N+1} \sum_{j=1}^N \Chi_A(T^j(\vet{x}_0))
+\end{align*}
+In the same vein,
+\begin{align*}
+\mu_{T(\vet{x}_0})(A) &= \lim_{N\to\infty} \frac{1}{N+1}\sum_{j=0}^N \Chi_A(T^j(T(\vet{x}_0)))\\
+                      &= \lim_{N\to\infty} \frac{1}{N+1} \sum_{j=0}^N \Chi_A(T^{j+1}(\vet{x}_0))\\
+                      &= \lim_{N\to\infty} \frac{1}{N+1} \sum_{j=1}^N \Chi_A(T^{j}(\vet{x}_0))
+                      +   \cancelto{0}{\lim_{N\to\infty} \frac{1}{N+1} \Chi_A(T^{N+1}(\vet{x}_0))}
+\end{align*}
+Hence, $\mu_{\vet{x}_0}(A) = \mu_{T(\vet{x}_0)}(A)\blob$
+
+Things are bound to become more difficult, however. First, it is \emph{also} OK to write
+\begin{align*}
+\mu_{\vet{x}_0}(A) &= \lim_{N\to\infty} \frac{1}{N+1}\sum_{j=0}^N \Chi_A(T^j(\vet{x}_0))\\
+                   &= \lim_{N\to\infty} \frac{1}{N+1} \sum_{j=0}^{N-1} \Chi_A(T^j(\vet{x}_0))
+                   +  \cancelto{0}{\lim_{N\to\infty} \frac{1}{N+1} \Chi_A(T^N(\vet{x}_0))}
+\end{align*}
+Now,
+\begin{align*}
+\mu_{T^{-1}(\vet{x}_0)}(A) &= \lim_{N\to\infty} \frac{1}{N+1}\sum_{j=0}^N \Chi_A(T^j(T^{-1}(\vet{x}_0)))\\
+                   &= \lim_{N\to\infty} \frac{1}{N+1} \sum_{j=-1}^{N-1} \Chi_A(T^{j}(\vet{x}_0))\\
+                   &= \cancelto{0}{\lim_{N\to\infty} \frac{1}{N+1} T^{-1}(\vet{x}_0)} +
+                      \lim_{N\to\infty} \frac{1}{N+1} \sum_{j=0}^{N-1} \Chi_A(T^{j}(\vet{x}_0)) = \mu_{\vet{x}_0}(A)\blob
+\end{align*}
+
+
+Now change gear, and look at
+\[
+m_N(\vet{x}_0,T^{-1}(A)) = \frac{1}{N+1}\sum_{j=0}^N \Chi_{T^{-1}(A)}(T^j(\vet{x}_0)).
+\]
+The main point here is
+\begin{align*}
+T^j(\vet{x}_0) \in T^{-1}(A) &\Rightarrow T(T^j(\vet{x}_0)) \in T(T^{-1}(A)),\\
+                             &\Rightarrow T^{j+1}(\vet{x}_0) \in A.
+\end{align*}
+Hence,
+\[
+\Chi_{T^{-1}(A)}(T^j(\vet{x}_0)) = \Chi_A(T^{j+1}(A).
+\]
+The fact that $\mu_{\vet{x}_0}(A) = \mu_{\vet{x}_0}(T^{-1}(A))$ follows from the same line of reasoning as above.
+
+From Collet:
+\begin{quote}
+If one assumes that $\mu_{\vet{x}_0}(A)$ does not depend on $\vet{x}_0$ at least for Borel sets
+$A$ (or some other sigma algebra but we will mostly consider the Borel sigma
+algebra below), one is immediately lead to the notion of invariant measure.
+\end{quote}
+
+A measure $\mu$ on a sigma-algebra $\mathcal{B}$ is invariant by the measurable map $T$ if for any measurable set $A$ 
+\begin{equation}
+\mu\left(T^{-1}(A)\right) = \mu(A).
+\end{equation}
+This may be very important!  This may assure that the dynamical system is a ``maker'' of random variables!  Let's find out!
+
+Nomenclature: $(\Omega, T, \mathcal{B}, \mu)$ is a dynamical system with state
+space $\Omega$, discrete time evolution $T$, $\mathcal{B}$ is a sigma-algebra on
+$\Omega$ such that $T$ is measurable with respect to $\mathcal{B}$ is $\mu$ is a
+measure on $\mathcal{B}$ that is invariant by $T$.
+
+\textbf{A broken theorem!}
+
+$\mu$ is invariant if and only if for every measurable $g$ we have 
+
+\begin{equation}
+\int g \circ T \,\md{\mu} = \int g \,\md{\mu}.\label{eq:g-on-Omega}
+\end{equation}
+
+Now, since $g$ defines a random variable in $\Omega$, the collection $g\circ
+T^n$ for all $n$ defines a stochastic process. On account of
+(\ref{eq:g-on-Omega}), this is a stationary stochastic process.
+
+\begin{quote}
+All the results from the theory of stochastic processes apply to a dynamical
+system equipped with an invariant measure.
+\end{quote}
+
+It is important to mention that the very notion of what is deterministic, and
+what is stochastic, is fuzzy.  For instance, in this passage
+\cite{breuer.petruccione--burgers.model}, we read, right at the introduction:
+\begin{quote}
+It is well known that models of homogeneous turbulence often rely upon
+statistical tools [1,2]. In principle, statistical concepts are introduced in
+the theory only by considering random initial ensembles of velocity
+fields. However, the time evolution of each member is governed by the
+deterinistic Navier-Stokes equation.
+\end{quote}
+In this view, the time evolution is deterministic, and randomness enters via the
+initial conditions.  But the general definition of a \emph{stochastic process}
+is very similar. It is: given a triplet $(\Omega,\mathcal{F},P)$, a stochastic
+process is a \emph{measurable function}
+\begin{align*}
+   X: (\Omega,T) &\rightarrow \mathbb{R},\\
+        (\omega,t)        &\mapsto x = X(\omega,t)
+\end{align*}
+$T$ is the indexing set. $T$ can be the natural numbers, the integers, the
+positive reals, etc.
+
+
+
+
+
+
+
+
+
+\bibliography{all}
+\bibliographystyle{aaai-named}
+
+
+
+
+\end{document}
