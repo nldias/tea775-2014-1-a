@@ -1,0 +1,373 @@
+% ------------------------------------------------------------------------------
+% Matemática Aplicada II, 2013-2
+%
+% 2013-08-23T15:50:18
+% ------------------------------------------------------------------------------
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=2.5cm,top=2.0cm,bottom=2.0cm]{geometry}
+\usepackage{newtxtext}
+\usepackage{libertine}
+\usepackage[libertine,cmintegrals,cmbraces]{newtxmath}
+\usepackage[T1]{fontenc}
+\usepackage[small,compact]{titlesec}
+\usepackage[brazil]{babel}
+\usepackage[square]{natbib}
+\usepackage{datenumber}
+\usepackage{longtable}
+\usepackage{amsmath}
+\usepackage{tabu}
+\usepackage{booktabs}
+\usepackage{url}
+\input{ira.tex}
+% ------------------------------------------------------------------------------
+% contadores
+% ------------------------------------------------------------------------------
+\newcounter{aula}
+\setcounter{aula}{0}
+\newcounter{inweek}
+\setcounter{inweek}{0}
+\newcounter{semdi}
+% -------------------------------------------------------------------------------
+% algoritmo para calcular automaticamente a data da próxima aula
+% -------------------------------------------------------------------------------
+\newcommand{\mplus}{
+   \ifcase\value{inweek}
+      \addtocounter{datenumber}{3}\setdatebynumber{\thedatenumber} % 6a->2a
+   \or
+      \addtocounter{datenumber}{2}\setdatebynumber{\thedatenumber} % 2a->4a
+   \or
+      \addtocounter{datenumber}{2}\setdatebynumber{\thedatenumber} % 4a->6a
+   \fi
+   \stepcounter{inweek}
+   \ifnum\value{inweek}>2
+      \setcounter{inweek}{0}
+   \fi
+}
+% --------------------------------------------------------------------------------
+% próxima aula
+% --------------------------------------------------------------------------------
+\newcommand{\maisau}{
+   \stepcounter{aula}\arabic{aula}\mplus
+}
+% --------------------------------------------------------------------------------
+% 2a, 4a, 6a (não funcionaria nos fins de semana)
+% --------------------------------------------------------------------------------
+\newcommand{\dsem}{%
+   \setcounter{semdi}{\value{datedayname}}
+   \addtocounter{semdi}{1}
+   \arabic{semdi}\ira%
+}
+% --------------------------------------------------------------------------------
+% imprime o mês e o dia
+% --------------------------------------------------------------------------------
+\newcommand{\mesdi}{\arabic{dateday}/\arabic{datemonth}}
+% --------------------------------------------------------------------------------
+% faz um parágrafo na coluna da tabela
+% --------------------------------------------------------------------------------
+\newcommand{\boxit}[1]{\parbox[t]{10cm}{#1}}
+\newcommand{\boxut}[1]{\parbox[t]{4cm}{#1}}
+
+
+\renewcommand{\ttdefault}{cmtt}% default cmtt
+
+
+\begin{document}
+\setdatenumber{2014}{2}{7} % 6a feira, três dias antes do início das aulas
+
+\title{TT-009 Matemática Aplicada I\\
+Engenharia Ambiental, 1/2014}
+\author{Prof. Nelson Luís Dias (Lemma, Centro Politécnico, 3320-2025)\\
+\texttt{nldias@ufpr.br}}
+\date{\today}
+
+\maketitle
+
+\section*{Ensalamento e horário}
+
+2\iras\, 4\iras\, e 6\iras, Sala PF-15, 07:30--09:10.
+
+\section*{Objetivos Didáticos}
+
+A Disciplina TT009 tem por objetivo aprofundar o domínio pelo aluno de modelos
+matemáticos analíticos e numéricos aplicáveis à Engenharia Ambiental.  A
+disciplina incluirá aplicações de: álgebra linear, equações diferenciais
+ordinárias, técnicas de transformadas, campos escalares e vetoriais, teoremas
+vetoriais, a problemas de Mecânica dos Fluidos, Hidrologia, Meteorologia,
+Química Ambiental e Ecologia, devendo enfatizar a capacidade de formular e de
+resolver alguns problemas típicos (dispersão,reações químicas, dinâmica de
+populações, etc.) de importância em Engenharia Ambiental.
+
+
+\section*{Avaliação de Matemática Aplicada I, 2013-1}
+
+A tabela a seguir contém a avaliação de Matemática Aplicada II no segundo
+semestre de 2012. A tabela contém o
+número de alunos que marcaram notas de 5 a 1.  Em geral, 5 é melhor e 1 é
+pior, e isso é indicado pela letra `E' (esquerda). No entanto, em alguns casos
+ocorre o inverso, sendo isso indicado pela letra `D' (direita).  Finalmente,
+algumas vezes o ideal é o meio-termo (nota 3, letra `M', meio).  Os escores são
+calculados da seguinte forma: dado o número $x_i$ de alunos que marcaram uma
+determinada nota $i$, $i=1,\ldots,5$, os graus para os casos D, E, M são
+\begin{align*}
+D &= (5,4,3,2,1),\\ 
+E &= (1,2,3,4,5),\\
+M &= (1,3,5,3,1);
+\end{align*}
+o escore de cada caso é
+\begin{align*}
+s_D &= \frac{\sum {x_i D_i} }{\sum x_i}, \\
+s_E &= \frac{\sum {x_i E_i} }{\sum x_i}, \\
+s_M &= \frac{\sum {x_i M_i} }{\sum x_i}.
+\end{align*}
+
+Dessa forma, o melhor escore é sempre 5, e o pior escore é sempre 1.
+
+
+\newpage
+\begin{center}
+{\scriptsize
+\begin{longtable}{lp{6cm}cccccccr}
+\toprule 
+   & Notas & 5 & 4 & 3 & 2 & 1 & 0 & & escore \\
+\midrule
+A.   & Auto-Avaliação\\
+A1.  & Meus conhecimentos iniciais (pré-requisitos) foram suficientes e adequados?                                              & 5  & 9  & 6  & 4 & 0  & 1 & E	& 3.62 \\
+A2.  & Adquiri muitos conhecimentos práticos/aplicados?                                                                         & 7  & 4  & 11 & 2 & 1  & 0 & E	& 3.56 \\
+A3.  & Me senti capaz de aplicar os conhecimentos para outras situações e problemas?                                            & 4  & 8  & 8  & 2 & 3  & 0 & E	& 3.32 \\
+A4.  & O meu interesse no tema da disciplina cresceu durante o semestre?                                                        & 7  & 6  & 5  & 6 & 1  & 0 & E	& 3.48 \\
+A5.  & O grau de dificuldade foi, em geral:                                                                                     & 11 & 8  & 6  & 0 & 0  & 0 & M	& 2.60 \\
+A6.  & Me dediquei suficientemente para a compreensão da matéria?                                                               & 3  & 10 & 11 & 1 & 0  & 0 & E	& 3.60 \\
+A7.  & Minha avaliação geral desta disciplina é:                                                                                & 6  & 11 & 5  & 2 & 1  & 0 & E	& 3.76 \\
+A8.  & Em média, estudei para esta disciplina (por semana)?,-1hr,1hr,2hr,3hr,+3hr                                               & 1  & 4  & 10 & 4 & 6  & 0 & D	& 3.40 \\
+\midrule
+B.  & Aula\\
+\midrule
+B1.  & No início foi apresentado um plano de aulas para a disciplina?                                                           & 23 & 1  & 0  & 0 & 0  & 1 & E	& 4.96 \\
+B2.  & Os objetivos da disciplina foram definidos transparentes e claros?                                                       & 20 & 1  & 3  & 0 & 1  & 0 & E	& 4.56 \\
+B3.  & Os critérios das avaliações (exercícios, provas, etc.), foram definidos?                                                 & 20 & 3  & 1  & 0 & 1  & 0 & E	& 4.64 \\
+B4.  & Em geral, o conteúdo das unidades didáticas foi bem organizado?                                                          & 14 & 8  & 2  & 0 & 0  & 1 & E	& 4.50 \\
+B5.  & O volume do conteúdo foi viável?                                                                                         & 11 & 6  & 3  & 4 & 1  & 0 & E	& 3.88 \\
+B6.  & Os materiais adicionais (apostila, mídias, referencias bibliográficas, etc. ) foram bem acessíveis?                      & 14 & 6  & 5  & 0 & 0  & 0 & E	& 4.36 \\
+B7   & Os materiais adicionais (apostila, mídias, referencias bibliográficas, etc. ) ajudaram para o entendimento do conteúdo? & 14 & 7  & 2  & 2 & 0  & 0 & E	& 4.32 \\
+B8.  & Os materiais adicionais foram suficientes para a fixação do conteúdo?                                                    & 7  & 6  & 7  & 2 & 3  & 0 & E	& 3.48 \\
+\midrule
+C.  & Professor \\
+\midrule
+C1.  & O professor foi gentil e aberto com os alunos?                                                                           & 11 & 6  & 5  & 1 & 1  & 1 & E	& 4.04 \\
+C2.  & A atmosfera de trabalho foi animada e não tensa?                                                                         & 3  & 8  & 9  & 3 & 2  & 0 & E	& 3.28 \\
+C3.  & O professor estimulava os alunos a fazer perguntas, sugestões e respondia e reagia a estes?                              & 15 & 6  & 4  & 0 & 0  & 0 & E	& 4.44 \\
+C4.  & O professor esteve disponível fora do horário das aulas?                                                                 & 15 & 5  & 5  & 0 & 0  & 0 & E	& 4.40 \\
+C5.  & O professor parecia motivado com a própria disciplina e pesquisa relacionada?                                            & 21 & 3  & 1  & 0 & 0  & 0 & E	& 4.80 \\
+C6.  & O tempo de aula foi adequado (5 = rápido demais, 1 = lento demais)?                                                                                            & 9  & 7  & 0  & 4 & 4  & 1 & M	& 1.92 \\
+C7.  & O Layout e a letra no quadro e nas transparências foi adequado?                                                          & 21 & 4  & 0  & 0 & 0  & 0 & E	& 4.84 \\
+C8.  & O professor foi capaz de explicar problemas complexos/complicados numa maneira clara e inteligível?                      & 9  & 11 & 4  & 0 & 1  & 0 & E	& 4.08 \\
+C9.  & O professor preparava as aulas com antecedência?                                                                         & 21 & 4  & 0  & 0 & 0  & 0 & E	& 4.84 \\
+C10. & O professor foi assíduo e pontual?                                                                                       & 20 & 3  & 1  & 0 & 0  & 1 & E	& 4.79 \\
+C11. & Foram feitas relações a outras disciplinas do curso?                                                                     & 16 & 6  & 3  & 0 & 0  & 0 & E	& 4.52 \\
+C12. & O professor era competente?                                                                                              & 19 & 3  & 1  & 0 & 1  & 1 & E	& 4.62 \\
+\midrule
+D.  & Consultas e exercícios\\
+\midrule
+D1.  & O conteúdo dos exercícios combinava bem com as aulas?                                                                    & 15 & 6  & 3  & 0 & 1  & 0 & E	& 4.36 \\
+D2.  & Os exercícios ajudavam no entendimento do conteúdo?                                                                      & 15 & 6  & 2  & 0 & 2  & 0 & E	& 4.28 \\
+D3.  & A quantidade dos exercícios foi adequada?                                                                                & 1  & 2  & 9  & 9 & 4  & 0 & E	& 2.48 \\
+D4.  & Os exercícios abrangeram toda a matéria?                                                                                 & 10 & 9  & 2  & 2 & 1  & 1 & E	& 4.04 \\
+D5.  & A prova estava adequada aos conhecimentos ministrados?                                                                   & 9  & 8  & 6  & 0 & 2  & 0 & E	& 3.88 \\
+\midrule
+E.   & Infra-estrutura\\
+\midrule
+E1.  & A sala de aula tem intraestrutura adequada (quadro, data-show, mesas, etc.)?                                             & 15 & 7  & 2  & 1 & 0  & 0 & E	& 4.44 \\
+E2.  & A universidade tem infraestrutura adequada para as atividades fora de sala?                                              & 3  & 0  & 6  & 5 & 10 & 1 & E	& 2.21 \\
+E3.  & A quantidade de alunos em sala prejudicou o aprendizado?  (5 = sim, 1 = não)                                             & 0  & 0  & 3  & 1 & 21 & 0 & D	& 4.72 \\
+\midrule
+média &&&&&&&&& 3.97\\
+\bottomrule
+\end{longtable}}
+\end{center}
+
+
+
+
+
+
+\section*{Unidades Didáticas}
+
+
+{\tabulinesep=1.5pt
+\noindent\begin{tabu}[t]{XX[15]}
+\toprule
+1 & Análise Dimensional e Ferramentas Computacionais \\
+2 & Solução numérica de Polinômios, Integrais, Séries e EDO's\\
+3 & Geometria \& Álgebra \\
+4 & Solução de Sistemas de Equações Lineares\\
+5 & Funções no $\mathbb{R}^n$\\
+6 & Equações Diferenciais Ordinárias\\
+7 & Variáveis Complexas \\
+8 & Soluções de EDO's em Séries de Potências\\
+9 & Transformada de Laplace e Teoria de Distribuições\\
+\bottomrule
+\end{tabu}}
+
+
+
+
+
+\newpage
+
+
+
+
+
+\section*{Programa}
+
+\textbf{Atenção:} Este é um planejamento.  O conteúdo individual das aulas
+poderá variar de acordo com o andamento da disciplina.
+
+
+{\fontsize{8pt}{8pt}\selectfont
+\tabulinesep=1.5pt
+\noindent\begin{tabu}[t]{XXXXX[15]X[5]}
+\toprule
+Aula & UD & Dia & Data & Conteúdo & Progresso \\
+\midrule
+\maisau & 1 & \dsem & \mesdi & Apresentação do curso. Introdução à Análise Dimensional. &  \\
+\maisau & 1 & \dsem & \mesdi & Análise Dimensional. Ferramentas  computacionais.        &  \\ 
+\maisau & 1 & \dsem & \mesdi & Ferramentas computacionais                               &  \\
+\maisau & 2 & \dsem & \mesdi & Polinômios e integrais.                                  &  \\ 
+\maisau & 2 & \dsem & \mesdi & Séries.                                                  &  \\ 
+\maisau & 2 & \dsem & \mesdi & Solução numérica de eq dif --- Euler.                    &  \\
+\maisau & 2 & \dsem & \mesdi & Solução numérica de eq dif --- Runge-Kutta.              &  \\
+\maisau & 2 & \dsem & \mesdi & Solução numérica de eq dif --- Aplicações.               &  \\
+\maisau & 3 & \dsem & \mesdi & Vetores e Álgebra Linear.                                &  \\
+\mplus  &   & \dsem & \mesdi & \textbf{Feriado: Carnaval}                               &  \\
+\mplus  &   & \dsem & \mesdi & \textbf{Feriado: Carnaval}                               &  \\
+\mplus  &   & \dsem & \mesdi & \textbf{Feriado: Carnaval}                               &  \\
+\maisau & 3 & \dsem & \mesdi & Aplicações geométricas.                                  &  \\
+\maisau & 3 & \dsem & \mesdi & Determinantes e hipervolumes.                            &  \\
+\maisau &   & \dsem & \mesdi & \textbf{P1}                                              &  \\
+\maisau & 3 & \dsem & \mesdi & Transformações lineares.                                 &  \\
+\maisau & 3 & \dsem & \mesdi & \textbf{Distribuição do TC1}. Sistemas de
+                               equações lineares; autovalores e autovetores.            &  \\
+\maisau & 4 & \dsem & \mesdi & Eliminação de Gauss.                                     &  \\
+\maisau & 5 & \dsem & \mesdi & Funções no $\mathbb{R}^n$.  Teorema da
+                               função implícita.                                        &  \\
+\maisau & 5 & \dsem & \mesdi & Teorema da função implícita (continuação). 
+                               Regra de Leibnitz.                                       &  \\
+\maisau & 5 & \dsem & \mesdi & Derivada total.  Integrais de linha e de
+                               superfície.                                              &  \\
+\maisau & 5 & \dsem & \mesdi & Integrais de volume.  Jacobiano.                         &  \\
+\maisau & 5 & \dsem & \mesdi & Operadores diferenciais: Divergente,
+                               gradiente, rotacional.                                   &  \\
+\maisau & 5 & \dsem & \mesdi & Teoremas integrais e aplicações.  Integrais de volume
+                               e jacobiano.                                             &  \\
+\maisau & 6 & \dsem & \mesdi & * EDO's: classificação, ordem 1, Ricatti.                  &  \\
+\maisau & 6 & \dsem & \mesdi & * EDO's: Coeficientes constantes, ordem 2, Euler.          &  \\
+\maisau &   & \dsem & \mesdi & * \textbf{P2}                                              &  \\
+\maisau & 7 & \dsem & \mesdi & Números complexos, raízes da equação
+                               $z=a^{1/n}$, fórmula de Euler.                           &  \\
+\maisau & 7 & \dsem & \mesdi & Funções plurívocas.                                      &  \\
+\mplus  &   & \dsem & \mesdi & \textbf{Feriado: 6\ira\ Feira Santa.}                    &  \\
+\mplus  &   & \dsem & \mesdi & \textbf{Feriado: Tiradentes.}                            &  \\
+\maisau & 7 & \dsem & \mesdi & Sequências e séries: teoremas de convergência.           &  \\
+\maisau & 7 & \dsem & \mesdi & Funções analíticas e condições de Cauchy-Riemman.        &  \\
+\maisau & 7 & \dsem & \mesdi & Séries de Taylor e de Laurent.                           &  \\
+\maisau & 7 & \dsem & \mesdi & \textbf{TC1: Entrega}. Séries: Exemplos e aplicações.    &  \\
+\maisau &   & \dsem & \mesdi & \textbf{Livre.}                                          &  \\
+\maisau & 7 & \dsem & \mesdi & Séries: Exemplos e aplicações.                           &  \\
+\maisau & 8 & \dsem & \mesdi & Solução de EDOs em séries de potências.                  &  \\
+\maisau & 8 & \dsem & \mesdi & Método de Frobenius: introdução.                         &  \\
+\maisau & 8 & \dsem & \mesdi & Método de Frobenius: caso geral.                         &  \\
+\maisau & 8 & \dsem & \mesdi & Método de Frobenius e funções especiais da 
+                               Física Matemática.                                       &  \\
+\mplus  & 8 & \dsem & \mesdi & \textbf{P3}                                              &  \\
+\maisau & 9 & \dsem & \mesdi & Catálogo de funções especiais: Bessel e Legendre.        &  \\
+\maisau & 9 & \dsem & \mesdi & Transformada de Laplace: definição, propriedades, 
+                               inversão.                                                &  \\
+\maisau & 9 & \dsem & \mesdi & Transformadas de Laplace: convolução, mudança de origem. &  \\
+\maisau & 9 & \dsem & \mesdi & Transformaas de Laplace: aplicações simples.            &  \\
+\maisau & 9 & \dsem & \mesdi & Transformadas de Laplace: solução de uma 
+                               equação diferencial parcial.                             &  \\
+\maisau & 9 & \dsem & \mesdi & Delta de Dirac $\delta(x)$ e distribuições. 
+                               $H(x)$ e o Cálculo com distribuições.                    &  \\
+\maisau & 9 & \dsem & \mesdi & Aplicações da Teoria de distribuições.                   &  \\
+\maisau & 9 & \dsem & \mesdi & Aplicações da Teoria de distribuições.                   &  \\
+\mplus  &   & \dsem & \mesdi & \textbf{P4}\mplus\mplus\mplus\mplus
+                               \mplus\mplus\mplus\mplus\mplus\mplus
+                               \mplus\mplus\mplus\mplus\mplus                           & \\
+\mplus  & 9 & \dsem & \mesdi & \textbf{F}\\
+\bottomrule
+\end{tabu}}
+
+
+\section*{Avaliação}
+
+A disciplina é semestral. Haverá 4 exames parciais (P1, P2, P3, P4)
+aproximadamente mensais, e um trabalho computacional (TC) para ser entregue
+após a P2, seguidos de um exame final F. \textbf{O conteúdo de todos os exames é
+cumulativo.} Os alunos poderão solicitar revisão de prova durante o período até a
+promulgação da nota do exame posterior. Após esse prazo, não será concedida
+nenhuma revisão.  Os alunos que fizerem a revisão de prova devem comparecer à
+sala do professor com uma cópia impressa da solução da prova, devidamente
+estudada. As soluções são disponibilizadas eletronicamente em
+\texttt{www.lemma.ufpr.br/nldias}, juntamente com as notas. O prazo final para a
+revisão da prova final é 24/12/2013.
+
+A média parcial, P, será a média \textbf{ponderada} de 4 notas: P4
+(\textbf{obrigatoriamente}, com peso 1{,}0), as duas maiores notas entre P1, P2
+e P3 (com peso 1{,}0), e TC (\textbf{obrigatoriamente}, com peso 0{,}5). A
+ausência na P4 obriga o aluno a fazer a F, que contará como substituta da P4 e,
+eventualmente, como a própria F. O resultado parcial é: Alunos com $\mathrm{P <
+  40}$ estão reprovados. Alunos com $\mathrm{P \ge 70}$ estão aprovados. Para os
+alunos aprovados nesta fase, a sua média final é $\mathrm{M=P}$. Alunos com
+$\mathrm{40 \le P < 70}$ farão o exame final F\,. Calcula-se a média final
+$\mathrm{M = (P + F)/2}$. Alunos que obtiverem $M \ge 50$ estão
+aprovados. Alunos com $\mathrm{M < 50}$ estão reprovados. Todas as contas são
+feitas com 2 algarismos significativos com arredondamento para cima.
+
+
+
+
+A sistemática dos exames é a seguinte: para cada prova, eu gero um mapa de prova
+aleatoriamente, com o nome e a posição dos alunos. Ao chegar à porta da sala de
+aula, verifique no mapa a sua posição durante a prova. O caderno de prova já
+estará distribuído, com seu número bem visível.  Deixe todo o seu material junto
+ao quadro negro, e sente-se: tenha com você apenas um estojo contendo: caneta
+azul, lápis ou lapiseira, apontador, e borracha.  Neste curso, não será
+permitido o uso de calculadoras, exceto quando explicitamente indicado antes de
+alguma prova. O mapa de prova torna o seu início muito rápido e confortável para
+você.  Ele também é um elemento muito útil para a comprovação de atos de
+desonestidade (cópia da prova de um colega próximo).  É proibido usar telefones
+celulares durante a prova.  É proibido usar bonés, turbantes, etc., durante a
+prova, exceto por motivos religiosos, e nesse caso o aluno/aluna fica proibido
+de retirar a cobertura durante a prova. É proibido deixar a sala após o início
+da prova.  Portanto, vá ao banheiro antes, desligue o seu celular e deixe-o
+junto com o resto do material dentro de sua pasta ou mochila, verifique suas
+lentes de contato, óculos, etc..  Após o início da prova, você só se retirará
+após entregar a prova.
+
+\section*{Referências Bibliográficas e Estudo}
+
+\textbf{Leia cuidadosamente}
+
+A 1\ira\ parte do Curso será seguida com uma apostila distribuída no início das
+aulas \citep{dias--metnum}; e a 2\ira\ parte com o livro-texto
+\citep{greenberg--advanced}.  \textbf{Consulte ativamente esse material, e a
+  bibliografia adicional}. Reserve pelo menos 6 horas semanais para o estudo em
+casa desta disciplina. Leia a teoria no livro, evitando pular direto para
+exemplos e exercícios. Entenda a teoria, principalmente as deduções.  Essa é a
+única maneira de estudar e entender matemática.  Evite estudar apenas pelo
+caderno.  Procure depois fazer o maior número possível de problemas, mas
+cuidado: evite fazer problemas apenas sobre uma parte da matéria.  Planeje
+cuidadosamente seu tempo de estudo para que você consiga fazer exercícios sobre
+toda a matéria.
+
+\nocite{greenberg--advanced}
+\nocite{butkov:fisica}
+\nocite{dias--metnum}
+
+
+\bibliography{all}
+\bibliographystyle{belllike}
+
+
+\end{document}

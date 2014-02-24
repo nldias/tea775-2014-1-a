@@ -1,0 +1,160 @@
+\documentclass[12pt]{report} 
+\usepackage[a4paper,top=30mm,bottom=30mm,left=25mm,right=25mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[brazil]{babel}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{hyphenat}
+\usepackage{setspace}
+\usepackage{stmaryrd}
+\usepackage{upgreek}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{mathrsfs}
+
+\title{Lições de Teoria Ergódica, Processos Estocásticos e Sistemas Dinâmicos}
+\author{Nelson Luís Dias}
+\date{\today}
+
+\begin{document}
+
+\chapter{2014-02-19: Aditividade finita}
+
+\section*{Como conceitualizamos e formalizamos a propabilidade?}
+
+Existem várias abordagens possíveis:
+\begin{enumerate}
+\item Clássica (teórica ou ``a priori"):
+
+Consideramos um processo aleatório com $n$ resultados igualmente prováveis, e um
+evento $A$ que consiste em $m$ desses resultados.
+\[
+P(A) = \frac{m}{n}\nonumber
+\]
+
+Crítica: Raciocínio circular \textrightarrow uso da palavra ``provável" para definir probabilidade.
+
+\item Empírica (``a posteriori" ou frequentista)}
+
+Sorteios.
+
+\[
+P(A) = \frac{m}{n}\nonumber
+\]
+
+\item  Subjetiva
+
+Sensação, aposta.
+
+\item Axiomática  
+
+Uma tripla de propabilidade é uma tripla formada por ($\Upomega$, $\mathscr{F}$, P), sendo $\Upomega$ um conjunto não vazio,
+$\mathscr{F}$ um campo sigma ($\sigma$-álgebra), e P uma função, com
+
+\begin{eqnarray}\nonumber
+P :\mathscr{F} &\rightarrow& [0,1], \\
+A \in \mathscr{F} &\rightarrow& P(A).
+\end{eqnarray}
+
+Axiomas:
+
+\begin{enumerate}
+\item $P\{A\} \geq 0$
+\item $P\{\Upomega\} =1$
+\item $P\{\mathop{\cup}\limits_{i=1}^n A_i\} = \sum\limits_{i=1}^n P(A_i), \text{ se }A_i \cap A_j = \emptyset\varnothing$.
+\end{enumerate}
+
+Os axiomas funcionam quando $\Upomega$ é finito. Contudo, há conjuntos maiores/infinitos (?) para os quais a noção de probabilidade
+não faz sentido. Assim, $\sigma$-álgebra é um subconjunto dos subconjuntos de $\Upomega$ para o qual faz sentido falar de probabilidade.
+
+\textbf{Exemplo}: Sabendo que $A_1 \cup A_2 \cup A_3 =(A_1 \cup A_2)\cup A_3$, prove por indução que o axioma 3 vale para todo $n$ se ele valer para $n=2$.
+
+\begin{eqnarray}
+P(A_1 \cup...\cup A_n) &=& \sum\limits_{i=1}^n P(A_i), \text{para $n=2$ fica}\\
+P(A_1\cup A_2) &=& \sum\limits_{i=1}^2 P(A_i). \label{eq:ax3n2}
+\end{eqnarray}
+
+Consideramos agora $n+1$ resultados:
+\begin{eqnarray}
+P(A_1\cup ...\cup A_n\cup A_{n+1})=P(B\cup A_{n+1}),
+\end{eqnarray}
+
+\noindent que pode ser trabalhada da mesma forma que (\ref{eq:ax3n2}), sendo que
+
+\begin{eqnarray}
+P(B)=P(\mathop{\cup}\limits_{i=1}^n A_i)=\sum\limits_{i=1}^n P(A_i),
+\end{eqnarray}
+
+\noindent logo
+
+\begin{eqnarray}
+P(A_1\cup ...\cup A_n\cup A_{n+1})&=&P(A_{n+1})\cup\sum\limits_{i=1}^n P(A_i), \\
+P(A_1\cup ...\cup A_n\cup A_{n+1})&=&\sum\limits_{i=1}^{n+1}P(A_i).
+\end{eqnarray}
+
+Agora, para que a prova seja válida, precisamos garantir que $A_{n+1}$ é dijunto de todos os $A_n$.
+
+\begin{eqnarray}
+C\cap[\mathop{\cup}\limits_{i=1}^n A_i] = \mathop{\cup}\limits_{i=1}^n C\cap A_i
+\end{eqnarray}
+
+$\subset$)
+\begin{eqnarray}
+x \in C\cap[\mathop{\cup}\limits_{i=1}^n A_i] &\Leftrightarrow&  x \in C \text{ e } x \in \mathop{\cup}\limits_{i=1}^n A_i,  \text{ logo}\\
+\exists\quad j \in \{1,..,n\} &\mid& x \in A_j, \text{ e}\\
+x \in C \text{ e } x\in A_j &\Leftrightarrow& x\in C\cap A_j.
+\end{eqnarray}
+
+$\supset$)
+\begin{eqnarray}
+x\in \mathop{\cup}\limits_{i=1}^n C\cap A_i &\Leftrightarrow& \exists K \in \{1,...,n\}\mid x\in C\cap A_K, \text{ então}\\
+x\in C &\text{ e }& x\in A_K, \\
+x&\in& C\cap\mathop{\cup}\limits_{i=1}^n A_i, \\
+x\in C &\text{ e }& x\in \mathop{\cup}\limits_{i=1}^n A_i.
+\end{eqnarray}
+
+
+
+\section*{Notas de Aula Professor Paulo Cezar P. de Carvalho - Ailin}
+
+\subsection*{Modelos elementares}
+
+$\Upomega = \{\omega_1,...,\omega_n\}$ \textrightarrow espaço amostral
+
+$\mathscr{F} = 2^\Upomega$\textrightarrow é o conjunto potência e inclui todos o subconjuntos de $\Upomega$, e, em particular, inclui
+$\{\omega_1\}$,$\{...\}$,$\{\omega_n\}$, os quais são chamados eventos complementares.
+
+\begin{eqnarray}
+P(\{\omega_i\}) = P_i \in [0,1] \mid \sum\limits_{i=1}^n P_i=1
+\end{eqnarray}
+
+Caso equiprovável: $P_i = 1/n, \forall i \in \{1,...,n\}$.
+
+\textbf{Exemplo:} 3 moedas são lançadas. Qual a probabilidade de sairem 2 caras?
+
+Como defino $\Upomega$? Se considerarmos $\Upomega=\{0,1,2,3\}$, as probabilidades são $1/8$ para $0$ e $3$, e $3/8$ para $1$ e $2$. Para
+$i=0,1,2,3$, temos
+
+\begin{eqnarray}
+P(i)=\left(\frac{1}{8}\right)^i\left(1-\frac{1}{8}\right)^{3-i}{3\choose i},
+\end{eqnarray}
+
+\noindent distribuição binomial herdada do modelo equiprovável.
+
+\textbf{Exemplo:} Escolher um número no intervalo $[0,1]$ tal que $P([a,b])=b-a$ para qualquer intervalo $[a,b]\subset[0,1]$.
+
+$\Upomega = [0,1]$
+
+A primeira tentativa seria atribuir $P(\{a\})$. Se for equiprovável com $P\neq 0$ já estaria em contradição com a aditividade.
+
+Com um conjunto enumerável (infinito) não é possível ter equiprobabilidade nem
+atribuindo probabilidade nula, porque não conseguiremos que a ``soma"das
+$P(\{\})$ seja $1$.
+
+
+\bibliography{all}
+\bibliographystyle{belllike}
+
+\end{document}

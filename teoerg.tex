@@ -1,0 +1,328 @@
+\documentclass[12pt]{report} 
+\usepackage[a4paper,top=30mm,bottom=30mm,left=25mm,right=25mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[brazil]{babel}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{hyphenat}
+\usepackage{setspace}
+\usepackage{stmaryrd}
+\usepackage{upgreek}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{textcomp}
+\usepackage{mathrsfs}
+\usepackage{natbib}
+
+\title{Lições de Teoria Ergódica, Processos Estocásticos e Sistemas Dinâmicos}
+\author{Nelson Luís Dias}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\chapter{2014-02-19: Aditividade finita}
+
+\section*{Como conceitualizamos e formalizamos a propabilidade?}
+
+Existem várias abordagens possíveis:
+\begin{enumerate}
+\item Clássica (teórica ou ``a priori''):
+
+Consideramos um processo aleatório com $n$ resultados igualmente prováveis, e um
+evento $A$ que consiste em $m$ desses resultados. A probabilidade desse evento é
+então definida por
+\[
+P(A) \equiv \frac{m}{n}.
+\]
+Crítica: no termo ``igualmente prováveis'', já há a suposição de que nós
+``sabemos'' o que é probabilidade antes de defini-la. Trata-se portanto de um
+argumento circular. (COMO PODEMOS MELHORAR ESSE TEXTO?)
+
+
+
+\item Empírica (``a posteriori'' ou frequentista):
+
+Supõe-se que um determinado experimento é repetido $n$ vezes ``nas mesmas
+condições''. Se $A$ é um evento identificável no experimento, a probabilidade de
+$A$ é definida como o limite da razão entre número $m$ de ocorrências de $A$ e o
+número de repetições $n$ quando $n \to \infty$:
+\[
+P(A) \equiv \lim_{n\to\infty} \frac{m}{n}.
+\]
+
+\item  Subjetiva:
+
+Aceita-se que podemos atribuir a diversos eventos uma ``probabilidade'' de
+ocorrência. Por exemplo, eu \emph{acho} que a probabilidade de que eu encontre
+petróleo no terreno de minha casa é (ou deve ser) $10^{-12}$.
+
+\item Axiomática  \citep{kolmogorov--foundations}.
+
+Uma tripla de propabilidade é uma tripla formada por $(\Omega, \mathscr{F},P)$,
+sendo $\Omega$ um conjunto não vazio, $\mathscr{F}$ um campo sigma
+(uma $\sigma$-álgebra) de subconjuntos de $\Omega$ (PRECISAMOS USAR OS TERMOS CORRETOS), e $P$ uma função, com
+
+\begin{align*}
+P :\mathscr{F} &\rightarrow [0,1], \\
+A \in \mathscr{F} &\mapsto P(A).
+\end{align*}
+
+Axiomas:
+
+\begin{align}
+P(A) &\geq 0,\label{eq:posprob}\\
+P(\Omega) &=1,\label{eq:omegaprob}\\
+P\left( \bigcup_{i=1}^n A_i\right) &= \sum_{i=1}^n P(A_i), \qquad \text{se} \qquad A_i \cap A_j = \emptyset.\label{eq:finite-additivity}
+\end{align}
+
+\end{enumerate}
+
+Os axiomas funcionam quando $\Omega$ é finito. Contudo, há conjuntos
+maiores/infinitos (?) para os quais a noção de probabilidade não faz
+sentido. Assim, uma $\sigma$-álgebra será um subconjunto de $2^\Omega$ com uma
+certa estrutura, para o qual deverá fazer sentido especificar probabilidades.
+
+\textbf{Exemplo}: Sabendo que $A_1 \cup A_2 \cup A_3 =(A_1 \cup A_2)\cup A_3$,
+prove por indução que o axioma (\ref{eq:finite-additivity}) vale para todo $n$
+se ele valer para $n=2$.
+
+Para $n=2$,
+\begin{equation}
+A_1 \cup A_2 = \emptyset \Rightarrow P(A_1\cup A_2) = \sum_{i=1}^2 P(A_i). \label{eq:ax3n2}
+\end{equation}
+
+Suponha agora que (\ref{eq:finite-additivity}) valha para $n$, e que 
+\[
+A_{n+1} \cap \left[ \bigcup_{i=1}^n A_i\right] = \emptyset, \qquad i = 1,\ldots, n.
+\]
+Então,
+\begin{eqnarray}
+P\left(A_1\cup ...\cup A_n\cup A_{n+1}\right)=P(B\cup A_{n+1}),
+\end{eqnarray}
+fazendo-se
+\[
+B = \bigcup_{i=1}^n A_i.
+\]
+A partir de (\ref{eq:ax3n2}),
+\begin{equation}
+P\left( B \cup A_{n+1}\right) = P(B) + P(A_{n+1}).
+\end{equation}
+Por sua vez, como supusemos a validade de (\ref{eq:finite-additivity}),
+\begin{eqnarray}
+P(B)=P\left(\bigcup_{i=1}^n A_i\right)=\sum_{i=1}^n P(A_i).
+\end{eqnarray}
+Logo,
+\begin{equation}
+P(A_1\cup ...\cup A_n\cup A_{n+1}) = P(A_{n+1}) + \sum_{i=1}^n P(A_i) =
+\sum_{i=1}^{n+1} P(A_i).
+\end{equation}
+
+
+Note entretanto que, para que a prova seja válida, precisamos garantir que 
+\[
+A_{n+1} \cap \left[ \bigcup_{i=1}^n A_i\right] = \emptyset \Rightarrow
+A_{n+1} \cap A_i = \emptyset, \forall i = 1, \ldots, n.
+\]
+Faça $C = A_{n+1}$, e considere a igualdade:
+\begin{equation}
+C\cap \left[\bigcup_{i=1}^n A_i\right] = \bigcup\limits_{i=1}^n C\cap A_i. \label{eq:dist-capcup}
+\end{equation}
+Se ela for verdadeira, então:
+\begin{align*}
+A_{n+1} \cap \left[ \bigcup_{i=1}^n A_i\right] = \emptyset &\Rightarrow
+\bigcup\limits_{i=1}^n C\cap A_i = \emptyset\nonumber \\
+&\Rightarrow A_{n+1} \cap A_i = \emptyset, \qquad\forall i = 1,\ldots, n.
+\end{align*}
+Portanto, se (\ref{eq:dist-capcup}) for verdadeira, a questão está liquidada.
+
+De fato, 
+\begin{align*}
+x \in C \cap \left[ \bigcup_{i=1}^n A_i \right]&\Rightarrow \left(x \in C \right) \;\text{e}\; \left(x \in \bigcup_{i=1}^n A_i\right), \\
+&\Rightarrow \exists j \in \{1,\ldots,n\} \mathop{|} \left( x \in C \right) \;\text{e}\; \left( x \in A_j\right)\\
+&\Rightarrow x \in C \cap A_j\\
+&\Rightarrow x \in \bigcup_{i=1}^n C \cap A_i.
+\end{align*}
+Isso significa que 
+\[
+C\cap \left[\bigcup_{i=1}^n A_i\right] \subseteq \bigcup\limits_{i=1}^n C\cap
+A_i.
+\] 
+Por outro lado,
+\begin{align*}
+x \in \bigcup_{i=1}^n C \cap A_i &\Rightarrow \exists j\mathop{|} x \in C \cap A_j\\
+&\Rightarrow x \in C \cap \bigcup_{i=1}^n A_i.
+\end{align*}
+Isso significa que
+\[
+\bigcup\limits_{i=1}^n C\cap
+A_i \subseteq C\cap \left[\bigcup_{i=1}^n A_i\right] .
+\]
+Com isso, (\ref{eq:dist-capcup}) está provada, e chegamos ao fim (desta prova).
+
+
+%% $\subset$)
+%% \begin{eqnarray}
+%% x \in C\cap[\mathop{\cup}\limits_{i=1}^n A_i] &\Leftrightarrow&  x \in C \text{ e } x \in \mathop{\cup}\limits_{i=1}^n A_i,  \text{ logo}\\
+%% \exists\quad j \in \{1,..,n\} &\mid& x \in A_j, \text{ e}\\
+%% x \in C \text{ e } x\in A_j &\Leftrightarrow& x\in C\cap A_j.
+%% \end{eqnarray}
+
+%% $\supset$)
+%% \begin{eqnarray}
+%% x\in \mathop{\cup}\limits_{i=1}^n C\cap A_i &\Leftrightarrow& \exists K \in \{1,...,n\}\mid x\in C\cap A_K, \text{ então}\\
+%% x\in C &\text{ e }& x\in A_K, \\
+%% x&\in& C\cap\mathop{\cup}\limits_{i=1}^n A_i, \\
+%% x\in C &\text{ e }& x\in \mathop{\cup}\limits_{i=1}^n A_i.
+%% \end{eqnarray}
+
+
+
+\section*{Notas de Aula Professor Paulo Cezar P. de Carvalho - Ailin}
+
+\subsection*{Modelos elementares}
+
+$\Omega = \{\omega_1,...,\omega_n\}$ \textrightarrow espaço amostral
+
+$\mathscr{F} = 2^\Omega$\textrightarrow é o conjunto potência e inclui todos o subconjuntos de $\Omega$, e, em particular, inclui
+$\{\omega_1\}$,$\{...\}$,$\{\omega_n\}$, os quais são chamados eventos complementares.
+
+\begin{eqnarray}
+P(\{\omega_i\}) = P_i \in [0,1] \mid \sum\limits_{i=1}^n P_i=1
+\end{eqnarray}
+
+Caso equiprovável: $P_i = 1/n, \forall i \in \{1,...,n\}$.
+
+\textbf{Exemplo:} 3 moedas são lançadas. Qual a probabilidade de sairem 2 caras?
+
+Como defino $\Omega$? Se considerarmos $\Omega=\{0,1,2,3\}$, as probabilidades são $1/8$ para $0$ e $3$, e $3/8$ para $1$ e $2$. Para
+$i=0,1,2,3$, temos
+
+\begin{eqnarray}
+P(i)=\left(\frac{1}{8}\right)^i\left(1-\frac{1}{8}\right)^{3-i}{3\choose i},
+\end{eqnarray}
+
+\noindent distribuição binomial herdada do modelo equiprovável.
+
+\textbf{Exemplo:} Escolher um número no intervalo $[0,1]$ tal que $P([a,b])=b-a$ para qualquer intervalo $[a,b]\subset[0,1]$.
+
+$\Omega = [0,1]$
+
+A primeira tentativa seria atribuir $P(\{a\})$. Se for equiprovável com $P\neq 0$ já estaria em contradição com a aditividade.
+
+Com um conjunto enumerável (infinito) não é possível ter equiprobabilidade nem
+atribuindo probabilidade nula, porque não conseguiremos que a ``soma"das
+$P(\{\})$ seja $1$.
+
+\chapter{2014-02-24: Aditividade infinita}
+
+Passamos agora para casos em que o espaço amostral $\Omega$ deixa de ser um
+conjunto finito. Um conjunto infinito pode ser enumerável ou não-enumerável. Um
+conjunto enumerável é um conjunto cujos elementos possam ser colocados em uma
+relação biunívoca com os naturais.  Os racionais são um conjunto enumerável
+(Cantor). Os números reais no intervalo fechado $[0,1]$ são um conjunto
+não-enumerável. 
+
+Quando $\Omega$ é finito, todos os elementos de $2^\Omega$ são eventos: a todos
+e a cada um deles pode ser atribuída uma probabilidade, e os axiomas
+(\ref{eq:posprob})--~(\ref{eq:finite-additivity}) se aplicam. 
+
+Antes de seguir para o infinito, considere o exemplo: $n$ lançamentos de uma
+moeda, cujos resultados individuais podem ser ``cara'' (0) ou ``coroa'' (1). Os
+eventos elementares com os quais podemos construir um espaço amostral são
+$n$-uplas do tipo
+\[
+\begin{array}{c}
+(0,0,\ldots,0,0)\\
+(0,0,\ldots,0,1)\\
+(0,0,\ldots,1,0)\\
+\vdots\\
+(1,1,\ldots,1,1).
+\end{array}
+\]
+Existem $2^n$ casos.
+
+Suponha por exemplo que desejemos calcular a probabilidade de que ocorram $k$
+caras (e, consequentemente, $n-k$ coroas). Um evento deste tipo (exatamente $k$
+caras e $n-k$ coroas) pode ocorrer de $n!$ maneiras.  No entanto, a posição das
+$k$ caras é imaterial: todos os $k!$ casos aparecem da mesma forma.  Idem para
+os $(n-k)!$ casos de permuta das posições das coroas. Concluímos que há
+\[
+\binom{n}{k} = \frac{n!}{k!(n-k)!}
+\]
+possibilidades de ocorrência de $k$ caras.  A sua probabilidade é
+\[
+\frac{{\binom{n}{k}}}{{2^n}}=\binom{n}{k}\left(\frac{1}{2}\right)^k\left(\frac{1}{2}\right)^{n-k}.
+\]
+Isso é um caso particular da distribuição binomial. Se 0 tem probabilidade $p$,
+e 1 tem probabilidade $1-p$, a probabilidade de $k$ zeros em $n$ lançamentos é
+\[
+P(k) = \binom{n}{k} p^k (1-p)^{n-k}.
+\]
+
+\textbf{Exercício:} Mostre que
+\[
+\sum_{k=0}^n P(k) = 1.
+\]
+Prova:
+\begin{align*}
+( p + (1-p))^n & = 1 \\
+&= \sum_{k=0}^n \binom{n}{k} p^k (1-p)^{n-k} \\
+&= \sum_{k=0}^n P(k).
+\end{align*}
+
+Agora, se $\Omega = \{ x_1, x_2, x_3, \ldots \}$ for enumerável, precisamos de
+\[
+\sum_{i=1}^n P(x_i) = 1
+\]
+e fica evidente que os $P(x_i)$ não podem ser todos iguais. Entretanto, ainda é
+possível aproveitar os $x_i$'s desde que a soma acima funcione.
+
+\textbf{Exemplo}: Em um jogo, dez bolas numeradas de 0 a 9 podem ser sorteadas.
+Cada jogador sorteia uma bola, mostra o resultado e retorna a bola. Ganha o
+primeiro jogador que sortear um 7. O jogo poderia durar para sempre?
+
+Nossa opção para construção do espaço amostral é 
+\[
+\Omega = \{ 1, 2, 3, 4, \ldots \}
+\]
+1 significa que o 7 foi sorteado na primeira rodada; 2 na segunda; e assim por
+diante. As probabilidades desses eventos não são iguais:
+\begin{align*}
+P(1) &= \frac{1}{10}, \\
+P(2) &= \frac{9}{10}\times \frac{1}{10},\\
+P(3) &= \frac{9}{10} \times \frac{9}{10} \times \frac{1}{10}, \\
+     &\vdotswithin{=} \\
+P(n) &= \left( \frac{9}{10}\right)^{n-1} \times \frac{1}{10}
+\end{align*}
+
+É elementar verificar que $P(n)$ é uma série geométrica com soma 1.
+
+Finalmente, considere o caso em que desejamos atribuir probabilidades dentro do
+conjunto não-enumerável $\Omega = [0,1]$. Note que faz sentido atribuir
+probabilidade zero a um ponto qualquer:
+\[
+P(X = a) = 0
+\]
+e que é muito razoável atribuir probabilidades a intervalos:
+\[
+P( [a,b] ) = b - a.
+\]
+O problema é que se $A$ é um evento, o seu complemento $\overline{A}$ também tem
+que ser, com $P(\overline{A}) = 1 - P(A)$, pela propriedade de aditividade
+finita (\ref{eq:finite-additivity}). Portanto, se $(a,b] \in \mathscr{F}$,
+devemos também ter $\overline{(a,b]} \in \mathscr{F}$, onde $\mathscr{F}$ será a
+classe dos eventos cujas probabilidades podem ser quantificadas.
+
+Por exemplo, o complemento de um único intervalo $(a,b]$ \emph{não} é um único
+  intervalo. Desconfiamos que uma criatura desse tipo, $[0,a] \cup (b,1]$,
+    precisa ser definida com as mesmas propriedades genéricas de $(a,b]$, de
+      forma que ambos pertençam a $\mathscr{F}$.
+
+\bibliography{all}
+\bibliographystyle{belllike}
+
+\end{document}

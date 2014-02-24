@@ -1,0 +1,161 @@
+% ------------------------------------------------------------------------------
+% Unravelling the mysteries of ergodic processes
+%
+% 2014-02-24T15:18:01
+% ------------------------------------------------------------------------------
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=2.5cm,top=2.0cm,bottom=2.0cm]{geometry}
+\usepackage{newtxtext}
+\usepackage{libertine}
+\usepackage[libertine,cmintegrals,cmbraces]{newtxmath}
+\usepackage[T1]{fontenc}
+\usepackage[small,compact]{titlesec}
+\usepackage[brazil]{babel}
+\usepackage[square]{natbib}
+\usepackage{datenumber}
+\usepackage{longtable}
+\usepackage{amsmath}
+\usepackage{tabu}
+\usepackage{booktabs}
+\usepackage{url}
+\input{ira.tex}
+% ------------------------------------------------------------------------------
+% contadores
+% ------------------------------------------------------------------------------
+\newcounter{aula}
+\setcounter{aula}{0}
+\newcounter{inweek}
+\setcounter{inweek}{0}
+\newcounter{semdi}
+% -------------------------------------------------------------------------------
+% algoritmo para calcular automaticamente a data da próxima aula
+% -------------------------------------------------------------------------------
+\newcommand{\mplus}{
+   \ifcase\value{inweek}
+      \addtocounter{datenumber}{5}\setdatebynumber{\thedatenumber} % 4a->2a
+   \or
+      \addtocounter{datenumber}{2}\setdatebynumber{\thedatenumber} % 2a->4a
+   \fi
+   \stepcounter{inweek}
+   \ifnum\value{inweek}>1
+      \setcounter{inweek}{0}
+   \fi
+}
+% --------------------------------------------------------------------------------
+% próxima aula
+% --------------------------------------------------------------------------------
+\newcommand{\maisau}{
+   \stepcounter{aula}\arabic{aula}\mplus
+}
+% --------------------------------------------------------------------------------
+% 2a, 4a, 6a (não funcionaria nos fins de semana)
+% --------------------------------------------------------------------------------
+\newcommand{\dsem}{%
+   \setcounter{semdi}{\value{datedayname}}
+   \addtocounter{semdi}{1}
+   \arabic{semdi}\ira%
+}
+% --------------------------------------------------------------------------------
+% imprime o mês e o dia
+% --------------------------------------------------------------------------------
+\newcommand{\mesdi}{\arabic{dateday}/\arabic{datemonth}}
+% --------------------------------------------------------------------------------
+% faz um parágrafo na coluna da tabela
+% --------------------------------------------------------------------------------
+\newcommand{\boxit}[1]{\parbox[t]{10cm}{#1}}
+\newcommand{\boxut}[1]{\parbox[t]{4cm}{#1}}
+
+
+\renewcommand{\ttdefault}{cmtt}% default cmtt
+
+
+\begin{document}
+\setdatenumber{2014}{2}{12} % 4a feira, três dias antes do início das aulas
+
+\title{TEA775-Tópicos Especiais em Engenharia Ambiental\\
+PPGEA, 1/2014}
+\author{Prof. Nelson Luís Dias (Lemma, Centro Politécnico, 3320-2025)\\
+\texttt{nldias@ufpr.br}}
+\date{\today}
+
+\maketitle
+
+\section*{Ensalamento e horário}
+
+2\iras\ e  4\iras\, Sala 1 CESEC, 09:30--11:10.
+
+\section*{Objetivos Didáticos}
+
+
+
+\section*{Unidades Didáticas}
+
+
+{\tabulinesep=1.5pt
+\noindent\begin{tabu}[t]{XX[15]}
+\toprule
+1 & Introdução ao curso\\
+2 & Variáveis aleatórias\\
+\bottomrule
+\end{tabu}}
+
+
+
+
+
+\newpage
+
+
+
+
+
+\section*{Programa}
+
+\textbf{Atenção:} Este é um planejamento.  O conteúdo individual das aulas
+poderá variar de acordo com o andamento da disciplina.
+
+
+{\fontsize{8pt}{8pt}\selectfont
+\tabulinesep=1.5pt
+\noindent\begin{tabu}[t]{XXXXX[15]X[5]}
+\toprule
+Aula & UD & Dia & Data & Conteúdo & Progresso \\
+\midrule
+\maisau & 1 & \dsem & \mesdi & Apresentação do curso. &  \\
+\maisau & 1 & \dsem & \mesdi & Variáveis aleatórias: aditividade finita.      &  \\ 
+\maisau & 1 & \dsem & \mesdi & Variáveis aleatórias: aditividade infinita.    &  \\
+\maisau & 1 & \dsem & \mesdi & O que é uma álgebra-sigma?    &  \\
+\mplus  &   & \dsem & \mesdi & \textbf{Feriado: Carnaval}                               &  \\
+\mplus  &   & \dsem & \mesdi & \textbf{Feriado: Carnaval}                               &  \\
+\bottomrule
+\end{tabu}}
+
+
+
+
+
+
+
+
+
+
+\nocite{birkhoff-proof-ergodic}
+\nocite{breuer.petruccione--burgers.model}
+\nocite{einstein--uber.molekularkinetischen}
+\nocite{einstein--movement}
+\nocite{kolmogorov--foundations}
+\nocite{langevin--brownien}
+\nocite{lemons.gythiel--langevin.brownian}
+\nocite{reynolds--b-dynamical}
+\nocite{james--probabilidade.intermediario}
+\nocite{rosenthal--first.look}
+\nocite{todorovic--introduction.stochastic.processes}
+
+
+
+
+\bibliography{all}
+\bibliographystyle{belllike}
+
+
+\end{document}
