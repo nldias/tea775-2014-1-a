@@ -16,6 +16,8 @@
 \usepackage{mathrsfs}
 \usepackage{natbib}
 
+\input{math.tex}
+
 \title{Lições de Teoria Ergódica, Processos Estocásticos e Sistemas Dinâmicos}
 \author{Nelson Luís Dias}
 \date{\today}
@@ -287,11 +289,13 @@ primeiro jogador que sortear um 7. O jogo poderia durar para sempre?
 
 Nossa opção para construção do espaço amostral é 
 \[
-\Omega = \{ 1, 2, 3, 4, \ldots \}
+\Omega = \{ 0, 1, 2, 3, 4, \ldots \}
 \]
-1 significa que o 7 foi sorteado na primeira rodada; 2 na segunda; e assim por
-diante. As probabilidades desses eventos não são iguais:
+0 significa que o 7 \emph{nunca} é sorteado; 1 significa que o 7 foi sorteado
+na primeira rodada; 2 na segunda; e assim por diante. As probabilidades desses
+eventos não são iguais:
 \begin{align*}
+P(0) &= ?, \\
 P(1) &= \frac{1}{10}, \\
 P(2) &= \frac{9}{10}\times \frac{1}{10},\\
 P(3) &= \frac{9}{10} \times \frac{9}{10} \times \frac{1}{10}, \\
@@ -299,7 +303,10 @@ P(3) &= \frac{9}{10} \times \frac{9}{10} \times \frac{1}{10}, \\
 P(n) &= \left( \frac{9}{10}\right)^{n-1} \times \frac{1}{10}
 \end{align*}
 
-É elementar verificar que $P(n)$ é uma série geométrica com soma 1.
+É elementar verificar que $P(n), \; n \ge 1,$ é uma série geométrica com soma
+1. Portanto, o evento ``o 7 nunca é sorteado'', indicado por 0, tem
+probabilidade complementar à $P(1) + P(2) + \ldots = 1$, e sua probabilidade é
+zero. 
 
 Finalmente, considere o caso em que desejamos atribuir probabilidades dentro do
 conjunto não-enumerável $\Omega = [0,1]$. Note que faz sentido atribuir
@@ -317,10 +324,213 @@ finita (\ref{eq:finite-additivity}). Portanto, se $(a,b] \in \mathscr{F}$,
 devemos também ter $\overline{(a,b]} \in \mathscr{F}$, onde $\mathscr{F}$ será a
 classe dos eventos cujas probabilidades podem ser quantificadas.
 
-Por exemplo, o complemento de um único intervalo $(a,b]$ \emph{não} é um único
+Entretanto, o complemento de um único intervalo $(a,b]$ \emph{não} é um único
   intervalo. Desconfiamos que uma criatura desse tipo, $[0,a] \cup (b,1]$,
     precisa ser definida com as mesmas propriedades genéricas de $(a,b]$, de
-      forma que ambos pertençam a $\mathscr{F}$.
+      forma que ambos pertençam a $\mathscr{F}$. O caminho para $\mathscr{F}$,
+      entretanto, é longo.
+
+
+Uma extensão do que vimos para a binomial é a distribuição multinomial:
+
+\begin{align*}
+1 = (p_1 + \ldots + p_n)^n &= \sum_{l_1 + \ldots + l_k = n} 
+                              \binom{n}{l_1 \ldots l_k}
+                              p_1^{l_1}\ldots p_k^{l_k},\\
+\binom{n}{l_1 \ldots l_k} &= \frac{n!}{l_1! \ldots l_k!}.
+\end{align*}
+
+\chapter{2014-02-26: Semi-anéis, anéis, e outros bichos}
+
+
+
+
+\textbf{Definição}
+
+Uma classe $\mathscr{S}$ de conjuntos é um \emph{semi-anel} quando:
+\begin{align*} 
+\emptyset &\in \mathscr{S}, \\
+A,B \in \mathscr{S} \Rightarrow A \cap B &\in \mathscr{S},\\
+A,B \in \mathscr{S} \Rightarrow 
+A - B &= A \cap \overline{B} = \bigsqcup_{i=1}^n E_i,
+\end{align*}
+onde $E_i \in \mathscr{S}$. O símbolo $\bigsqcup$ significa ``uniões disjuntas''.
+
+Seja $\mathscr{S}$ a classe formada por \emph{intervalos} do tipo
+\[
+(a,b]  \qquad\text{ou}\qquad \emptyset.
+\]
+
+\begin{enumerate}
+\item $\emptyset \in \mathscr{S}$?  Sim.
+\item A interseção de dois elementos de $\mathscr{S}$ pertence a $\mathscr{S}$?
+
+Sim: as possibilidades para interseção de $(a,b]$ com $(c,d]$ são
+\begin{align*}
+\emptyset &\in \mathscr{S}, \\
+(c,b]     &\in \mathscr{S}, \\
+(c,d]     &\in \mathscr{S}, \\
+(a,d]     &\in \mathscr{S}, \\
+(a,b]     &\in \mathscr{S}.
+\end{align*}
+
+Talvez seja possível resumir:
+\[
+(a,b] \cap (c,d] = (\max(a,c), \min(b,d)) \qquad \text{ou} \qquad\emptyset ?
+\]
+
+\item $A - B$ ($A$, $B$ intervalos) é exprimível como uma união finita disjunta
+  de intervalos?
+
+Sim:
+\begin{align*}
+(a,b] \cap \overline{(c,d]} &= (a,b] \cap \big[ (0,c] \cup (d,1] \big] \\
+                            &= \underbrace{(a,b] \cap (0,c]}_{\in \mathscr{S}}
+                \cup \underbrace{(a,b] \cap (d,1]}_{\in \mathscr{S}}\blob
+\end{align*}
+\end{enumerate}
+
+Portanto, essa classe $\mathscr{S}$ de intervalos é um semi-anel.
+
+\textbf{Definição:}
+
+$\mathscr{R} \subset 2^{\Omega}$ é um \emph{anel} quando:
+\begin{align*}
+\emptyset &\in \mathscr{R}, \\
+A, B \in \mathscr{R} &\Rightarrow A \cap B \in \mathscr{R},\\
+A, B \in \mathscr{R} &\Rightarrow A \mathop{\vartriangle} B \in \mathscr{R}.
+\end{align*}
+
+Lembre-se:
+\[
+A \mathop{\vartriangle} B \equiv
+(A - B) \cup (B - A).
+\]
+
+Tivemos uma discussão sobre o motivo de se usar a diferença simétrica nessas
+definições: alguém gostaria de resumir a discussão em \LaTeX?
+
+
+Anéis triviais são:
+\[
+\{ \emptyset, \Omega \} \qquad \text{e} \qquad
+2^{\Omega}.
+\]
+
+É possível mostrar as seguintes propriedades de anéis: se $A, B \in
+\mathscr{R}$, então:
+\begin{align*}
+A \cap B &\in \mathscr{R}, \\
+A \mathop{\vartriangle} B &\in \mathscr{R}, \\
+A \cup B &\in \mathscr{R}, \\
+A - B &\in \mathscr{R}, \\
+B - A &\in \mathscr{R}, \\
+\emptyset &\in \mathscr{R}.
+\end{align*}
+
+Mas a última não faz parte da \emph{definição} de $\mathscr{R}$????
+
+Note também que o complemento ainda não apareceu na jogada.
+
+\textbf{Teorema}
+
+A partir de um semi-anel $\mathscr{S}$ é possível construir um anel
+$\mathscr{R}$ por meio somente de uniões disjuntas finitas de elementos de
+$\mathscr{S}$, ou seja:
+\[
+\mathscr{R} = \left\{  \bigsqcup_{i=1}^n A_i\right\}, \; A_i \in \mathscr{S}.
+\]
+
+\textbf{Definição}
+
+Uma \emph{álgebra} ou um \emph{campo} $\mathscr{A}$ é um anel que contém
+$\Omega$. Segue-se imediatamente que
+\[
+A \in \mathscr{A} \Rightarrow \overline{A} \in \mathscr{A}.
+\]
+
+\textbf{Definição}
+Um $\sigma$-anel é um anel fechado por uma união enumerável
+
+Comentário: ``fechado'' significa que uniões enumeráveis de elementos do
+$\sigma$-$\mathscr{R}$ ainda pertencem a ele.
+
+Segue-se imediatamente que o $\sigma$-$\mathscr{R}$ também é fechado por
+interseções enumeráveis.
+
+
+
+\textbf{Definição}
+Uma $\sigma$-álgebra ou $\sigma$-campo ou campo de Borel é uma álgebra fechada
+por uniões enumeráveis.
+
+Segue-se imediatamente que uma $\sigma$-álgebra também é fechada por interseções
+enumeráveis. 
+
+\textbf{Definição}
+Dada uma classe $\mathscr{C} \subseteq 2^{\Omega}$, uma sequência monótona de
+elementos $E_i \in \mathscr{C}, \; i \in \mathbb{N}$, é definida por 
+\begin{align*}
+E_i \subseteq E_{i+1} \\
+\intertext{ou}
+E_i \supseteq E_i.
+\end{align*}
+
+\textbf{Definição}
+Uma classe $\mathscr{M}$ é dita \emph{monótona} quando todas as suas sequências
+monótonas atendem a:
+\begin{align*}
+E_i \subseteq E_{i+1} &\Rightarrow \bigsqcup_{i=1}^n E_i \in \mathscr{M},\\
+\intertext{ou}
+E_i \supseteq E_{i+1} &\Rightarrow \bigsqcap_{i=1}^n E_i \in \mathscr{M}.
+\end{align*}
+
+A questão agora é como construir $\sigma$-álgebras a partir de álgebras, anéis
+ou semi-anéis.
+
+\textbf{Teorema}: Para as famílias $\mathscr{R}$, $\mathscr{A}$,
+$\sigma$-$\mathscr{R}$, $\sigma$-$\mathscr{A}$, $\mathscr{M}$ de anéis, álgebras,
+sigma-anéis, sigma-álgebras, e classes monótonas $\mathscr{M}$, interseções
+arbitrárias produzem famílias de mesmo tipo.
+
+Em resumo: se $\mathscr{F}_i, \; i \in I$, são classes de algum dos tipos acima,
+então
+\[
+\bigsqcap_{i\in I} \mathscr{F}_i
+\]
+também é.
+
+Por exemplo: se
+\[
+\mathscr{F}_i, \; i \in I
+\]
+são $\sigma$-álgebras, então 
+\[
+\bigsqcap_{i\in I} \mathscr{F}_i
+\]
+também é uma $\sigma$-álgebra.
+
+\section{Geração de $\sigma$-álgebras}
+
+Seja $\mathscr{S}$ um semi-anel que gera o anel $\mathscr{R}$.
+A \emph{menor} $\sigma$-álgebra contendo $\mathscr{S}$ ou gerada por
+$\mathscr{R}$ é denominada ``$\sigma$-álgebra de Borel'' $\mathscr{B}$.
+
+No caso de $\Omega = [0,1]$, a $\sigma$-álgebra de Borel é a menor
+$\sigma$-álgebra que contém os intervalos $(a,b]$.
+
+Para ela, é possível definir uma medida de probabilidade
+\begin{align*}
+P : \mathscr{B} &\to [0,1], \\
+     A \in \mathscr{B} &\mapsto P(A) \in [0,1],
+\end{align*}
+de tal forma que 
+\begin{align*}
+P(\emptyset) &= 0, \\
+P(\Omega) &= 1,\\
+P\left(\bigsqcup_{i=1}^\infty A_i\right) &= \sum_{i=1}^\infty P(A_i).
+\end{align*}
+
 
 \bibliography{all}
 \bibliographystyle{belllike}
