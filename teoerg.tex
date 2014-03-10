@@ -221,6 +221,8 @@ $P(\{\})$ seja $1$.
 
 \chapter{2014-02-24: Aditividade infinita}
 
+(Ou $\sigma$--Aditividade)
+
 Passamos agora para casos em que o espaço amostral $\Omega$ deixa de ser um
 conjunto finito. Um conjunto infinito pode ser enumerável ou não-enumerável. Um
 conjunto enumerável é um conjunto cujos elementos possam ser colocados em uma
@@ -530,6 +532,253 @@ P(\emptyset) &= 0, \\
 P(\Omega) &= 1,\\
 P\left(\bigsqcup_{i=1}^\infty A_i\right) &= \sum_{i=1}^\infty P(A_i).
 \end{align*}
+
+\chapter{2014-03-10: Existe um conjunto não-mensurável em
+  $(0,1]$}\label{chap:non-measurable-set}
+
+%\newcommand{\ooplus}{\mathbin{\stackrel{\curvearrowleft}{+}}}
+\newcommand{\ooplus}{\xhookleftarrow{+}}
+
+Uma nova operação será usada \textit{ad nauseam} nesta lição. Para $x,y \in
+(0,1]$:
+\begin{equation}
+x \boxplus y \equiv 
+\begin{cases}
+x + y, & x + y \le 1,\\
+x + y - 1, & x+ y > 1.
+\end{cases}
+\end{equation}
+
+(Eu prefiro $\oplus$ \ldots)
+
+Agora, para \emph{qualquer} subconjunto $E$ de $(0,1]$, defina um novo conjunto $E(x)$
+
+\begin{equation}
+E(x) \equiv \left\{ x \boxplus y, \; y \in E\right\}.
+\end{equation}
+
+$E(x)$ é a \emph{translação} (de uma distância $x$) do conjunto $E$. 
+
+\begin{description}
+\item[Dúvida:] $E \subseteq (0,1]$ ou $E \in \mathscr{B}$? 
+\item[Dúvida:] ``translação \emph{em} $x$'' me soa estranho, pois todo $y \in E$ é transladado
+\emph{de} $x$.
+\end{description}
+
+Suponha que exista uma coisa tal como uma medida ``natural'' em $(0,1]$.  Para o
+  intervalo $(a,b]$ essa medida é
+\begin{equation}
+\left| (a,b]\right| \equiv b - a.\label{eq:def-medida}
+\end{equation}
+
+Vamos supor, sem entrar em muitos detalhes, que para todo $B \in \mathscr{B}$,
+existe uma $|B|$ compatível com (\ref{eq:def-medida}), \textit{i.e.}, redutível
+a (\ref{eq:def-medida}) se $B$ for um intervalo.
+
+A notação $E(x)$ é a usada por \cite{taylor--intro.measure.integration}. 
+
+Agora, se $E \in \mathscr{B}$, então,
+
+\begin{equation}
+|E(x)| = |E|. \label{eq:medida-mantem-x}
+\end{equation}
+
+Agora, como sempre, $\mathbb{Q}$ é o conjunto dos racionais.  Esse conjunto é
+enumerável. Consideremos os racionais contidos em $(0,1]$. Esse segundo conjunto
+  é
+\begin{equation}
+Q \equiv \mathbb{Q} \cap (0,1].\label{eq:def-Q-em-zero-um}
+\end{equation}
+
+Com essas definições à mão, estudemos então as propriedades dos conjuntos do
+tipo $Q(x)$.
+
+\begin{enumerate}
+\item 
+\begin{equation}
+x \in (0,1] \Rightarrow x \in Q(x). \label{eq:x-in-Qx}
+\end{equation}
+Será verdade? Como provar?
+\[
+Q(x) = \left\{ x \boxplus y, \; y \in Q \right\}
+\]
+Se $0$ pertencesse a $Q$, (\ref{eq:x-in-Qx}) seria trivial. Mas é quase, porque
+$1 \in Q$.  Faça $y = 1$ acima; então,
+\[
+x = x + 1 - 1 = x \boxplus 1 \in Q(x)\blob
+\]
+\item 
+\begin{equation}
+x \in Q \Rightarrow Q(x) = Q.\label{eq:xinQ-Qx-eq-Q}
+\end{equation}
+De fato: para começar, $x,y \in Q \Rightarrow x \boxplus y \in Q$. De fato, $x
+\boxplus y \in (0,1]$, e tanto $x + y$ quanto $x + y -1$, conforme for o caso,
+  são números racionais em $(0,1]$.  Isso basta!, pois, \emph{neste caso},
+$Q(x) = \left\{ x \boxplus y, \; y \in Q \right\} = Q\blob$ (Ailin, esta dedução
+    é \emph{diferente} de suas notas.  Estou tentando tirar o máximo partido de
+    `$\boxplus$'!  Está certo?)
+\item
+\begin{align}
+x_1 - x_2 \not\in \mathbb{Q} &\Rightarrow Q(x_1) \cap Q(x_2) = \emptyset, \label{eq:irraQx1x2}\\
+x_1 - x_2 \in     \mathbb{Q} &\Rightarrow Q(x_1) = Q(x_2).\label{eq:raciQx1x2}
+\end{align}
+Dessa forma, os conjuntos $\left\{ Q(x), \; x \in (0,1]\right\}$ (que constituem
+  uma \emph{classe}, ou \emph{família}) particionam o intervalo $(0,1]$ em
+    subconjuntos disjuntos cuja união é o próprio $(0,1]$.  Há bastante material
+      aqui.  Antes das deduções, vamos escrever formalmente essa última
+      observação:
+\[
+\bigcup_{x \in (0,1]} Q(x) = (0,1].
+\]
+Note também que os índices na expressão acima são demasiados, devido a (\ref{eq:raciQx1x2}).  Queremos chegar a
+uma afirmação mais econômica:
+\[
+\bigsqcup_{x \in T} Q(x) = (0,1]
+\]
+(note a disjunção). Na sequência, precisamos provar (\ref{eq:irraQx1x2})--(\ref{eq:raciQx1x2}) e
+prosseguir na obtenção do conjunto $T$. Esse último na verdade se revelará um
+conjunto interessante, e na verdade o ponto final desta lição: $T$ se revelará
+um conjunto \emph{não mensurável}.
+
+Para provar (\ref{eq:irraQx1x2}): Vamos tentar \textit{reductio ad absurdum}.
+Seja $z \in Q(x_1)$ e $z \in Q(x_2)$: nesse caso, a interseção $Q(x_1) \cap
+Q(x_2)$ não seria o conjunto vazio.  Porém, debaixo dessa hipótese:
+\begin{align*}
+z &= x_1 \boxplus y, \; y \in Q, \\
+z &= x_2 \boxplus y, \; y \in Q.
+\end{align*}
+Agora,  
+\begin{align*}
+( x_1 \boxplus y ) - ( x_2 \boxplus y) &= x_1 - x_2, \; \text{ou}\\
+                                       &= x_1 - x_2 - 1 \; \text{ou}\\
+                                       &= x_1 - x_2 + 1.
+\end{align*}
+Portanto, subtraindo (dessa forma) as duas expressões acima,
+\[
+(-1 \; \text{ou} \; 0 \; \text{ou} +1) = x_1 - x_2.
+\]
+mas $(-1,0,+1)$ são racionais, o que contraria a hipótese original sobre $x_1 -
+x_2\blob$
+
+Para provar (\ref{eq:raciQx1x2}): Volte acima e escreva a expressão geral:
+\[
+(x_1 \boxplus y) - (x_2 \boxplus y) = x_1 - x_2 + s,
+\]
+onde, como vimos, ou $s=0$ ou $s=-1$ ou $s=+1$. Reescreva:
+\[
+x_1 \boxplus y = x_2 \boxplus y + (x_1 - x_2) + s.
+\]
+Note agora que é \emph{sempre} possível escrever $x_2 \boxplus y = x_2 + r$,
+onde $r$ é racional, e não necessariamente está em $Q$. Substitua:
+\[
+x_1 \boxplus y = x_2 + r + s + (x_1 - x_2).
+\]
+O lado esquerdo é um número em $Q$.  Portanto, o lado direito é um número em
+$Q$ e, além disso:
+\begin{align*}
+x_2 \in Q, \\
+x_2 + p \in Q,
+\end{align*}
+onde $p = (r + s + (x_1 - x_2))$ e portanto $p \in \mathbb{Q}$ (mas não
+necessariamente $ p \in Q$).  Portanto, é possível escrever o lado direito
+como $x_2 \boxplus z$, onde $z \in Q$.  Disso se segue que 
+\[
+\left\{ x_1 \boxplus y, \; y \in Q\right\} = 
+\left\{ x_2 \boxplus z, \; z \in Q\right\} 
+\]
+e portanto $Q(x_1) = Q(x_2)\blob$
+\end{enumerate}
+
+Relembrando:
+\[
+x \in Q \Rightarrow Q(x) = Q
+\]
+significa, por exemplo:
+\[
+Q(1/2) = Q(1/3) = Q(1).
+\]
+
+\[
+x_1 - x_2 \in \mathbb{I} \Rightarrow Q(x_1) \cap Q(x_2) = \emptyset
+\]
+significa, por exemplo:
+\[
+Q(\sqrt{3}/2) \cap Q(3/2) = \emptyset.
+\]
+
+\[
+x_1 - x_2 \in \mathbb{Q} \Rightarrow Q(x_1) = Q(x_2) 
+\]
+significa, por exemplo:
+\[
+Q(\sqrt{2}/1000 + 1/8) = Q(\sqrt{2}/1000 + 3/8)
+\]
+
+Ou seja: as criaturas estão ficando estranhas.
+
+Para fechar esta parte bastante cansativa para a mente:
+\[
+\bigcup_{x \in (0,1]} Q(x) = (0,1]
+\]
+pois $x \in Q(x)$.
+
+\section{O axioma da seleção e um conjunto estranho}
+
+Seja $\mathscr{C}$ a família dos conjuntos $Q(x)$, $x \in (0,1]$. Escolha um
+  único ponto em $(0,1]$ pertencente a cada $Q(x)$.  O conjunto dos pontos assim
+    escolhidos será chamado $T$, e temos que $T \subset (0,1]$. O que fizemos
+      significa que, \emph{por definição}, não há dois pontos em $T$
+      pertencendentes ao mesmo $Q(x)$. Segue-se que
+\[
+   \bigsqcup_{t \in T} Q(t) = (0,1].
+\]
+
+Estudemos as propriedades dos conjuntos $T(r_i), r_i \in Q$.
+\begin{enumerate}
+\item
+\begin{equation}
+\bigcup_{i=1}^\infty T(r_i) = (0,1].\label{eq:union-ri}
+\end{equation}
+Só precisamos provar que, se $x \in (0,1]$, $\exists i \in Q : x \in
+  T(r_i)$. Mas, de (\ref{eq:x-in-Qx}), segue-se que $x \in (0,1] \Rightarrow x
+    \in Q(x)$. Agora, portanto, se $x \in Q(x)$, escolha $t \in Q(x)$, onde $t$
+    é o representante de $Q(x)$: $t \in T$.
+
+Veja:
+\begin{align*}
+Q(x) &= { x \boxplus y, \; y \in Q }, \\
+t \in Q(x) &\Rightarrow t = x \boxplus y \; \text{para algum $y \in Q$}.
+\end{align*}
+Logo, existe algum $q \in Q$ tal que $t = x + q$; pelo mesmo motivo agora deve
+existir algum $r \in Q$ tal que $x = t + r$. Mas $Q$ é enumerável (não
+provamos!), portanto existe um índice $i$ tal que $x = t + r_i$, $i \in
+\mathbb{N}$, e $Q = \bigsqcup_{i=1}^\infty r_i$. Logo, $x \in T(r_i)$. A união
+dos $T(r_i)$ gera o $(0,1]$.
+\item Os $T(r_i)$ são disjuntos. Lembre-se de que $T$ contém um único
+  representante de cada $Q(x)$. Se houvesse $r_i \ne r_j$ com $y \in \left[ T(r_i) \cap
+  T(r_j)\right]$, então teríamos
+\begin{align*}
+y &= t_i \boxplus r_i \qquad \text{e}\\
+y &= t_j \boxplus r_j.
+\end{align*}
+``Subtraia'':
+\[
+0 = (t_i - t_j) + q
+\]
+onde $q$ é racional. Logo, $t_i - t_j$ é racional, donde $Q(t_i) = Q(t_j)$.  Mas
+isso não é possível, porque $Q(t_i)$ possui um único representante em
+$T$. Portanto, a disjunção dos $T(r_i)$'s transforma (\ref{eq:union-ri}) em 
+\begin{equation}
+\bigsqcup_{i=1}^\infty T(r_i) = (0,1].\label{eq:union-disjoint-ri}
+\end{equation}
+\end{enumerate}
+Finalmente: se $T$ fosse mensurável, haveria $|T| = |T(r_i)|$ para todo $i$.
+Agora, pela sigma-aditividade:
+\[
+\sum_{i=1}^\infty |T(r_i)| = |(0,1]| = 1.
+\]
+Isso, nós também já vimos em outra lição, é impossível. $T$ não pode ser mensurável.
+
 
 
 \bibliography{all}
