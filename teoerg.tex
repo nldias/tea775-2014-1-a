@@ -15,6 +15,13 @@
 \usepackage{textcomp}
 \usepackage{mathrsfs}
 \usepackage{natbib}
+\usepackage{needspace}
+\usepackage[pdftex,colorlinks=true,%
+   urlcolor=blue,
+   linkcolor=blue,
+   citecolor=blue,
+   filecolor=blue]{hyperref}
+
 
 \input{math.tex}
 
@@ -549,7 +556,12 @@ x + y - 1, & x+ y > 1.
 \end{cases}
 \end{equation}
 
-(Eu prefiro $\oplus$ \ldots)
+Seguem-se imediatamente os seguintes fatos: para $x, y, z \in (0,1]$,
+\begin{align}
+x \boxplus y &= y \boxplus x, \label{eq:box-symmetric}\\
+z = x \boxplus y &\Leftrightarrow \exists\: r \in (-1,+1] : z = x + r.\label{eq:box-rationals}
+\end{align}
+
 
 Agora, para \emph{qualquer} subconjunto $E$ de $(0,1]$, defina um novo conjunto $E(x)$
 
@@ -589,6 +601,12 @@ enumerável. Consideremos os racionais contidos em $(0,1]$. Esse segundo conjunto
 \begin{equation}
 Q \equiv \mathbb{Q} \cap (0,1].\label{eq:def-Q-em-zero-um}
 \end{equation}
+\needspace{2cm}
+
+Valeria a pena provar que
+\begin{quote}
+Q é enumerável.
+\end{quote}
 
 Com essas definições à mão, estudemos então as propriedades dos conjuntos do
 tipo $Q(x)$.
@@ -614,9 +632,7 @@ x \in Q \Rightarrow Q(x) = Q.\label{eq:xinQ-Qx-eq-Q}
 De fato: para começar, $x,y \in Q \Rightarrow x \boxplus y \in Q$. De fato, $x
 \boxplus y \in (0,1]$, e tanto $x + y$ quanto $x + y -1$, conforme for o caso,
   são números racionais em $(0,1]$.  Isso basta!, pois, \emph{neste caso},
-$Q(x) = \left\{ x \boxplus y, \; y \in Q \right\} = Q\blob$ (Ailin, esta dedução
-    é \emph{diferente} de suas notas.  Estou tentando tirar o máximo partido de
-    `$\boxplus$'!  Está certo?)
+$Q(x) = \left\{ x \boxplus y, \; y \in Q \right\} = Q\blob$ 
 \item
 \begin{align}
 x_1 - x_2 \not\in \mathbb{Q} &\Rightarrow Q(x_1) \cap Q(x_2) = \emptyset, \label{eq:irraQx1x2}\\
@@ -635,10 +651,10 @@ uma afirmação mais econômica:
 \[
 \bigsqcup_{x \in T} Q(x) = (0,1]
 \]
-(note a disjunção). Na sequência, precisamos provar (\ref{eq:irraQx1x2})--(\ref{eq:raciQx1x2}) e
-prosseguir na obtenção do conjunto $T$. Esse último na verdade se revelará um
-conjunto interessante, e na verdade o ponto final desta lição: $T$ se revelará
-um conjunto \emph{não mensurável}.
+(note a disjunção). Na sequência, precisamos provar
+(\ref{eq:irraQx1x2})--(\ref{eq:raciQx1x2}) e prosseguir na obtenção do conjunto
+$T$. Esse último se revelará um conjunto interessante, e na verdade o ponto
+final desta lição: $T$ se revelará um conjunto \emph{não mensurável}.
 
 Para provar (\ref{eq:irraQx1x2}): Vamos tentar \textit{reductio ad absurdum}.
 Seja $z \in Q(x_1)$ e $z \in Q(x_2)$: nesse caso, a interseção $Q(x_1) \cap
@@ -668,20 +684,21 @@ onde, como vimos, ou $s=0$ ou $s=-1$ ou $s=+1$. Reescreva:
 \[
 x_1 \boxplus y = x_2 \boxplus y + (x_1 - x_2) + s.
 \]
-Note agora que é \emph{sempre} possível escrever $x_2 \boxplus y = x_2 + r$,
-onde $r$ é racional, e não necessariamente está em $Q$. Substitua:
+Note agora que é \emph{sempre} possível escrever $x_2 \boxplus y = x_2 + r$
+(veja (\ref{eq:box-rationals})),
+\emph{onde agora $r$ é racional}, e não necessariamente está em $Q$. Substitua:
 \[
 x_1 \boxplus y = x_2 + r + s + (x_1 - x_2).
 \]
 O lado esquerdo é um número em $Q$.  Portanto, o lado direito é um número em
-$Q$ e, além disso:
-\begin{align*}
-x_2 \in Q, \\
-x_2 + p \in Q,
-\end{align*}
+$Q$:
+\begin{equation}
+x_2 + p \in Q,\label{eq:x2p-in-Q}
+\end{equation}
 onde $p = (r + s + (x_1 - x_2))$ e portanto $p \in \mathbb{Q}$ (mas não
-necessariamente $ p \in Q$).  Portanto, é possível escrever o lado direito
-como $x_2 \boxplus z$, onde $z \in Q$.  Disso se segue que 
+necessariamente $ p \in Q$).  Agora, utilizando (\ref{eq:box-rationals}), vemos
+que é possível escrever o lado direito como $x_2 \boxplus z$, onde $z \in Q$.
+Disso se segue que
 \[
 \left\{ x_1 \boxplus y, \; y \in Q\right\} = 
 \left\{ x_2 \boxplus z, \; z \in Q\right\} 
@@ -749,7 +766,7 @@ Veja:
 Q(x) &= { x \boxplus y, \; y \in Q }, \\
 t \in Q(x) &\Rightarrow t = x \boxplus y \; \text{para algum $y \in Q$}.
 \end{align*}
-Logo, existe algum $q \in Q$ tal que $t = x + q$; pelo mesmo motivo agora deve
+Logo, de (\ref{eq:box-rationals}), existe algum $q \in Q$ tal que $t = x + q$; pelo mesmo motivo agora deve
 existir algum $r \in Q$ tal que $x = t + r$. Mas $Q$ é enumerável (não
 provamos!), portanto existe um índice $i$ tal que $x = t + r_i$, $i \in
 \mathbb{N}$, e $Q = \bigsqcup_{i=1}^\infty r_i$. Logo, $x \in T(r_i)$. A união
@@ -765,9 +782,10 @@ y &= t_j \boxplus r_j.
 \[
 0 = (t_i - t_j) + q
 \]
-onde $q$ é racional. Logo, $t_i - t_j$ é racional, donde $Q(t_i) = Q(t_j)$.  Mas
+onde $q$ é racional (novamente, nós usamos (\ref{eq:box-rationals})). Logo, $t_i
+- t_j$ é racional, donde $Q(t_i) = Q(t_j)$ (devido a (\ref{eq:raciQx1x2})).  Mas
 isso não é possível, porque $Q(t_i)$ possui um único representante em
-$T$. Portanto, a disjunção dos $T(r_i)$'s transforma (\ref{eq:union-ri}) em 
+$T$. Portanto, a disjunção dos $T(r_i)$'s transforma (\ref{eq:union-ri}) em
 \begin{equation}
 \bigsqcup_{i=1}^\infty T(r_i) = (0,1].\label{eq:union-disjoint-ri}
 \end{equation}
@@ -777,7 +795,7 @@ Agora, pela sigma-aditividade:
 \[
 \sum_{i=1}^\infty |T(r_i)| = |(0,1]| = 1.
 \]
-Isso, nós também já vimos em outra lição, é impossível. $T$ não pode ser mensurável.
+Isso, nós também já vimos em outra lição, é impossível. $T$ não pode ser mensurável\blob
 
 
 
