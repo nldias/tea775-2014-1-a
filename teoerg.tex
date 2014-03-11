@@ -33,6 +33,101 @@
 
 \maketitle
 
+\chapter{Introdução}
+
+Em \citeyear{reynolds--b-dynamical}, Osborne Reynolds publicou um artigo sobre
+escoamentos turbulentos no qual pela primeira vez aparece o que hoje denominamos
+decomposição de Reynolds: o campo de velocidade $\vet{U} = U_i\vet{e}_i$ de um
+fluido foi decomposto em $U_i = \tavg{U_i} + u_i$ (``média'' e ``flutuação''), e
+equações para as médias $\tavg{U_i}$, e para o segundo momento $\tavg{u_i u_i}/2$,
+foram deduzidas a partir de promediações das equações de Navier-Stokes para
+$U_i$ (a velocidade do fluido no ponto $\vet{x} = x_i\vet{e}_i$, e no instante
+$t$).
+
+Reynolds deu à promediação `$\tavg{\cdot}$' que ele usou o significado de uma
+média espacial, num procedimento claramente inspirado pelo trabalho anterior, e
+pioneiro, de Maxwell sobre a teoria cinética dos gases
+\citep{maxwell--dynamical.theory.gases}.
+
+Imediatamente, percebeu-se que a dedução das equações para os momentos de ordem
+1 e 2 (as equações de Reynolds) a partir das equações de Navier-Stokes requeria
+um conjunto de postulados, \emph{que não aparece explicitamente no artigo de
+\citeyear{reynolds--b-dynamical}}:
+
+\begin{align}
+\tavg{u_i} &= 0, \label{eq:pos-rey-zero-mean}\\
+\tavg{\tavg{U_i}} &= 0, \label{eq:pos-rey-mean-mean}\\
+\tavg{u_i\tavg{U_j}} &= 0, \label{eq:pos-rey-mean-fluct}\\
+\tavg{\parder{U_i}{t}} &= \parder{\tavg{U_i}}{t},\label{eq:pos-rey-t-der}\\
+\tavg{\parder{U_i}{x_j}} &= \parder{\tavg{U_i}}{x_j}.\label{eq:pos-rey-x-der}
+\end{align}
+
+Os ``postulados'' (\ref{eq:pos-rey-zero-mean})--(\ref{eq:pos-rey-x-der})
+aparecem, de uma forma ou de outra, em todos os livros-texto importantes de
+turbulência. Por exemplo (e a lista não é abrangente): \cite{hinze:turbulence},
+\cite{tennekes.lumley--first}, \cite{monin.yaglom:statistical.vol2},
+\cite{pope:turbulent}. 
+
+O significado original da promediação de Reynolds não se manteve: a analogia
+entre o movimento das moléculas de um gás e o das partículas materiais de um
+fluido (debaixo da hipótese do contínuo) é essencialmente insustentável
+\cite[][Capítulo 1]{tennekes.lumley--first}.
+
+Curiosamente, em nenhum caso os autores acima (ou quaisquer outros que sejam de
+nosso conhecimento) procuram deduzir matematicamente
+(\ref{eq:pos-rey-zero-mean})--(\ref{eq:pos-rey-x-der}), com a possível exceção
+de \cite{kundu:fluid}, que o faz para um \textit{ensemble}, supostamente finito,
+de realizações do escoamento turbulento.
+
+A definição mais comumente encontrada de `$\tavg{\cdot}$', e que formalizaremos
+neste texto, é o de uma média probabilística (\textit{ensemble average}), mas
+mesmo aqui uma definição precisa não pode ser encontrada na literatura.
+
+A abordagem era promissora, e logo Reynolds recebeu a compania ilustre de
+\cite{einstein--uber.molekularkinetischen} (movimento browniano), 
+\cite{langevin--brownien} (idem), 
+\cite{taylor--statistical-a, taylor--statistical-b, taylor--statistical-c,
+  taylor--statistical-d}, e, naturalmente, Kolmogorov
+\cite{kolmogorov--local.russian}.
+
+Entretanto, o \emph{significado} de se tomar médias probabilísticas sobre os
+resultados de um processo determinístico está longe de ser
+óbvio. Intuitivamente, a motivação é que o processo é suficientemente
+``complexo'' (as velocidades das moléculas de um gás; um escoamento turbulento;
+o movimento browninao; etc.) para que seja mais fácil lidar apenas com médias e
+desvios-padrão, ou seja, \emph{estatísticas}, e não com realizações,
+trajetórias, moléculas, partículas, etc., \emph{individuais}. Ainda assim, do
+ponto de vista experimental, a tomada de médias sobre realizações é fortemente
+restrita pela disponibilidade de tais realizações. A saída é supor, debaixo de
+hipóteses adicionais tais como estacionariedade (mas que por si só não é suficiente), que médias
+tomadas sobre um número pequeno de realizações (tão pequeno quanto uma única)
+são capazes de estimar as médias de \emph{ensemble}.  Essa é a \emph{hipótese
+  ergódica}. 
+
+De todo modo, os procedimentos adotados pelos pioneiros eram necessariamente
+intuitivos, e tiveram que aguardar, como acontece tantas vezes na história da
+Física e da Matemática, por formalização posterior.  A própria teoria de
+probabilidade só seria definitivamente formalizada por
+\citeauthor{kolmogorov--foundations} em \citeyear{kolmogorov--foundations}; o
+teorema ergódico é devido a \cite{birkhoff-proof-ergodic}, e a
+\cite{neumann--zuroperatorenmethode}.
+
+Finalmente, as conexões entre processos estocásticos e sistemas dinâmicos, que
+em última análise justificam o procedimento informal dos pioneiros, parecem ser
+ainda mais recentes \cite[ver][]{lebowitz.penrose--modern.ergodic,
+collet--dynsys.valparaiso}.
+
+Neste texto, nós procuramos ao mesmo tempo traçar uma parte da história da
+abordagem estatística de sistemas dinâmicos, desde
+\cite{maxwell--dynamical.theory.gases} até a atualidade, e prover um nível
+intermediário de formalização. 
+
+A formalização aqui não é feita no espírito de ``arte pela arte'', mas sim no de
+embasar mais firmemente as análises de caráter probabilístico de sistemas
+físicos determinísticos, representados matematicamente por sistemas dinâmicos.
+
+
+
 \chapter{2014-02-19: Aditividade finita}
 
 \section*{Como conceitualizamos e formalizamos a propabilidade?}
