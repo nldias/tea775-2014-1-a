@@ -14,6 +14,8 @@
 \usepackage{mathtools}
 \usepackage{textcomp}
 \usepackage{mathrsfs}
+\usepackage{enumerate}
+\usepackage{ntheorem}
 \usepackage{natbib}
 \usepackage{needspace}
 \usepackage[pdftex,colorlinks=true,%
@@ -24,6 +26,27 @@
 
 
 \input{math.tex}
+\input{ira.tex}
+
+{\theoremheaderfont{\bfseries}
+ \theorembodyfont{\rmfamily\small}
+ \theoremprework{\needspace{1cm}\bigskip\hrule height1pt\leavevmode}
+ \newtheorem{Exe}{Exemplo}[chapter]
+}
+\newcommand{\skipend}{\vspace*{1ex}\hrule width5cm height1pt}
+\newenvironment{Def}{
+\abovedisplayskip=18pt plus 3pt minus 9pt
+\abovedisplayshortskip=0pt plus 3pt
+\belowdisplayskip=9pt plus 3pt minus 0pt
+\belowdisplayshortskip=0pt plus 3pt minus 0pt
+\vspace*{0.5cm}
+  \hrule \vspace*{0.25cm} \noindent\textbf{Definição ---}}{\vspace{0.250cm
+    plus 0pt minus 0.250cm} \hrule \vspace{0.5cm plus 0pt minus 0.125cm}}
+{\theoremheaderfont{\bfseries}
+ \theorembodyfont{\rmfamily\small}
+ \newtheorem{Proj}{Projeto}[chapter]
+}
+
 
 \title{Lições de Teoria Ergódica, Processos Estocásticos e Sistemas Dinâmicos}
 \author{Nelson Luís Dias}
@@ -33,7 +56,7 @@
 
 \maketitle
 
-\chapter{Introdução}
+\chapter{Introdução}\label{chap:intro}
 
 Em \citeyear{reynolds--b-dynamical}, Osborne Reynolds publicou um artigo sobre
 escoamentos turbulentos no qual pela primeira vez aparece o que hoje denominamos
@@ -49,7 +72,7 @@ média espacial, num procedimento claramente inspirado pelo trabalho anterior, e
 pioneiro, de Maxwell sobre a teoria cinética dos gases
 \citep{maxwell--dynamical.theory.gases}.
 
-Imediatamente, percebeu-se que a dedução das equações para os momentos de ordem
+Logo, percebeu-se que a dedução das equações para os momentos de ordem
 1 e 2 (as equações de Reynolds) a partir das equações de Navier-Stokes requeria
 um conjunto de postulados, \emph{que não aparece explicitamente no artigo de
 \citeyear{reynolds--b-dynamical}}:
@@ -81,14 +104,15 @@ de realizações do escoamento turbulento.
 
 A definição mais comumente encontrada de `$\tavg{\cdot}$', e que formalizaremos
 neste texto, é o de uma média probabilística (\textit{ensemble average}), mas
-mesmo aqui uma definição precisa não pode ser encontrada na literatura.
+mesmo aqui uma definição precisa não pode ser facilmente encontrada na
+literatura de turbulência.
 
-A abordagem era promissora, e logo Reynolds recebeu a compania ilustre de
-\cite{einstein--uber.molekularkinetischen} (movimento browniano), 
-\cite{langevin--brownien} (idem), 
-\cite{taylor--statistical-a, taylor--statistical-b, taylor--statistical-c,
-  taylor--statistical-d}, e, naturalmente, Kolmogorov
-\cite{kolmogorov--local.russian}.
+De qualquer forma, a abordagem estatística de sistemas complexos era promissora,
+e logo Reynolds recebeu a compania ilustre de
+\cite{einstein--uber.molekularkinetischen} (movimento browniano),
+\cite{langevin--brownien} (idem), \cite{taylor--statistical-a,
+  taylor--statistical-b, taylor--statistical-c, taylor--statistical-d}
+(turbulência), e, naturalmente, \cite{kolmogorov--local.russian} (turbulência).
 
 Entretanto, o \emph{significado} de se tomar médias probabilísticas sobre os
 resultados de um processo determinístico está longe de ser
@@ -99,10 +123,10 @@ desvios-padrão, ou seja, \emph{estatísticas}, e não com realizações,
 trajetórias, moléculas, partículas, etc., \emph{individuais}. Ainda assim, do
 ponto de vista experimental, a tomada de médias sobre realizações é fortemente
 restrita pela disponibilidade de tais realizações. A saída é supor, debaixo de
-hipóteses adicionais tais como estacionariedade (mas que por si só não é suficiente), que médias
-tomadas sobre um número pequeno de realizações (tão pequeno quanto uma única)
-são capazes de estimar as médias de \emph{ensemble}.  Essa é a \emph{hipótese
-  ergódica}. 
+hipóteses adicionais tais como estacionariedade (mas que por si só não é
+suficiente), que médias tomadas sobre um número pequeno de realizações (tão
+pequeno quanto uma única) são capazes de estimar as médias de \emph{ensemble}.
+Essa é a \emph{hipótese ergódica}.
 
 De todo modo, os procedimentos adotados pelos pioneiros eram necessariamente
 intuitivos, e tiveram que aguardar, como acontece tantas vezes na história da
@@ -115,7 +139,7 @@ teorema ergódico é devido a \cite{birkhoff-proof-ergodic}, e a
 Finalmente, as conexões entre processos estocásticos e sistemas dinâmicos, que
 em última análise justificam o procedimento informal dos pioneiros, parecem ser
 ainda mais recentes \cite[ver][]{lebowitz.penrose--modern.ergodic,
-collet--dynsys.valparaiso}.
+  collet--dynsys.valparaiso}.
 
 Neste texto, nós procuramos ao mesmo tempo traçar uma parte da história da
 abordagem estatística de sistemas dinâmicos, desde
@@ -128,7 +152,7 @@ físicos determinísticos, representados matematicamente por sistemas dinâmicos.
 
 
 
-\chapter{2014-02-19: Aditividade finita}
+\chapter{2014-02-19: Aditividade finita}\label{chap:add-finite}
 
 \section*{Como conceitualizamos e formalizamos a propabilidade?}
 
@@ -321,7 +345,7 @@ Com um conjunto enumerável (infinito) não é possível ter equiprobabilidade nem
 atribuindo probabilidade nula, porque não conseguiremos que a ``soma"das
 $P(\{\})$ seja $1$.
 
-\chapter{2014-02-24: Aditividade infinita}
+\chapter{2014-02-24: Aditividade infinita}\label{chap:sigma-add}
 
 (Ou $\sigma$--Aditividade)
 
@@ -444,7 +468,7 @@ Uma extensão do que vimos para a binomial é a distribuição multinomial:
 \binom{n}{l_1 \ldots l_k} &= \frac{n!}{l_1! \ldots l_k!}.
 \end{align*}
 
-\chapter{2014-02-26: Semi-anéis, anéis, e outros bichos}
+\chapter{2014-02-26: Semi-anéis, anéis, e outros bichos}\label{chap:rings}
 
 
 
@@ -891,6 +915,959 @@ Agora, pela sigma-aditividade:
 \sum_{i=1}^\infty |T(r_i)| = |(0,1]| = 1.
 \]
 Isso, nós também já vimos em outra lição, é impossível. $T$ não pode ser mensurável\blob
+
+
+\chapter{2014-03-12: Teoria de probabilidade e incursões na física e em geociências}\label{chap:teoprob}
+
+
+\section{Variável aleatória}\label{sec:random-var}
+
+
+Em uma visão moderna de probabilidades e estatística, inventada por Kolmogorov, nós
+precisamos de:
+\begin{enumerate}
+   \item um conjunto $\Omega$ --- responsável por ``sorteios'', denominado \emph{Espaço
+   Amostral};
+   \item Uma função
+   \begin{align*}
+      X: \Omega &\rightarrow \mathbb{R} \\
+	 \omega \in \Omega &\mapsto x = X(\omega)
+   \end{align*}
+   A função $X$ é denominada ``variável aleatória''.  A função $X$ tem que ser
+   \emph{mensurável}, e nós vamos gastar algum tempo com isso ainda mais à frente.
+   \item Uma função 
+   \begin{align*}
+      P:\mathscr{F} &\rightarrow [0,1]\\
+      A \in \mathscr{F} &\mapsto P(A)
+   \end{align*}
+\end{enumerate}
+
+O conjunto $\mathscr{F}$ é uma \emph{classe} (um conjunto de conjuntos).  Como
+vimos no capítulo \ref{chap:sigma-add}, $\mathscr{F}$ é uma $\sigma$-álgebra.
+Cada \emph{elemento} de $\mathscr{F}$ é um sub-conjunto mensurável $A \in
+\Omega$, ao qual nós associamos um número $P(A)$.  Os elementos de $\mathscr{F}$
+gozam de algumas propriedades importantes em teoria de probabilidades:
+\begin{align}
+   A \in \mathscr{F} &\then \overline{A} \in \mathscr{F}\\
+   A,B \in \mathscr{F} &\then A \cup B \in \mathscr{F}\\
+   A,B \in \mathscr{F} &\then A \cap B \in \mathscr{F}\\
+   \emptyset	       &\in \mathscr{F}\\
+   \Omega	       &\in \mathscr{F}
+\end{align}
+Nós podemos reconhecer nestas propriedades, imediatamente, que os sub-conjuntos $A \in \Omega$
+são \emph{eventos}.  A função $P$ associa a cada evento uma \emph{probabilidade}.  A função $P$
+também deve obedecer a algumas regras. Se $A_1, \ldots, A_n$ são conjuntos \emph{disjuntos},
+$A_i \cap A_j = \emptyset, \; i\ne j$, então
+\begin{align}
+   P(A_i) &\ge 0\\
+   P(\Omega) &= 1\\
+   P(A_i \cup A_j) &= P(A_i) + P(A_j)
+\end{align}
+Esta última é um caso particular da $\sigma$-aditividade:
+\begin{equation}
+P\left(\bigsqcup_{i=1}^\infty A_i\right) = \sum_{i=1}^\infty A_i. 
+\end{equation}
+É muito importante enfatizar que o espaço amostral é um conceito \emph{abstrato}: ele ajuda a
+conceituar probabilidades e também ajuda a demonstrar alguns resultados, mas na prática tudo o
+que vemos no mundo ``real'', ou seja, os únicos objetos que podemos manipular em aplicações de
+teoria de probabilidade, são as \emph{realizações} da variável aleatória: $x = X(\omega)$.
+
+
+Para avaliar a probabilidade de ocorrência de certos níveis de uma variável aleatória nós usamos
+eventos do tipo $X(\omega) \le x$, que pode ser entendido com o auxílio da figura
+\ref{fig:Xlessthanx}.
+
+\begin{figure}\label{fig:Xlessthanx}\centering
+   \resizebox{0.5\textwidth}{!}{\includegraphics{Xlessthanx}}
+   \caption{Representação gráfica do evento $X(\omega) \le x$}
+\end{figure}
+ 
+Diferentes maneiras de escrever o evento $A$ são:
+\begin{align*}
+    A &= \left\{ \omega \mathrel{|} X(\omega) \le x \right\},\\
+    A &= \left\{ X(\omega) \le x \right\},\\
+    A &= \left\{ X \le \omega \right\}.
+\end{align*}
+Note que na última forma desapareceu qualquer referência explícita ao espaço amostral.
+
+Nós agora vamos definir a função distribuição acumulada (FDA) de probabilidade de uma variável
+aleatória $X$:
+\begin{equation}
+   F_X(x) \equiv P(\{ X \le x\}).\label{eq:def-fda}
+\end{equation}
+A notação da equação \eqref{eq:def-fda} é normalmente simplificada para $F_X(x) \equiv P\{X \le
+x\}$. A FDA nos permite calcular facilmente probabilidade relacionadas a $X$.  Por exemplo,
+para obter a probabilidade de que $X$ ocorra em um intervalo $[a,b]$:
+\begin{align}
+   P\{ a \le X \le b \} &= P\{ X \le b\} - P\{ X \le a\}\\
+		        &= F(b) - F(a).
+\end{align}
+As propriedades da função distribuição acumulada são:
+\begin{align}
+   F(-\infty) &= 0,\\
+   F(+\infty) &= 1,\\
+F(b) - F(a)   &\ge 0, \;\;\text{para}\;\; a < b.
+\end{align}
+
+A função densidade de probabilidade (FDP), $f_X$, é
+\begin{equation}
+   f_X(x) \equiv \deriva{F_X}{x},
+\end{equation}
+com $f_X(x) \ge 0$ e 
+\begin{equation}
+   \int_{-\infty}^{+\infty} f_X(x)\,\md{x} = 1.
+\end{equation}
+
+\section{Média e momentos}
+
+A média de uma variável aleatória, ou valor esperado de uma variável aleatória, é
+\begin{equation}
+   \tavg{X} \equiv \int_{-\infty}^{+\infty} xf_X(x)\,\md{x}.
+\end{equation}
+
+De maneira mais geral, seja $y = q(x)$ uma função de $x$; então para cada sorteio de $X$
+corresponderá um $Y = q(X)$, ou seja: $Y$ será (também) uma variável aleatória.  A média de $Y$
+será dada por
+\begin{equation}
+   \tavg{Y} = \tavg{q(X)} = \int_{-\infty}^{+\infty} q(x)f_X(x)\,\md{x}.
+\end{equation}
+
+
+Momentos centrais desempenham um papel importante em Teoria de Probabilidade. A
+definição do momento central de ordem $n$ é
+\begin{equation}
+c_{Xn} \equiv \tavg{\left( x - \tavg{X}\right)^n} 
+= \int_{-\infty}^{+\infty} \left( x - \tavg{X}\right)^n\, f_X(x)\,\md{x}.\label{eq:def-cxn}
+\end{equation}
+
+\section{Distribuições conjuntas}
+
+Para definirmos distribuições conjuntas de probabilidade, precisamos estender as
+definições da seções \ref{sec:random-var}.
+
+No $\mathbb{R}^2$, uma variável aleatória é uma função $\vet{X} = (X,Y)$ função
+de $\omega \in \Omega$:
+\begin{align*}
+\vet{X} : \Omega \rightarrow \mathbb{R}^2, \\
+        \omega   \mapsto     \vet{x} = \vet{X}(\omega).
+\end{align*}
+
+A função densidade acumulada conjunta será 
+\begin{equation}
+F_{X,Y}(x,y) \equiv P\left\{ X \le x \wedge Y \le y\right\},\label{eq:defFXY}
+\end{equation}
+e a função densidade de probabilidade será
+\begin{equation}
+f_{X,Y}(x,y) \equiv \parpar{F_{X,y}}{x}{y} = \parpar{F_{X,y}}{y}{x}.
+\end{equation}
+
+As funções densidade de probabilidade  \emph{marginais} são
+\begin{align}
+f_X(x) \equiv \int_{y=-\infty}^{+\infty} f_{X,Y}(x,y)\,\md{y}, \\
+f_Y(y) \equiv \int_{x=-\infty}^{+\infty} f_{X,Y}(x,y)\,\md{x}.
+\end{align}
+Naturalmente,
+\begin{equation}
+\iint_{x,y} f_{X,Y}(x,y)\,\md{x}\,\md{y} = 1.
+\end{equation}
+
+O \emph{valor esperado} de uma função de $X$ e $Y$ é
+\begin{equation}
+\tavg{g(X,Y)} = \iint_{x,y} g(x,y)f_{X,Y}(x,y)\,\md{x}\,\md{y}.
+\end{equation}
+
+Com os resultados acima, nós podemos agora deduzir o seguinte fato: se $X$ e $Y$
+são duas variáveis aleatórias quaisquer,
+\begin{equation}
+\tavg{X+Y} = \tavg{X} + \tavg{Y}.
+\end{equation}
+
+\begin{enumerate}[a)]
+\item \textit{Insight} com matemática finita: seja $(x_i,y_i), \; i =
+  0,\ldots,n-1$ uma amostra qualquer de $n$ pares de observações.  Então, a
+  \emph{média amostral} da soma é
+\begin{align*}
+\overline{x+y} &= \frac{1}{n}\sum_{i=0}^{n-1} \left( x_i + y_i\right) \\
+               &= \frac{1}{n}\sum_{i=0}^{n-1} x_i + \frac{1}{n}\sum_{i=0}^{n-1}y_i\\
+               &= \overline{x} + \overline{y}.
+\end{align*}
+Note como não foi necessária nenhuma hipótese adicional sobre a natureza dos
+$x$'s e $y$'s ou sobre qualquer relação entre eles.
+\item com Teoria de Probabilidade.  Seja $g(x,y) = x+y$. Então,
+\begin{align*}
+\tavg{g(X,Y)} = \tavg{X + Y} &= \iint_{x,y} (x+y)f_{X,Y}(x,y)\,\md{y}\,\md{x} \\ 
+&= \iint_{x,y} x f_{X,Y}(x,y)\,\md{y}\,\md{x} + \iint_{x,y} y f_{X,Y}(x,y)\,\md{y}\,\md{x} \\
+&= \iint_{x,y} x \underbrace{\left[f_{X,Y}(x,y)\,\md{y}\right]}_{f_X(x)}\,\md{x} +
+   \iint_{x,y} y \underbrace{\left[f_{X,Y}(x,y)\,\md{x}\right]}_{f_Y(y)}\,\md{y}\\
+&= \int_{-\infty}^{+\infty} xf_X(x)\,\md{x} + \int_{-\infty}^{+\infty} y f_Y(y)\,\md{y}\\
+&= \tavg{X} + \tavg{Y}.
+\end{align*}
+\end{enumerate}
+
+
+
+Já que estamos falando de distribuições conjuntas, devemos tocar no conceito
+fundamental de independência/dependência. Dados dois eventos $A$ e $B$, a
+probabilidade de $B$ condicionada a $A$ é
+\begin{equation}
+   P(B|A) \equiv \frac{P(A \cap B)}{P(A)}\label{eq:def-probcond}
+\end{equation}
+
+\textbf{Definição:} $B$ e $A$ são independentes quando
+\begin{equation} 
+P(B|A) = P(B).
+\end{equation}
+\textbf{Corolário:} Se $A$ e $B$ são independentes,
+\begin{equation}
+P(B|A) = \frac{P(A \cap B)}{P(A)} = P(B) \Rightarrow P(A \cap B) = P(A)P(B).
+\end{equation}
+
+Isso nos leva imediatamente à definição de independenência de variáveis
+aleatórias: $X$ e $Y$ são independentes quando os \emph{eventos}
+\[
+A = \left\{ \omega | X(\omega) \le x\right\} \; \text{e} \;
+B = \left\{ \omega | Y(\omega) \le y\right\} 
+\]
+são independentes, ou seja:
+\begin{align*}
+P(A \cap B) &= P(A)P(B), \\
+P\left( X(\omega) \le x  \wedge Y(\omega) \le y\right) &= P\left( X(\omega) \le x \right)P\left( Y(\omega) \le y\right),\\
+F_{X,Y}(x,y) &= F_X(x)F_Y(y).
+\end{align*}
+
+Portanto, se $X$ e $Y$ são independentes, então a FDA conjunto é igual ao
+produto das FDA's marginais. Fazendo a 2\ira\ derivada cruzada,
+\begin{align*}
+f_{X,Y}(x,y) &= \parpar{F_{X,Y}(x,y)}{y}{x} \\
+             &= \parpar{F_{X}(x) F_{Y}(y)}{y}{x} \\
+             &= \parder{}{y}\left[ \parder{F_X}{x} F_Y(y)\right]\\
+             &= f_X(x)\parder{F_Y}{y}\\
+             &= f_X(x)f_Y(x).
+\end{align*}
+
+A  próxima definição é a densidade de probabilidade de $y$ \emph{condicionada} à
+ocorrência de $x$:
+\begin{equation}
+   f_{Y|x}(y) \equiv \frac{f_{X,Y}(x,y)}{f_X(x)}.\label{eq:dens-cond}
+\end{equation}
+Embora deva ser possível deduzir rigorosamente (\ref{eq:dens-cond}) a partir de
+(\ref{eq:def-probcond}), não vou fazê-lo (ainda).  Em vez disto, vou procurar um caso particular
+muito interessante.  Primeiramente, note que, por definição, a densidade marginal de $y$ é dada
+por
+\begin{align}
+   f_Y(y) &= \int_{x=-\infty}^{+\infty} f_{X,Y}(x,y)\,\md{x} \nonumber \\
+          &= \int_{x=-\infty}^{+\infty} f_{Y|x}(y)f_X(x)\,\md{x} \label{eq:y-dens-marg}.
+\end{align}
+Considere agora o caso  em que $y = g(x)$, ou seja: em que $Y$ está
+deterministicamente determinado a partir da observação de $x$.  A função densidade de
+probabilidade condicionada é então, simplesmente, 
+\begin{equation}
+   f_{Y|x}(y) = \delta(g(x)-y),\label{eq:delta-y-gx}
+\end{equation}
+ou seja: dado $x$, a probabilidade de que $Y = g(x)$ é 1 (note as letras maiúscula e
+minúscula). Note também que (\ref{eq:delta-y-gx}) é uma densidade de probabilidade legítima, já
+que sua integral em $y$ é igual a 1.  O primeiro resultado que vamos obter a partir daqui é uma
+fórmula para $f_Y(y)$:
+\begin{align}
+   f_{Y}(y) &= \int_{x = -\infty}^{+\infty} f_{Y|x}(y)f_X(x)\,\md{x} \nonumber \\
+            &= \int_{x = -\infty}^{+\infty} \delta(g(x)-y)f_X(x)\,\md{x}. \label{eq:gx-marginal}
+\end{align}
+Essa é uma equação totalmente geral, que permite o cálculo da densidade de
+probabilidade de \emph{qualquer} variável aleatória definida por uma função, $Y
+= g(X)$, independentemente de ela ser biunívoca ou não!  A equação
+(\ref{eq:gx-marginal}) pode ser prontamente generalizada para funções de várias
+variáveis.  Em particular, se $Z = g(X,Y)$, tem-se
+\begin{equation}
+   f_Z(z) = \int_{x = -\infty}^{+\infty}
+               \int_{y = -\infty}^{+\infty}
+                  \delta(g(x,y)-z) f_{X,Y}(x,y)\,\md{y}\md{x}. \label{eq:gxy-marginal}
+\end{equation}
+
+Considere agora o seguinte exemplo: $y = x^2, \; -1 \le X \le +1$, com $f_X(x) =
+1/2$. Essa função \emph{não} é biunívoca.  A densidade de probabilidade de $y$ é
+\begin{align}
+   f_Y(y) = \int_{-1}^{+1} \delta(x^2-y)\frac{1}{2} \,\md{x}. \label{eq:first-integral}
+\end{align}
+Para calcular a integral acima, é preciso um pouco de cuidado.  Primeiramente, note que 
+\begin{equation}
+   y = x^2 \Rightarrow x = \pm \sqrt{y}:
+\end{equation}
+existem duas raízes, e isto precisa ser levado em consideração pelo ser humano que está
+resolvendo o problema: a fórmula (\ref{eq:gx-marginal}) \emph{em si} não vai dizer isso para
+você! 
+O caminho mais rápido, aparentemente, é recorrer à seguinte propriedade da delta \citep[Cap. 6,
+  p. 231]{butkov:fisica}:
+\begin{equation}
+   \delta(x^2 - a^2) = (1/2a)\left[ \delta(x+a) + \delta(x-a)\right] \qquad (a>0);
+\end{equation}
+então,
+\begin{equation}
+   f_Y(y) = \int_{-1}^{+1} \frac{1}{2\sqrt{y}}
+   \left[ \delta(x+\sqrt{y}) + \delta(x-\sqrt{y})\right]\frac{1}{2}\,\md{x} 
+   = \frac{1}{4\sqrt{y}}\left[ 1 + 1\right] 
+   = \frac{1}{2\sqrt{y}}\blob
+\end{equation}
+
+Esse é um exemplo simples, porém muito rico.  O valor esperado de $Y$, para o qual nós vamos
+usar a notação $\tavg{Y}$, agora é facilmente obtido:
+\begin{equation}
+\tavg{Y} = \int_0^1 yf_Y(y)\,\md{y} = \int_0^1 y \frac{1}{2\sqrt{y}}\,\md{y} = 
+\int_0^1 \frac{\sqrt{y}}{2}\,\md{y} = \frac{1}{3},
+\end{equation}
+enquanto que, devido à simetria de $f_X(x)$, $\tavg{X} = 0$.
+
+
+Mais interessante ainda é a seguinte questão: se $X$ é a variável aleatória com distribuição
+uniforme entre $-1/2$ e $+1/2$, como acima, e $Y = X^2$, qual é a covariância entre $X$ e $Y$?
+Por definição, a covariância entre duas variáveis aleatórias é
+\begin{equation}
+\Cov\{X,Y\} = 
+\int_{x\in \mathbb{R}}\int_{y \in \mathbb{R}} (x - \tavg{X})(y - \tavg{Y})f_{X,Y}(x,y)\,\md{y}\md{x}.
+\end{equation}
+
+
+Quando duas variáveis aleatórias são independentes, sua covariância é nula:
+\begin{align*}
+\Cov\{X,Y\} &= \iint_{x\in \mathbb{R}, y \in \mathbb{R}}(x - \tavg{X})(y - \tavg{Y})f_{X,Y}(x,y)\,\md{y}\md{x}\\
+            &= \iint_{x\in \mathbb{R}, y \in \mathbb{R}}(x - \tavg{X})(y - \tavg{Y}) f_X(x)f_Y(y)\,\md{y}\md{x}\\
+            &= \left[
+                  \int_{x\in\mathbb{R}}(x - \tavg{X})f_X(x)\,\md{x}
+               \right]
+               \left[
+                  \int_{y\in\mathbb{R}}(y-\tavg{Y})f_Y(y)\,\md{y}
+               \right]\\
+             &= 0.
+\end{align*}
+
+
+
+No nosso caso particular, $y=x^2$, a covariância é
+\begin{align}
+\Cov\{X,Y\} &=
+\int_{x=-1}^{1} \int_{y=0}^{1}
+   x(y - \frac{1}{3})\delta(x^2 - y)f_X(x)\,\md{y}\md{x} \nonumber \\
+&= \int_{x=-1}^{1} \int_{y=0}^{1}
+   x(x^2 - \frac{1}{3})\delta(x^2 - y)\frac{1}{2}\,\md{y}\md{x} \nonumber \\
+&= \int_{x=-1}^{1} x(x^2 - \frac{1}{3})\int_{y=0}^{1}
+   \delta(x^2 - y)\frac{1}{2}\,\md{y}\md{x} \nonumber \\
+&= \frac{1}{2}\int_{x=-1}^{1} x(x^2 - \frac{1}{3})
+    \underbrace{\int_{y=0}^{1}\left[ \delta(x^2 - y)\,\md{y}\right]}_{=1}\md{x} \nonumber \\
+&= \frac{1}{2}\int_{x=-1}^{1} x(x^2 - \frac{1}{3})\,\md{x} = 0.\label{eq:covxy-nula}
+\end{align}
+
+
+Na linha acima de (\ref{eq:covxy-nula}), note a utilização simultânea de duas propriedades da delta:
+\begin{align}
+   \int_{-\infty}^{+\infty} \delta(x-a)\,\md{x} &= 1,\\
+   \delta(x) &= \delta(-x).
+\end{align}
+O resultado (\ref{eq:covxy-nula}) é admirável: ele mostra que, mesmo que a dependência entre
+duas variáveis aleatórias seja \emph{total}; mesmo que $Y$ seja \emph{totalmente} dependente de
+$X$ na forma $Y = g(X)$, é possível que $\Cov\{X,Y\} = 0$.  Moral da história: a covariância é
+uma medida de dependência \emph{linear}, e \emph{não} uma medida universal de dependência.
+
+Além da covariância, é usual encontrar o coeficiente de correlação,
+\[
+\varrho_{XY} = \frac{\Cov\{X,Y\}}{\left[ \Var\{X\}\Var\{Y\}\right]^{1/2}}.
+\]
+Com a desigualdade de Schwarz,
+\[
+-1 \le \varrho_{XY} \le +1
+\]
+
+
+Considere agora o cálculo da função densidade de probabilidade da variável aleatória $Z = X +
+Y$, \emph{soma} de duas variáveis aleatórias $X$ e $Y$ cuja distribuição conjunta de
+probabilidade, $f_{X,Y}(x,y)$, é conhecida.  A função densidade de probabilidade de $Z$ dada a
+ocorrência de $x,y$ é
+\begin{equation}
+   f_{Z|x,y} = \frac{f_{Z,X,Y}(z,x,y)}{f_{X,Y}(x,y)} = \delta(z - [x+y])
+\end{equation}
+Segue-se que a função densidade de probabilidade marginal de $Z$ é
+\begin{align}
+   f_{Z}(z) &= \int_{x=-\infty}^{+\infty}\int_{y=-\infty}^{+\infty}f_{Z,X,Y}(z,x,y)\,\md{y}\,\md{x}
+   \nonumber \\
+            &= \int_{x=-\infty}^{+\infty}\int_{y=-\infty}^{+\infty}\delta(z - x - y)f_{X,Y}(x,y)\,\md{y}\,\md{x}
+\end{align}
+Lembrando das propriedades da Delta de Dirac,
+\begin{align}
+   \int_{-\infty}^{+\infty} \delta(y-a)f(y)\,\md{y} &= f(a),\\
+   \delta(y-a) &= \delta(a-y),
+\end{align}
+tem-se
+\begin{equation}
+f_{Z}(z) = \int_{x=-\infty}^{+\infty}
+            f_{X,Y}(x,z-x)\,\md{x} = \int_{y=-\infty}^{+\infty} f_{X,Y}(z-y,y)\,\md{y}\blob
+\end{equation}
+Finalmente, no caso de variáveis aleatórias $X$ e $Y$ independentes, as integrais acima
+tornam-se integrais de convolução:
+\begin{equation}
+f_{Z}(z) = \int_{x=-\infty}^{+\infty} f_X(x)f_Y(z-x)\,\md{x}.
+\end{equation}
+
+Note que esta é uma convolução no sentido da Teoria de Transformadas de Fourier, e não no
+sentido da Teoria de Transformadas de Laplace.
+
+Quando, por outro lado, a relação $Y=g(X)$ é biunívoca, as coisas ficam mais
+fáceis:
+\begin{align*}
+P\left\{ Y \le y \right\} & P\left\{ X \le x \right\}, \\
+P\left\{ Y \le g(x) \right\} & P\left\{ X \le x \right\}, \\
+F_Y(g(x)) &= F_X(x),\\
+\mderiva{}{x} F_Y(g(x)) &= \mderiva{}{x} F_X(x), \\
+\mderiva{}{y} F_Y(g(x))\mderiva{g}{x} &= f_X(x),\\
+f_Y(y)\mderiva{g}{x} &= f_X(x).
+\end{align*}
+Mudando ligeiramente a notação, $y = y(x)$ produz
+\[
+f_Y(y)\md{y} = f_X(x)\md{x}
+\]
+cuja interpretação gráfica é óbvia.
+
+Um caso particularmente útil e interessante é o de geração de uma variável
+aleatória no computador com uma distribuição dada. A resposta é o uso da própria
+FDA $F_X(x)$ no lugar de $g(x)$. Seja $U = F_X(X)$ a variável aleatória assim
+gerada. Nesse caso,
+\begin{align*}
+f_U(u)\md{u} &= f_X(x) \md{x}, \\
+f_U(u)\mderiva{u}{x} &= f_X(x).
+\end{align*}
+mas
+\[
+\mderiva{u}{x} = \mderiva{F_X(x)}{x} = f_X(x);
+\]
+portanto,
+\begin{equation}
+f_U(u) = 1, \qquad 0 \le u \le 1.
+\end{equation}
+
+A ``receita'' para gerar uma variável aleatória com FDA $F_x(x)$ é a seguinte:
+\begin{enumerate}[a)]
+\item gere uma variável $u$ uniforme em $[0,1]$.
+\item calcule $x = F_X^{-1}(u)$.
+\end{enumerate}
+
+Quando existe uma dependência linear, do tipo $Y = aX + b$, a \emph{forma} da
+distribuição não muda:
+\begin{align*}
+x &= \frac{y-b}{a}, \\
+\mderiva{y}{x} &= a,\\
+f_Y(y) \md{y} &= f_X(x)\md{x},\\
+f_Y(y) \mderiva{y}{x} &= f_X(x), \\
+f_Y(y) a &= f_X(x),\\
+f_Y(y) &= \frac{1}{a}f_X\left( \frac{y-b}{a}\right).
+\end{align*}
+
+
+
+
+Seja $Y$ o estimador de uma variável cujo valor verdadeiro (de população) é $y$.  No
+caso mais geral,
+\begin{equation}
+\tavg{Y} = y' \ne y.
+\end{equation}
+A diferença entre o valor médio previsto pelo modelo ($y'$) e o valor verdadeiro ($y$) é
+denominada o \emph{viés} do modelo.
+
+A figura \ref{fig:duasfdps} dá uma visão dessas relações.
+
+\begin{figure}\centering
+\includegraphics[width=0.6\textwidth]{duasfdps}
+\caption{Relação entre as distribuições de probabilidade de $X$ e $Y$ quando a
+  relação entre ambos é biunívoca.\label{fig:duasfdps}}
+\end{figure}
+
+\textbf{Exemplo: soma de exponenciais}
+
+Sejam
+\begin{align*}
+f_X(x) = \frac{1}{\beta}\exp\left(-\frac{x}{\beta}\right),\\
+f_Y(y) = \frac{1}{\beta}\exp\left(-\frac{y}{\beta}\right),
+\end{align*}
+ou seja: duas variáveis aleatórias $X$ e $Y$ independentes e igualmente
+distribuídas com distribuição exponencial. Se $Z = X+Y$,
+\begin{align*}
+P\{ Z \le z \} &= P\{ X + Y \le z\}\\
+               &= P\{ (X,Y) \in \mathscr{D}\}\\
+               &= P(\mathscr{D}).
+\end{align*}
+Veja a figura \ref{fig:duasexps}
+
+\begin{figure}\centering
+\includegraphics[width=0.5\textwidth]{duasexps}
+\caption{Região de integração para cálculo da distribuição da soma de duas
+  variáveis aleatórias exponenciais.\label{fig:duasexps}}
+\end{figure}
+
+Agora,
+\begin{align*}
+P\{ X + Y \le z\} &= \int_{x=0}^z\int_{y=0}^{z-x}
+\frac{1}{\beta}\exp\left(-\frac{x}{\beta}\right)
+\frac{1}{\beta}\exp\left(-\frac{y}{\beta}\right)\,\md{y}\md{x} \\
+&= \int_{x=0}^z \exp\left(-\frac{x}{\beta}\right)
+\left[
+\int_{y=0}^{z-x} \exp\left(-\frac{y}{\beta}\right)\,\md{\left(\frac{y}{\beta}\right)}
+\right]
+\md\left( \frac{x}{\beta}\right)\\
+&= \int_{x=0}^z \exp\left(-\frac{x}{\beta}\right)\left[ 1 -
+  \exp\left(-\frac{z-x}{\beta}\right)\right]\md\left( \frac{x}{\beta}\right)\\
+&= \int_0^z \left( \me^{-x/\beta} - \me^{-z/\beta}\right)\md{\frac{x}{\beta}}\\
+&= 1 - \me^{-z/\beta} - \frac{z}{\beta}\me^{-z/\beta}.
+\end{align*}
+Portanto,
+\begin{align*}
+F_Z(z) &= 1 - \me^{-z/\beta} - \frac{z}{\beta}\me^{-z/\beta},\\
+f_Z(z) &= \frac{z}{\beta^2}\me^{-z/\beta}.
+\end{align*}
+A fdp tem a forma de distribuição gama, cuja fórmula geral é
+\begin{equation}
+f_X(x) = \frac{1}{\beta\Gamma(\alpha)}\left(\frac{x}{\beta}\right)^{\alpha-1}\me^{-\frac{x}{\beta}}.
+\end{equation}
+Para $\alpha=2$, $\Gamma(\alpha) = 1$, e a fórmula coincide. Esse é uma caso
+particular do seguinte resultado, mais geral:
+\[
+X_1, \ldots X_n \sim \text{EXP}(\beta) \Rightarrow Z = \sum_{i=1}^n X_i \sim
+\text{GAMA}(n,\beta).
+\]
+
+\chapter{Modelos e erros}
+
+
+\begin{Exe}\label{exe:modtemp}
+Seja $M$ um modelo de previsão da temperatura da água de um rio.  O modelo funciona de acordo com
+o seguinte esquema:
+\[
+   \begin{bmatrix}
+     x_1 \\
+     x_2 \\
+     \vdots \\
+     x_n
+   \end{bmatrix} \longrightarrow \fbox{$\displaystyle M(\vet{x}; \vet{\theta})$} \longrightarrow y' \ne y.
+\]
+Aqui, o vetor $\vet{x} = (x_1, x_2, \ldots, x_n)$ representa os \emph{dados de entrada}; eles
+podem ser, por exemplo, a radiação solar incidente, a vazão do rio, a temperatura do ar, etc..
+O modelo $M$ em si é composto de elementos tais como a geometria rio (largura, profundidade,
+comprimento), pelas as equações utilizadas para calcular ou estimar a temperatura $y$, etc..  A
+\emph{natureza} de M pode ser qualquer.  Por exemplo, M pode ser simplesmente uma regressão
+linear múltipla
+\begin{equation}
+    y = a_0 + a_1x_1 + a_2x_2 + \ldots + a_nx_n\label{eq:Maix}
+\end{equation}
+mas também pode ser um modelo físico de balanço de entalpia cuja incógnita seja a temperatura da
+água \citep{dias:obtencao.sol,dias.gobbi.ea:formulacao}.  Finalmente note que existe um vetor de
+\emph{parâmetros} $\veg{\theta}$ de $M$.  No caso da regressão múltipla (\ref{eq:Maix}), os
+parâmetros são $a_0, a_1, \ldots, a_n$.
+\skipend
+\end{Exe}
+
+A partir do esquema geral representado pelo Exemplo \ref{exe:modtemp}, é fácil identificar que
+numerosos erros podem ocorrer no processo de modelagem.  Em geral, nós classificamos os erros em
+3 tipos
+\begin{enumerate}[A)]
+   \item Erro dos dados: os dados de entrada do modelo geralmente contêm erros. Só isto já faz
+     com que os dados de entrada devam ser considerados como variáveis aleatórias $X_1, X_2,
+     \ldots, X_n$ e consequentemente a saída do modelo, $Y$, também.
+   \item Erro do modelo: todo modelo contém imperfeições e limitações, e muitas vezes é
+     extremamente difícil até mesmo identificar inequivocamente um único modelo (por exemplo, é
+     comum que diversas distribuições diferentes de probabilidade representem ``igualmente bem''
+     um determinado conjunto de observações). 
+   \item Erro dos parâmetros.  Mesmo que o modelo seja perfeito, a aleatoriedade seja dos dados
+     de entrada seja das próprias observações $y$ nas quais nos baseamos para ``calibrar'' $M$
+     --- o processo de estimativa dos parâmetros $\veg{\theta}$ --- faz com que estes últimos
+     também carreguem incerteza.  
+\end{enumerate}
+
+Algumas estatísticas básicas de erros são definidas a seguir.
+
+O víes do modelo é 
+\begin{equation}
+v \equiv \tavg{Y} - y = y' - y.  \label{eq:def-vies}
+\end{equation}
+
+O erro médio quadrático do modelo é
+\begin{equation}
+\EMQ\{Y\} \equiv \tavg{(Y - y)^2}
+\end{equation}
+e sua raiz quadrada, que tem as mesmas dimensões de $Y$, é
+\begin{equation}
+   \REMQ\{Y\} = \sqrt{\EMQ\{Y\}}.
+\end{equation}
+
+A variância de $Y$ é
+\begin{equation}
+\Var\{Y\} = \tavg{(Y - \tavg{Y})^2}.
+\end{equation}
+
+Muito importante: como em geral $\tavg{Y} \ne y$, $\EMQ\{Y\} \ne \Var\{Y\}$.  A relação entre
+ambas as estatísticas pode ser obtida muito facilmente:
+\begin{align}
+\EMQ\{Y\} &= \tavg{(Y - y)^2} \nonumber \\
+          &= \tavg{ [ (Y - y') + (y' - y) ]^2} \nonumber \\
+          &= \tavg{ (Y - y')^2 + 2(Y- y')(y'-y) + (y'- y)^2} \nonumber \\
+          &= \tavg{ (Y - y')^2}  + 2(y'-y)\underbrace{\tavg{(Y- y')}}_{=0} + \tavg{(y'- y)^2}
+\nonumber \\
+          &= \Var\{Y\} + v^2\blob
+\end{align}
+
+Um bom modelo deve combinar duas virtudes:
+\begin{itemize}
+   \item ser acurado: $v \rightarrow 0$;
+   \item ser preciso: $\Var\{Y\} \rightarrow 0$.
+\end{itemize}
+
+
+
+\chapter{A difusão de um ponto de vista probabilístico}
+
+
+
+
+\section{Um passeio aleatório}\label{sec:passeio}
+
+Na figura \ref{fig:passale}, uma partícula move-se a partir da origem (com certeza) em passos de tempo $n$, dando ``saltos''
+de 1 unidade a cada tempo.  A posição da partícula no tempo $n$ é $X(n)$.   A
+\emph{probabilidade} de a partícula estar na posição $k$ no instante $n$ é
+\begin{equation}
+p_k(n) \equiv P\{ X(n) = k \}.\label{eq:pkn}
+\end{equation}
+Suponha que uma transição para cima ou para baixo seja igualmente provável, e
+\emph{independente} do estado atual $X(n)$:
+\begin{align}
+P\{ X(n+1) = X(n) + 1\} &= 1/2, \\
+P\{X(n+1) = X(n) -1 \} &= 1/2.
+\end{align}
+Então o estado $k$ só pode ser alcançado a partir de $k+1$ ou de $k-1$, e
+\begin{equation}
+p_k(n+1) = \frac{1}{2}p_{k+1}(n) + \frac{1}{2}p_{k-1}(n).\label{eq:midpk}
+\end{equation}
+
+
+\begin{figure}\centering
+   \includegraphics[width=0.6\textwidth]{passale}
+   \caption{Um passeio aleatório simples, começando sempre em $X = 0$.\label{fig:passale}}
+\end{figure}
+
+\begin{figure}\centering
+   \includegraphics[width=0.6\textwidth]{derivadasnum}
+   \caption{Derivadas numéricas de ordem 1 e 2.\label{fig:derivadasnum}}
+\end{figure}
+
+Para prosseguirmos, nós vamos necessitar de derivadas numéricas. Veja a figura
+\ref{fig:derivadasnum}: as derivadas numéricas \emph{centradas} em $x = (i+1/2)\Delta x$, e $x =
+(i-1/2)\Delta x$ são
+\begin{align}
+f'_{i+1/2} &\approx \frac{f_{i+1} - f_i}{\Delta x}, \\
+f'_{i-1/2} &\approx \frac{f_i - f_{i-1}}{\Delta x}.
+\end{align}
+A derivada numérica é o coeficiente angular da secante entre 2 pontos; a derivada \emph{exata} é
+o coeficiente angular da tangente geométrica.  Na figura \ref{fig:derivadasnum}, ambas são
+mostradas: se você possuir uma vista suficientemente boa, procure identificar visualmente a
+diferença entre elas.
+
+
+A derivada segunda é a derivada da derivada:
+\begin{align}
+f''_i &\approx \frac{f'_{i+1/2} - f'_{i-1/2}}{\Delta x} \nonumber \\
+      &= \frac{\frac{f_{i+1} - f_i}{\Delta x} - \frac{f_i - f_{i-1}}{\Delta x}}{\Delta
+  x}\nonumber \\
+      &= \frac{f_{i+1} - 2f_i + f_{i-1}}{\Delta x^2}.
+\end{align}
+Com isto, nós podemos agora manipular a equação (\ref{eq:midpk}):
+\begin{align}
+p_k(n+1) &= \frac{1}{2}\,\left( p_{k+1}(n) + p_{k-1}(n) \right) \nonumber \\
+2p_k(n+1) &=   p_{k+1}(n) + p_{k-1}(n) \nonumber \\
+2(p_k(n+1) - p_k(n)) &=   p_{k+1}(n) -2 p_k(n) + p_{k-1}(n)  \nonumber \\
+\frac{p_k(n+1) - p_k(n)}{\Delta x^2} &= \frac{1}{2} \,\frac{p_{k+1}(n) -2 p_k(n) +
+  p_{k-1}(n)}{\Delta x^2}\nonumber \\
+\frac{p_k(n+1) - p_k(n)}{\Delta t} &= \frac{\Delta x^2}{2\Delta t}\, \frac{p_{k+1}(n) -2 p_k(n) +
+  p_{k-1}(n)}{\Delta x^2}\label{eq:era-pkn}
+\end{align}
+Faça agora 
+\[
+p_k(n) = p(k\Delta x, n\Delta t) = p(x,t)
+\]
+e mantenha
+\begin{equation}
+\mathscr{D} = \frac{\Delta x^2}{2\Delta t} \label{eq:Dconst}
+\end{equation}
+constante, enquanto $\Delta x \to 0$. (\ref{eq:era-pkn}) torna-se
+\begin{align}
+\frac{p(x,t+\Delta t) - p(x,t)}{\Delta t} &= \mathscr{D}\, \frac{p(x+\Delta x,t) - 2p(x,t) +
+  p(x-\Delta x,t)}{\Delta x^2} \nonumber \; \to \\
+\parder{p}{t} &= \mathscr{D}\,\parn{p}{x}{2}.\label{eq:governing-pt}
+\end{align}
+Esta é a mesma equação de difusão que nós resolvemos no capítulo \ref{cap:edp}! Isto significa
+que nós podemos dar à concentração de uma substância uma interpretação \emph{probabilística}:
+ela é (também) a probabilidade de encontrarmos em $(x,t)$ uma partícula emitida em uma certa
+posição (digamos, $\xi$) no instante $t = 0$.  Mas será $\mathscr{D} = \Delta x^2/(2\Delta t)$
+realmente constante?  Esta pergunta possui uma resposta \emph{estatística}, encontrada por
+Albert Einstein em 1905
+
+\section{A solução de Einstein para o movimento Browniano}\label{sec:brown-einstein}
+
+Suponha que existem partículas movendo-se aleatoriamente dentro de um fluido de viscosidade
+dinâmica $\mu$ e com temperatura termodinâmica $T$.  A força de resistência ao movimento de uma
+partícula é dada pela lei de Stokes:
+\begin{equation}
+F_R = -6\pi \mu a \deriva{X}{t},\label{eq:fr-stokes}
+\end{equation}
+onde $X$ é a posição aleatória da partícula, e $a$ é o seu raio.  Em (\ref{eq:fr-stokes}), note
+que $X$ é um escalar: nossa abordagem aqui será \emph{unidimensional}, porque isto é mais fácil
+algebricamente. Quando fazemos isto, perdemos um pouco do realismo da situação, e muitas pessoas
+têm dificuldade em raciocinar com situações que, embora matematicamente mais simples, não
+possuem uma representação concreta no mundo real.  Entretanto, esta é uma \emph{excelente}
+maneira de abordar aquele mundo real: aos poucos, introduzindo as dificuldades matemáticas
+apenas quando não é mais possível escamoteá-las.
+
+As velocidades das partículas, $V$, dependem da temperatura do fluido (e delas mesmas), segundo
+a Mecânica Estatística, via
+\begin{equation}
+\tavg{\frac{mV^2}{2}} = \frac{1}{2} k T,
+\end{equation}
+onde $k$ é a constante de Boltzmann.
+
+Além de $F_R$, as partículas sofrem a ação de forças aleatórias $F$, que são produzidas pelos
+choques com as moléculas do fluido.  A equação de movimento (unidimensional, é claro) de um
+partícula é
+\begin{equation}
+m\mdern{X}{t}{2} = - 6\pi \mu a \deriva{X}{t} + F. \label{eq:eq-mov-brown}
+\end{equation}
+Volte agora ao coeficiente de difusão dado por (\ref{eq:Dconst}): se partirmos de $x=0$, $t=0$,
+teremos (para cada partícula)
+\[
+X^2 = 2\mathscr{D}t.
+\]
+Suponha que esta relação seja válida na média de todas as partículas; então,
+\begin{align}
+\tavg{X^2} &= 2\mathscr{D}t,\label{eq:difu-media-1}\\
+\deriva{}{t}\tavg{X^2} &= 2\mathscr{D},\label{eq:difu-media-2}\\
+\mdern{}{t}{2}\tavg{X^2} &= 0.\label{eq:difu-media-3}
+\end{align}
+Lembre-se de que por enquanto (\ref{eq:difu-media-1}) é apenas uma suposição, que nós devemos
+ser capazes de provar.  Agora,
+\begin{align}
+\deriva{}{t}\tavg{X^2} &= \tavg{\deriva{}{t} X^2} =
+\tavg{2X\deriva{X}{t}}, \label{eq:so-first}\\
+\mdern{}{t}{2}\tavg{X^2} &= 2\left[ \tavg{\deriva{X}{t}}^2 + \tavg{X\mdern{X}{t}{2}}\right].
+\end{align}
+Invocando agora (\ref{eq:difu-media-3}) (que ainda é apenas uma hipótese que precisa ser
+provada), 
+\begin{equation}
+\tavg{X\mdern{X}{t}{2}} = - \tavg{\deriva{X}{t}}^2.\label{eq:just-fit-difu}
+\end{equation}
+A equação (\ref{eq:just-fit-difu}) será útil em (\ref{eq:eq-mov-brown}); multiplicando esta
+última por $X$ e utilizando (\ref{eq:just-fit-difu}):
+\begin{align}
+   m\tavg{X\mdern{X}{t}{2}} &= -6\pi a \mu \tavg{X\deriva{X}{t}} + \tavg{XF}, \nonumber \\
+ -m\tavg{\deriva{X}{t}}^2  &= -6\pi a \mu \tavg{X\deriva{X}{t}} + \tavg{XF}.
+\end{align}
+Raciocine agora probabilisticamente: $X$ é a posição de uma partícula qualquer, com
+$\tavg{X}=0$.  $F$ é a força aleatória sobre uma partícula, com $\tavg{F} = 0$.  $X$ e $F$
+\emph{devem} ser variáveis aleatórias independentes:
+\begin{equation}
+\Cov\{X,F\} = 
+\tavg{(X - \tavg{X})(F- \tavg{F})} = \tavg{XF} = 0.
+\end{equation}
+Segue-se que
+\begin{align}
+6\pi a \mu \tavg{X\deriva{X}{t}} &= m\tavg{\deriva{X}{t}^2} = kT, \nonumber \\
+6\pi a \mu \tavg{2X\deriva{X}{t}} &= 2kT, \nonumber \\
+6\pi a \mu \deriva{}{t}\tavg{X^2} &= 2kT, \nonumber \\
+\deriva{}{t}\tavg{X^2} &= \frac{kT}{3\pi a \mu} = 2\mathscr{D}, \label{eq:eunaodisse} \\
+\mathscr{D} &= \frac{kT}{6\pi a \mu}.
+\end{align}
+Observe que (\ref{eq:eunaodisse}) é a mesma que (\ref{eq:difu-media-2}): a hipótese
+(\ref{eq:difu-media-1}) é \emph{consistente} com o resultado que obtivemos, e o justifica
+\textit{a posteriori}.
+
+A relação entre $k$, o número de Avogadro $N_A$, e a constante universal dos gases pode ser
+encontrada nos bons livros do ramo: $R = kN_A$, ou seja:
+\begin{equation}
+\deriva{}{t}\tavg{X^2} = \frac{RT}{3\pi a \mu N_A};
+\end{equation}
+esta é uma forma de determinar experimentalmente o número de Avogadro \textcolor{red}{\maltese You should
+  re-read Abraham Pais}!
+
+Uma maneira mais formal de deduzir que $\mdern{}{t}{2}\tavg{X^2} = 0$ é a seguinte.  Suponha que
+$X$ seja um processo estocástico com incrementos estacionários:
+\begin{align}
+\deriva{}{t}\tavg{ \left( X(t) - X(s)\right)^2} &= 0, \qquad \forall t,s, \; t > s, \nonumber \\
+\deriva{}{t}\tavg{ \frac{\left( X(t) - X(s)\right)^2}{t-s} } &= 0, \nonumber \\
+\deriva{}{t}\tavg{ \frac{(\Delta X)^2}{\Delta t}} &= 0, \nonumber \\
+\tavg{ \frac{(\Delta X)^2}{\Delta t}} &= 2\mathscr{D}.
+\end{align}
+
+Como vimos, o distribuição de probabilidade da posição de uma partícula no passeio aleatório
+descrito na seção \ref{sec:passeio} possui equação governante (\ref{eq:governing-pt}),
+com
+\begin{align}
+   p(x,0) &= \delta(x), \label{eq:always-from-zero}\\
+   \int_{-\infty}^{+\infty} p(x,t)\,\md{x} &= 1, \; \forall t.\label{eq:normalized-p}
+\end{align}
+É fácil interpretar estas duas últimas equações.  (\ref{eq:always-from-zero}) nos informa que
+$X(0) = 0$ \emph{com probabilidade 1}: a partícula \emph{sempre} sai de $x = 0$.
+(\ref{eq:normalized-p}) requer que a densidade de probabilidade possua integral unitária, o que
+é óbvio. Note que (\ref{eq:governing-pt}) juntamente com as condições
+(\ref{eq:always-from-zero})--(\ref{eq:normalized-p}) é um problema clássico \emph{que nós já
+  resolvemos}, utilizando transformada de Fourier.  A solução que obtivemos é
+\begin{equation}
+p(x,t) = \frac{1}{\sqrt{4\pi D t}}\exp\left[ - \frac{x^2}{4DT}\right].\label{eq:is-p-a-sol}
+\end{equation}
+Se fizermos, de acordo com a teoria do movimento Browniano de Einstein da seção \ref{sec:brown-einstein} 
+\begin{equation}
+\sigma^2 \equiv \tavg{X^2} = 2\mathscr{D}t \label{eq:sigma-enters-scene}
+\end{equation}
+e substituirmos em (\ref{eq:is-p-a-sol}), teremos
+\begin{equation}
+p(x,t) = \frac{1}{\sqrt{2\pi}\sigma}\exp\left[ -\frac{1}{2}\left(\frac{x}{\sigma}\right)^2\right].
+\end{equation}
+Esta é uma velha conhecida nossa: trata-se da distribuição normal, ou gaussiana, de
+probabilidade.  Neste contexto, o \emph{desvio-padrão} da posição da partícula, $\sigma$, cresce
+com a raiz quadrada do tempo $t$.
+
+Equações do tipo (\ref{eq:sigma-enters-scene}) aparecem com frequência em problemas de difusão,
+e seu surgimento agora deve estar mais claro para você.
+
+
+\section{Uma introdução informal a processos estocásticos}
+
+
+
+%% Em seguida, vamos definir o conceito, importantíssimo, de \emph{escala integral}.  De forma
+%% muito grosseira, mas certamente evocativa, \emph{a escala integral é a metade do tempo que um
+%% processo estocástico leva para se esquecer de si mesmo}. 
+%% Na verdade ainda não definimos o que é um \emph{processo estocástico}, mas tenha
+%% calma. 
+
+Primeiro, alguns exemplos: as condições de tempo (tempo bom --- sol, ou tempo ruim ---
+chuva), o total de milímetros de chuva precipitados a cada 24 horas, e a vazão em um rio a cada
+dia, são todos exemplos de fenômenos que podem ser \emph{modelados} como processos estocásticos.
+
+Note o cuidado com as palavras: estes fenômenos podem ser \emph{modelados} como processos estocásticos;
+eles não \emph{são} processos estocásticos. Tanto quanto sabemos, a natureza não ``sabe'' o que
+ela mesma é; somos nós que lhe atribuímos certas propriedades, e a ``enfeitamos'' com hipóteses
+e modelos.  
+
+{\itshape  De fato, é totalmente irrelevante o que a natureza realmente ``é'': tudo o que
+  devemos nos perguntar é se os modelos que utilizamos são uma boa descrição daqueles aspectos
+  da natureza que consideramos importante modelar, para efeito de compreensão e de previsão}
+
+De volta aos fenômenos que identificamos como passíveis de serem modelados como processos
+estocásticos, observe que
+\begin{enumerate}
+\item O tempo amanhã é muito parecido com o tempo hoje: se hoje o tempo está bom, é grande a
+  chance de o tempo também estar bom amanhã.  Uma boa variável para testar isto é a pressão
+  atmosférica.
+\item Uma coisa semelhante acontece --- não por coincidência, é claro --- com a chuva: se hoje
+  está chovendo, é grande a chance de ainda estar chovendo amanhã. 
+\item Idem para a vazão de um rio --- de novo você deve notar que estes 3 fenômenos estão
+  intimamente ligados --- se hoje a vazão de um rio está baixa (porque não chove na bacia há
+  muitos dias), então é grande a chance de que ela continue baixa amanhã.
+\end{enumerate}
+Por outro lado, a relação entre o tempo (ou a chuva, ou a vazão) hoje e daqui a 3 meses é
+praticamente nula: a persistência destes fenômenos não dura --- normalmente --- mais do alguns
+dias.  Figurativamente, depois de um certo número de dias a natureza ``se esquece'' de si
+mesma. A idéia aqui é que muitos fenômenos possuem uma memória ``finita''.  Nosso trabalho agora
+é obter uma caracterização matemática razoável do que são processos estocásticos, e do que é a
+sua ``memória''.
+
+\begin{Def}
+Um processo estocástico $X(t,\omega)$ é uma função que leva cada $\omega \in \Omega$ de um
+\emph{espaço} amostral em uma função $x(t) = X(t,\omega)$.
+\end{Def}
+
+
+\begin{figure}
+   \includegraphics[width=0.9\textwidth]{procest}
+   \caption{Ilustração de um processo estocástico.\label{fig:procest}}
+\end{figure}
+
+Uma figura vale mais do que mil palavras.  A figura \ref{fig:procest} ilustra a definição de
+processo estocástico.  Nesta figura, 3 valores diferentes de $\omega$ geram 3 funções $x(t)$
+distintas. Mas não se engane!  A \emph{estocasticidade} --- isto é, a aleatoriedade --- do
+processo está no sorteio dos $\omega$'s, e não na aparência ``aleatória'' de $x(t)$!  De fato,
+cada um dos 3 gráficos de $X(t,\omega)$ na figura \ref{fig:procest} poderia ser uma função
+perfeitamente suave, e ainda assim o ``processo'' seria estocástico.  A aparência de
+aleatoriedade de cada um dos gráficos está ligada a propriedades \emph{adicionais} --- e muito
+úteis na prática --- de alguns processos estocásticos.  Estas propriedades são a memória finita,
+e a ergodicidade.  Nós agora passamos a descrevê-las.
+
+\begin{Def} A função de autocovariância de um processo estocástico $X(t)$ é
+\begin{equation}
+C(r,s) \equiv \tavg{ (X(r)-\tavg{X(r)})(X(s)-\tavg{X(s)}) }\label{eq:def-crs}
+\end{equation}
+\end{Def}
+Quando $X(t)$ é estacionário, (\ref{eq:def-crs}) simplifica-se consideravelmente. Em processos
+estacionários, estatísticas calculadas em um instante $t$ qualquer não dependem do mesmo. Então,
+\begin{align}
+\tavg{X(r)} &= \tavg{X(s)} = \mu_X,\label{eq:mu-x-cte}\\
+\tavg{(X(t)-\mu_X)^2} &= \sigma_X^2\label{eq:sigma-x-cte},
+\end{align}
+sendo que $\mu_X$ e $\sigma_X^2$ são \emph{constantes} ao longo do tempo.
+
+Em segundo lugar, se $X(t)$ é estacionário, estatísticas que dependem de \emph{mais de um
+  instante} permanecem inalteradas sob uma translação no tempo.  Então,
+\begin{equation}
+C(r,s) = C(r-s,0).\label{eq:crs0}
+\end{equation}
+Em outras palavras, \emph{a função de autocovariância de um processo estocástico estacionário
+  depende apenas da diferença entre os instantes $r$ e $s$}.
+Isto nos dá, agora, uma definição mais simples (porém também mais restrita, porque só vale para
+processos estocásticos estacionários) para a função de autocovariância:
+\begin{equation}
+C(\tau) = \tavg{ (X(t) - \mu_X)(X(t + \tau) - \mu_X)}.\label{eq:ctau}
+\end{equation}
+Com $C(\tau)$ é possível definir uma 
+
+Vamos seguir agora para uma introdução informal à Teoria de Difusão Turbulenta de Taylor.  Não
+custa repetir, nossa versão é unidimensional (e portanto demasiadamente simplificada para
+algumas aplicações).  
+
+
+Vamos agora começar a descrição de uma outra teoria de difusão, que deve muito à de Einstein, e
+que tentar analisar a difusão turbulenta sob um ponto de vista lagrangeano, ou seja: sob o ponto
+de vista do passeio aleatório de uma partícula em um fluido em escoamento turbulento.
+
+Da mesma maneira que na seção \ref{sec:brown-einstein}, nós vamos estudar o problema em uma
+dimensão, para simplificar a matemática.
+
+Em primeiro lugar, note que a posição $X$ de uma partícula no instante $t$ pode ser interpretada
+como uma soma de incrementos, como se segue:
+\begin{equation}
+X(t) = \int_0^t U(\tau)\,d\tau \nonumber = \lim_{\Delta \tau \to 0} \sum_k U(\tau_k)\Delta \tau.\label{eq:XisSum}
+\end{equation}
+Em (\ref{eq:XisSum}), $U$ é a velocidade da partícula em cada instante, e a integral foi
+re-interpretada como (o limite de) uma soma de Riemman.  É muito razoável agora supor que todos
+os $U(\tau_k)$'s são indenticamente distribuídos, e invocar o Teorema Central do Limite. Nós
+concluímos então, imediatamente, que $X$ é distribuído normalmente.
+
+
+Nosso ponto de partida --- que já foi dado --- é a integral
+(\ref{eq:XisSum}).  Vamos supor que o campo de velocidade $U$ que transporta a partícula possui
+média zero: $\tavg{U} = 0$.  Segue-se de (\ref{eq:XisSum}) que 
+\begin{equation}
+\tavg{X(t)} = \tavg{\int_0^t U(\tau)\,d\tau} = \int_0^t \tavg{U(\tau)}\,d\tau = 0.
+\end{equation}
+A função de autocovariância simplifica-se ainda mais:
+\[
+C(\tau) = \tavg{X(t)X(t+\tau)}.\label{eq:ctau0}
+\]
+
+
+\begin{Proj}
+Um processo estocástico ``clássico'' é o modelo AR-2 dado por
+\begin{equation}
+X_{n} = a_1X_{n-1} + a_2X_{n-2} + E
+\end{equation}
+onde $E$ é um ruído branco de média zero e variância $\sigma^2$. Os parâmetros $a_1$ e
+$a_2$ devem obedecer a \citep[eq. 2.54]{bras-rodriguez-iturbe--random}:
+\begin{align*}
+   a_1 + a_2 &< 1,\\
+   a_2 - a_1 &< 1,\\
+-1 < a_2 &< 1.
+\end{align*}
+Por exemplo, podemos ter $a_1 = 0{,}8$, e $a_2 = -0{,}2$.
+\end{Proj}
 
 
 
