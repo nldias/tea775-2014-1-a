@@ -40,12 +40,27 @@
 \belowdisplayskip=9pt plus 3pt minus 0pt
 \belowdisplayshortskip=0pt plus 3pt minus 0pt
 \vspace*{0.5cm}
-  \hrule \vspace*{0.25cm} \noindent\textbf{Definição ---}}{\vspace{0.250cm
+  \hrule \vspace*{0.25cm} \noindent\textbf{Definição:}}{\vspace{0.250cm
     plus 0pt minus 0.250cm} \hrule \vspace{0.5cm plus 0pt minus 0.125cm}}
 {\theoremheaderfont{\bfseries}
  \theorembodyfont{\rmfamily\small}
  \newtheorem{Proj}{Projeto}[chapter]
 }
+{\theoremheaderfont{\bfseries}
+ \theorembodyfont{\rmfamily}
+ \theoremprework{\needspace{1cm}\bigskip\hrule\leavevmode}
+ \theorempostwork{\hrule\bigskip}
+ \newtheorem{Teo}{Teorema}[chapter]
+}
+
+{\theoremheaderfont{\bfseries}
+ \theorembodyfont{\rmfamily}
+ \theoremprework{\needspace{1cm}\bigskip\hrule\leavevmode}
+ \theorempostwork{\hrule\bigskip}
+ \newtheorem{Lema}{Lema}[chapter]
+}
+
+
 
 
 \title{Lições de Teoria Ergódica, Processos Estocásticos e Sistemas Dinâmicos}
@@ -360,6 +375,8 @@ Quando $\Omega$ é finito, todos os elementos de $2^\Omega$ são eventos: a todos
 e a cada um deles pode ser atribuída uma probabilidade, e os axiomas
 (\ref{eq:posprob})--~(\ref{eq:finite-additivity}) se aplicam. 
 
+\begin{Exe}\label{exe:n-moedas}
+
 Antes de seguir para o infinito, considere o exemplo: $n$ lançamentos de uma
 moeda, cujos resultados individuais podem ser ``cara'' (0) ou ``coroa'' (1). Os
 eventos elementares com os quais podemos construir um espaço amostral são
@@ -373,7 +390,17 @@ $n$-uplas do tipo
 (1,1,\ldots,1,1).
 \end{array}
 \]
-Existem $2^n$ casos.
+Existem $2^n$ casos. Portanto, o espaço amostral mais ``simples'' que podemos
+imaginar aqui é
+\[
+\Omega = \left\{ \omega_k = (x_1, \ldots, x_n), x_i = \text{0 ou 1}, k = 1,\ldots,2^n\right\}
+\]
+Observe que 
+\[
+P\left(\left\{\omega_k\right\}\right) = \frac{1}{2^n}.
+\]
+
+
 
 Suponha por exemplo que desejemos calcular a probabilidade de que ocorram $k$
 caras (e, consequentemente, $n-k$ coroas). Um evento deste tipo (exatamente $k$
@@ -392,6 +419,8 @@ e 1 tem probabilidade $1-p$, a probabilidade de $k$ zeros em $n$ lançamentos é
 \[
 P(k) = \binom{n}{k} p^k (1-p)^{n-k}.
 \]
+
+\end{Exe}
 
 \textbf{Exercício:} Mostre que
 \[
@@ -674,12 +703,82 @@ x + y, & x + y \le 1,\\
 x + y - 1, & x+ y > 1.
 \end{cases}
 \end{equation}
+Vamos chamar ``$\boxplus$''  de q-soma, para distingui-la da soma usual em $\mathbb{R}$.
 
-Seguem-se imediatamente os seguintes fatos: para $x, y, z \in (0,1]$,
-\begin{align}
-x \boxplus y &= y \boxplus x, \label{eq:box-symmetric}\\
-z = x \boxplus y &\Leftrightarrow \exists\: r \in (-1,+1] : z = x + r.\label{eq:box-rationals}
-\end{align}
+O conjunto $(0,1]$ juntamente com a operação $\boxplus$ configura um \emph{grupo
+    abeliano}, uma vez que valem as seguintes propriedades:
+
+\begin{enumerate}[1)]
+\item Fechamento:
+\begin{equation}
+   x \boxplus y \in (0,1]. \label{eq:box-fecha}
+\end{equation} 
+De fato $\boxplus$ configura uma função:
+\begin{align*}
+   \boxplus : (0,1] \times (0,1] &\rightarrow (0,1], \\
+              (x,y)              &\mapsto z = x \boxplus y.
+\end{align*}
+\item Comutatividade: para $x,y \in (0,1]$, 
+\begin{equation}
+   x \boxplus y = y \boxplus x.  \label{eq:box-comuta}
+\end{equation}
+\item Associatividade:
+\begin{equation}
+ (x \boxplus y) \boxplus z = x \boxplus ( y \boxplus z). \label{eq:box-associa}
+\end{equation}
+\textbf{Precisamos de um voluntário ou voluntária para provar a associatividade.}
+\item Elemento neutro:
+\begin{equation}
+x \boxplus 1 = 1 \boxplus x = x. \label{eq:box-neutro}
+\end{equation}
+\item Elemento inverso da soma:
+\begin{equation}
+\forall x \in (0,1], \exists y  \in (0,1]\;:\; x \boxplus y = 1. \label{eq:box-inverso}
+\end{equation}
+Vamos usar a notação $(\boxminus x)$ para indicar o inverso da q-soma.
+É fácil ver que:
+\[
+   (\boxminus x) = \begin{cases}
+        1, & x = 1, \\
+        1- x, & x < 1.
+       \end{cases}
+\]
+O primeiro caso é trivial, pois $1 \boxplus 1 = 1$. No segundo caso,
+\[
+x \boxplus y = x + y = x + (1 - x) = 1, \;\text{(pois $x + y \le 1$)}\; \; \forall x \in (0,1].
+\]
+\end{enumerate}
+
+A existência do elemento inverso da soma permite que nós definamos a operação
+``q-diferença'', 
+$\boxminus$:
+\begin{Def}
+$x \boxminus y \equiv x \boxplus (\boxminus y)$.
+\end{Def}
+
+
+\begin{Lema}
+Para $x,z \in (0,1]$:
+\begin{equation}
+\exists y \in (0,1]:z = x\boxplus y \Leftrightarrow \exists r \in (-1,1): z =
+  x+r. \label{eq:box-rationals}
+\end{equation}
+\end{Lema}
+\textbf{Favor verificar se os limites para o intervalo de $r$ estão corretos.}\\
+Prova:
+Se $x=1$,
+\[
+y = z \boxminus x = z \boxminus 1 = z \in (0,1] \qquad \Leftrightarrow \qquad r = y - 1 \in (-1,1).
+\]
+Se $x < 1$ e $z + 1 - x \le 1$,
+\[
+y = z \boxminus x = z + 1  - x \qquad \Leftrightarrow \qquad r = y - 1 \in (-1,1).
+\]
+Se $x < 1$ e $z + 1 - x > 1$,
+\[
+y = z \boxminus x = z   - x \qquad \Leftrightarrow \qquad r = y \in (-1,1)\blob
+\]
+
 
 
 Agora, para \emph{qualquer} subconjunto $E$ de $(0,1]$, defina um novo conjunto $E(x)$
@@ -917,10 +1016,17 @@ Agora, pela sigma-aditividade:
 Isso, nós também já vimos em outra lição, é impossível. $T$ não pode ser mensurável\blob
 
 
-\chapter{2014-03-12: Teoria de probabilidade e incursões na física e em geociências}\label{chap:teoprob}
+\chapter{2014-03-12, 2014-03-17: Teoria de probabilidade e incursões na física e
+  em geociências}\label{chap:teoprob}
+
+
 
 
 \section{Variável aleatória}\label{sec:random-var}
+
+\textbf{Este início de seção foi escrito por mim, anteriormente.  Entretanto,
+  ele se parece bastante com a exposição da Ailin em 2014-03-17.  Seria bom
+  portanto unificar as duas aqui.  Aceito sugestões.}
 
 
 Em uma visão moderna de probabilidades e estatística, inventada por Kolmogorov, nós
@@ -988,7 +1094,182 @@ Diferentes maneiras de escrever o evento $A$ são:
     A &= \left\{ X(\omega) \le x \right\},\\
     A &= \left\{ X \le \omega \right\}.
 \end{align*}
-Note que na última forma desapareceu qualquer referência explícita ao espaço amostral.
+Note que na última forma desapareceu qualquer referência explícita ao espaço
+amostral.
+
+
+
+\section{A conveniência  de definir funções de $\Omega$ em $\mathbb{R}$.}
+
+Em princípio, para cada pergunta que nós podemos formular sobre eventos e
+probabilidades, é possível construir um espaço amostral $\Omega$ ``sob medida''
+para respondê-la. Junto com esse espaço, é possível, também em princípio,
+definir uma medida de probabilidade adequada.  Nesse caso, tudo o que é
+necessário, sempre, é a formulação de uma tripla de probabilidade
+$(\Omega,\mathscr{F},P)$ que nos permita medir a probabilidade dos eventos $A$
+de nosso interesse.
+
+Entretanto, isso não é \emph{prático}. O motivo é que, \emph{sempre}, as
+perguntas que podemos formular a partir de uma dada tripla
+$(\Omega,\mathscr{F},P)$ inicial, podem ser expressas em termos de
+\emph{funções} cujo domínio é $\Omega$. Rapidamente, portanto, nós nos deparamos
+com a conveniência, e quase que com a imposição, da definição de funções de
+$\Omega$ em $\mathbb{R}$.  Tais funções são denominadas \emph{variáveis
+  aleatórias}.
+
+Considere, por exemplo, o lançamento de $n$ moedas do exemplo
+\ref{exe:n-moedas}. Se ``caras'' significa $x_i = 0$ e ``coroa'' significa $x_i
+= 1$, a pergunta: qual é o número de coroas obtidas em $n$ lançamentos pode ser
+respondida com o auxílio da função 
+\begin{align*}
+X : \Omega &\Rightarrow \mathbb{R}, \\
+    \omega = (x_1, \ldots, x_n) &\mapsto \sum_{i=1}^n x_i.
+\end{align*}
+$X$ é uma função. A imagem de $X$ é 
+\[
+\text{Im} X = \left\{ 0, 1, \ldots, n\right\} \subset \mathbb{R}.
+\]
+$X$ não é sobrejetiva.
+
+Perguntas similares podem ser respondidas com outras funções, sem que seja
+necessário redefinir uma nova tripla $(\Omega,\mathscr{F},P)$ para cada
+pergunta!  Por exemplo, se desejarmos calcular probabilidades associadas ao
+número de caras obtidas em $n$ lançamentos, podemos usar:
+\begin{align*}
+X : \Omega &\Rightarrow \mathbb{R}, \\
+    \omega = (x_1, \ldots, x_n) &\mapsto n - \sum_{i=1}^n x_i.
+\end{align*}
+Ou ainda poderíamos estar interessados no número médio de coroas em $n$
+lançamentos (ou ainda no limite dessa quantidade quando $n\to\infty$), quando
+então poderíamos usar a função
+\begin{align*}
+X : \Omega &\rightarrow \mathbb{R}, \\
+    \omega = (x_1, \ldots, x_n) &\mapsto \frac{1}{n}\left[\sum_{i=1}^n x_i\right].
+\end{align*}
+
+Esses breves exemplos sugerem que é \emph{econômico} e \emph{útil} trabalhar com
+funções definidas em $\Omega$, em vez de reformular, do zero, um novo $\Omega$
+para cada pergunta relevante que possamos ter sobre eventos relacionados com o
+$\Omega$ original. Sob esse ponto de vista, variáveis aleatórias não são, em
+absoluto, uma necessidade. Elas são apenas uma forma cômoda de responder
+perguntas sobre probabilidades.
+
+
+A conveniência de trabalhar com variáveis aleatórias, entretanto, cria um novo
+conjunto de ``problemas'' técnicos que agora precisam ser resolvidos. Grosso
+modo, a questão é a seguinte:
+\begin{quote}
+Como é que o contradomínio $\mathbb{R}$ ``percebe'' a tripla de probabilidade $(\Omega,\mathscr{F},P)$?
+\end{quote}
+
+Sucede que o que faz sentido é calcular probabilidades dos subconjuntos de
+$\mathbb{R}$ pertencentes à classe $\mathscr{B}$, onde $\mathscr{B}$ é a
+sigma-álgebra de Borel. 
+
+Lembremo-nos de que $\mathscr{B}$ é a menor sigma-álgebra que contém os
+intervalos $(a,b]$, $a,b \in \mathbb{R}$, os intervalos $(-\infty,b]$,
+    $(a,+\infty)$, e também os intervalos $[a,b]$, $(a,b)$, $[a,b)$ e suas
+      uniões e interseções, e todos os conjuntos abertos e fechados.
+
+\textbf{Não sei o que os conjuntos abertos e fechados estão fazendo aqui.  Seria
+  bom explicar sua relação com os intervalos.}
+
+
+Precisamos, portanto, ``ligar'', de alguma forma, $\mathscr{B}$ a $\mathscr{F}$,
+esta última a sigma-álgebra da tripla de probabilidade ``original''. No fim, o
+que vai funcionar é o seguinte: para qualquer $B \in \mathscr{B}$, vamos definir
+\[
+P(B) \equiv P(X^{-1}(B).
+\]
+É claro que é preciso ``garantir'' que $X^{-1}(B) \in \mathscr{F}$. Pode-se
+mostrar que uma condição suficiente para isso é que 
+\begin{equation}
+X^{-1}\left( (-\infty,b]\right) \in \mathscr{F}.  \label{eq:X-mensuravel}
+\end{equation}
+Dizemos que, se $X$ atende (\ref{eq:X-mensuravel}), $X$ é uma função
+\emph{mensurável}. Portanto,
+
+
+\begin{Def}
+Dada uma tripla de probabilidade $(\Omega, \mathscr{F}, P)$, uma \emph{variável aleatória} é uma função
+\begin{align*}
+   X : \Omega &\rightarrow \mathbb{R}, \\
+\omega        &\mapsto x = X(\omega),
+\end{align*}
+tal que 
+\[
+\forall b \in \mathbb{R}, \; X^{-1}((-\infty,b]) \in \mathscr{F}.
+\]
+\end{Def}
+
+É interessante observar que definição de mensurabilidade de uma função é feita
+em termos da relação (não necessariamente uma função) \emph{inversa} $X^{-1}$. 
+O motivo é técnico: uniões, interseções e complementos \emph{arbitrários} de
+conjuntos $B \in \mathscr{B}$ \emph{permanecem em $\mathscr{B}$}. Da mesma
+forma, é preciso garantir que as pré-imagens dessas uniões, interseções e
+complementos \emph{permaneçam em $\mathscr{F}$}. Dadas as propriedades de
+fechamento de qualquer sigma-álgebra sob essas operações, essa garantia é dada
+pelas propriedades sempre válidas (dada uma função $X$ qualquer, não
+necessariamente mensurável --- isso é outra parte de nossos requisitos!):
+\begin{align*}
+X^{-1}\left(A \cup B\right) &= X^{-1}(A) \cup X^{-1}\left(B\right), \\
+X^{-1}\left(A \cap B\right) &= X^{-1}(A) \cap X^{-1}\left(B\right), \\
+X^{-1}\left(\overline{A}\right) &= \overline{X^{-1}\left(A\right)}. \\
+\end{align*}
+As duas primeiras relações podem ser estendidas para uniões e
+interseções arbitrárias (não necessariamente enumeráveis, embora isso
+baste para nossas sigma-álgebras):
+\begin{align*}
+X^{-1}\left(\bigcup_{\lambda \in \Lambda} A_\lambda\right) &= \bigcup_{\lambda  \in \Lambda} X^{-1}(A_\lambda), \\
+X^{-1}\left(\bigcap_{\lambda \in \Lambda} A_\lambda\right) &= \bigcap_{\lambda  \in \Lambda} X^{-1}(A_\lambda).
+\end{align*}
+A necessidade de definir mensurabilidade usando $X^{-1}$ decorre do
+fato de que \emph{é falso que}:
+\begin{align*}
+X\left(A \cap B\right) &= X(A) \cap X\left(B\right), \\
+X\left(\overline{A}\right) &= \overline{X\left(A\right)}. \\
+\end{align*}
+Para isso, bastam dois contra-exemplos.
+\begin{Exe}
+Sejam $A = (-\infty,0)$ e $B=[0,+\infty)$.  Então, $\overline{A} = B$
+  e $\overline{B} = A$.  Dada a função
+\begin{align*}
+   f: \mathbb{R} &\rightarrow \mathbb{R}, \\
+               x &\mapsto 1,
+\end{align*}
+Temos:
+\[
+A \cap B = \emptyset, \qquad f(A) = f(B) = \{ 1\},
+\]
+e
+\[
+f(A) \cap f(B) = \{ 1\} \ne \emptyset = f(A \cap B).
+\]
+
+\skipend
+
+\end{Exe}
+\begin{Exe}
+Sejam $A = (-\infty,0)$ e $B=[0,+\infty)$.  Então, $\overline{A} = B$
+  e $\overline{B} = A$.  Dada a função
+\begin{align*}
+   f: \mathbb{R} &\rightarrow \mathbb{R}, \\
+               x &\mapsto x^2,
+\end{align*}
+Temos: 
+\[
+f(\overline{A}) = f(B) = [0,\infty) = B \ne [0,-\infty) = \overline{f(A)}.
+\]
+
+\skipend
+
+\end{Exe}
+
+
+
+
+
+\section{A FDA}
 
 Nós agora vamos definir a função distribuição acumulada (FDA) de probabilidade de uma variável
 aleatória $X$:
