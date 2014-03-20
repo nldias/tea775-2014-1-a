@@ -17,6 +17,7 @@
 \usepackage{enumerate}
 \usepackage{ntheorem}
 \usepackage{natbib}
+\usepackage{bbm}
 \usepackage{needspace}
 \usepackage[pdftex,colorlinks=true,%
    urlcolor=blue,
@@ -549,14 +550,13 @@ Sim:
 
 Portanto, essa classe $\mathscr{S}$ de intervalos é um semi-anel.
 
-\textbf{Definição:}
-
-$\mathscr{R} \subset 2^{\Omega}$ é um \emph{anel} quando:
+\begin{Def}    $\mathscr{R} \subset 2^{\Omega}$ é um \emph{anel} quando:
 \begin{align*}
 \emptyset &\in \mathscr{R}, \\
 A, B \in \mathscr{R} &\Rightarrow A \cap B \in \mathscr{R},\\
 A, B \in \mathscr{R} &\Rightarrow A \mathop{\vartriangle} B \in \mathscr{R}.
 \end{align*}
+\end{Def}
 
 Lembre-se:
 \[
@@ -564,8 +564,8 @@ A \mathop{\vartriangle} B \equiv
 (A - B) \cup (B - A).
 \]
 
-Tivemos uma discussão sobre o motivo de se usar a diferença simétrica nessas
-definições: alguém gostaria de resumir a discussão em \LaTeX?
+\textbf{Tivemos uma discussão sobre o motivo de se usar a diferença simétrica nessas
+definições: alguém gostaria de resumir a discussão em \LaTeX?}
 
 
 Anéis triviais são:
@@ -688,11 +688,13 @@ P(\Omega) &= 1,\\
 P\left(\bigsqcup_{i=1}^\infty A_i\right) &= \sum_{i=1}^\infty P(A_i).
 \end{align*}
 
-\chapter{2014-03-10: Existe um conjunto não-mensurável em
+\chapter{2014-03-10: O conjunto de Vitali: existe um conjunto não-mensurável em
   $(0,1]$}\label{chap:non-measurable-set}
 
 %\newcommand{\ooplus}{\mathbin{\stackrel{\curvearrowleft}{+}}}
 \newcommand{\ooplus}{\xhookleftarrow{+}}
+
+\section{A q-soma e resultados preliminares\label{sec:q-soma}}
 
 Uma nova operação será usada \textit{ad nauseam} nesta lição. Para $x,y \in
 (0,1]$:
@@ -957,13 +959,14 @@ Para fechar esta parte bastante cansativa para a mente:
 \]
 pois $x \in Q(x)$.
 
-\section{O axioma da seleção e um conjunto estranho}
+\section{O axioma da seleção e um conjunto estranho\label{sec:conj-vitali}}
 
 Seja $\mathscr{C}$ a família dos conjuntos $Q(x)$, $x \in (0,1]$. Escolha um
   único ponto em $(0,1]$ pertencente a cada $Q(x)$.  O conjunto dos pontos assim
-    escolhidos será chamado $T$, e temos que $T \subset (0,1]$. O que fizemos
-      significa que, \emph{por definição}, não há dois pontos em $T$
-      pertencendentes ao mesmo $Q(x)$. Segue-se que
+    escolhidos será chamado $T$, e temos que $T \subset (0,1]$. $T$ é um
+      \emph{conjunto de Vitali}.  O que fizemos significa que, \emph{por
+        definição}, não há dois pontos em $T$ pertencendentes ao mesmo
+      $Q(x)$. Segue-se que
 \[
    \bigsqcup_{t \in T} Q(t) = (0,1].
 \]
@@ -1178,13 +1181,14 @@ intervalos $(a,b]$, $a,b \in \mathbb{R}$, os intervalos $(-\infty,b]$,
 Precisamos, portanto, ``ligar'', de alguma forma, $\mathscr{B}$ a $\mathscr{F}$,
 esta última a sigma-álgebra da tripla de probabilidade ``original''. No fim, o
 que vai funcionar é o seguinte: para qualquer $B \in \mathscr{B}$, vamos definir
-\[
-P(B) \equiv P(X^{-1}(B).
-\]
+a probabilidade de conjuntos mensuráveis em $\mathscr{B}$ como
+\begin{equation}
+\mathcal{P}(B) \equiv P\bigl(X^{-1}(B)\bigr).\label{eq:P-in-borel}
+\end{equation}
 É claro que é preciso ``garantir'' que $X^{-1}(B) \in \mathscr{F}$. Pode-se
 mostrar que uma condição suficiente para isso é que 
 \begin{equation}
-X^{-1}\left( (-\infty,b]\right) \in \mathscr{F}.  \label{eq:X-mensuravel}
+X^{-1}\bigl( (-\infty,b]\bigr) \in \mathscr{F}.  \label{eq:X-mensuravel}
 \end{equation}
 Dizemos que, se $X$ atende (\ref{eq:X-mensuravel}), $X$ é uma função
 \emph{mensurável}. Portanto,
@@ -1198,7 +1202,7 @@ Dada uma tripla de probabilidade $(\Omega, \mathscr{F}, P)$, uma \emph{variável 
 \end{align*}
 tal que 
 \[
-\forall b \in \mathbb{R}, \; X^{-1}((-\infty,b]) \in \mathscr{F}.
+\forall b \in \mathbb{R}, \; X^{-1}\bigl((-\infty,b]\bigr) \in \mathscr{F}.
 \]
 \end{Def}
 
@@ -1266,7 +1270,134 @@ f(\overline{A}) = f(B) = [0,\infty) = B \ne [0,-\infty) = \overline{f(A)}.
 \end{Exe}
 
 
+Uma função mensurável em $\Omega$ tem o papel de transferir a estrutura
+$(\Omega,\mathscr{F},P)$ para uma tripla equivalente
+$(\mathbb{R},\mathscr{B},\mathcal{P})$. A probabilidade de sub-conjuntos de
+$\mathbb{R}$ que ``fazem sentido'' está bem definida por (\ref{eq:P-in-borel})
+(na verdade, nos sub-conjuntos que pertencem a $\mathscr{B}$ (a sigma-álgebra de
+Borel) e também possivelmente mais alguns, que pertencem a $\mathscr{L}$ (a
+sigma-álgebra de Lebesgue) --- mas a diferença entre ambos consiste em conjuntos
+de medida zero).
+Seguem-se
+\begin{align*}
+\mathcal{P}(\mathbb{R}) &= 1, \\
+0 &\le \mathcal{P}(B) \le 1, \\
+\mathcal{P}\left[ \bigsqcup_{i=1}^\infty B_i\right] &= \sum_{i=1}^\infty \mathcal{P}(B_i)\qquad\text{$\sigma$-aditividade}
+\end{align*}
 
+Cabe observar que nem toda função de $\Omega$ em $\mathbb{R}$ é uma variável
+aleatória.
+Considere por exemplo a função
+\begin{align*}
+\mathbbm{1}_{\overline{T}} : (0,1] &\rightarrow \mathbb{R}, \\
+                             \omega &\mapsto \begin{cases} 1, & \omega \in
+                               \overline{T}\cap(0,1], \\
+                               0, & \omega \in T.\end{cases}
+\end{align*}
+onde $T$ é o conjunto de Vitali definido na seção \ref{sec:conj-vitali}. Sabemos
+que $T$ é não-mensurável: $T \not\in \mathscr{F}$.  Segue-se que a função
+$\mathbbm{1}_{\overline{T}}$ não é mensurável:
+\begin{align*}
+\mathbbm{1}_{\overline{T}}^{-1}\bigl( \left(-\infty,1/2\right]\bigr)
+   &= \bigl\{ \omega \in (0,1] : \mathbbm{1}_{\overline{T}}(\omega) \in \left(-\infty,1/2\right]\bigr\}\\
+   &= \bigl\{ \omega: \mathbbm{1}_{\overline{T}}(\omega) = 0\bigr\}\\
+   &= T \not\in\mathscr{F}\blob
+\end{align*}
+
+\section{2014-03-19: Propriedades de variáveis aleatórias\label{sec:propva}}
+
+Exemplos de variáveis aleatórias construídas a partir de outras:
+\begin{enumerate}
+\item Se $A \in \mathscr{F}$,
+\begin{align*}
+\mathbbm{1}_{A} : \Omega &\rightarrow \mathbb{R}, \\
+                             \omega &\mapsto \begin{cases} 1, & \omega \in A, \\
+                               0, & \omega \not\in A.
+                               \end{cases}
+\end{align*}
+é uma variável aleatória em $(\Omega,\mathscr{F},P)$.
+\item Se $X$,$Y$ são duas variáveis aleatórias em $(\Omega,\mathscr{F},P)$, então
+      \begin{enumerate}[a)]
+         \item $X + Y$ é uma variável aleatória;
+         \item $cX$ é uma variável aleatória;
+         \item $X + c$ é uma variável aleatória;
+         \item $X^2$ é uma variável aleatória;
+         \item $XY$ é uma variável aleatória.
+      \end{enumerate}
+\item Se $(X_1, X_2, \ldots, X_n, \ldots)$ é uma sequência de variáveis aleatórias e $\lim_{x\to\infty}X_n(\omega)$ existe para cada $\omega$, então:
+\begin{align*}
+   X : \Omega &\rightarrow \mathbb{R}, \\
+       \omega &\mapsto \lim_{n\to\infty} X_n(\omega)
+\end{align*}
+satisfaz 
+\[
+X^{-1}\bigl( (-\infty,b]\bigr) \in \mathscr{F}.
+\]
+A prova é complicada!  Rosenthal:
+\[
+X^{-1}\bigl( (-\infty,b]\bigr) = 
+\bigcap_{m=1}^\infty \bigcup_{n=1}^\infty \bigcap_{k=n}^\infty X_k^{-1}\left(-\infty, x + \frac{1}{m}\right].
+\]
+\item $\max(X,Y)$, $\min(X,Y)$ e $|X|$ são variáveis aleatórias.
+Notando que
+\begin{align*}
+\max(X,Y) &= \frac{1}{2}\left[ X + Y + |X-Y|\right], \\
+\min(X,Y) &= (X+Y) - \max(X,Y), 
+\end{align*}
+basta provar para o $|X|$.
+\item $\sup_n X_n$, $\inf_n X_n$ são variáveis aleatórias, desde que bem definidos. Vale lembrar que
+\[
+\sup_{n\in\mathbb{N}} r_n = 
+\begin{cases}
+\min\left\{ r: r_n \le r, \forall n \in \mathbb{N}\right\}, \\
++\infty, & \text{se a sequência não for limitada}.
+\end{cases}
+\]
+\item $\limsup_n X_n$ e $\liminf_n X_n$ são variáveis aleatórias. 
+
+Forme:
+\[
+Y_n \equiv \sup_{N\ge n} X_N. \qquad \text{\textbf{Confirmar índices!!!}}
+\]
+Note que $Y_n(\omega)$ é uma função monótona (não-crescente) de $n$, para cada $\omega$. Portanto,
+\[
+\exists \lim_{n\to\infty} Y_n \equiv \limsup_{n\to\infty} X_n.
+\]
+
+Forme:
+\[
+Z_n \equiv \inf_{N\ge n} X_N. \qquad \text{\textbf{Confirmar índices!!!}}
+\]
+Note que $Z_n(\omega)$ é uma função monótona (não-decrescente) de $n$, para cada $\omega$. Portanto,
+\[
+\exists \lim_{n\to\infty} Z_n \equiv \liminf_{n\to\infty} X_n.
+\]
+
+\item Qualquer função contínua $X: \Omega \rightarrow \mathbb{R}$ é uma variável
+  aleatória. Nota: para que o conceito de função contínua faça sentido, é
+  preciso que, no domínio, $\mathscr{F}$ contenha os conjuntos abertos de
+  $\Omega$, ou seja, que $\mathscr{F}$ seja uma $\sigma$-álgebra de Borel em
+  $\Omega$.
+
+\item Se:
+\begin{align*}
+X : (\Omega,\mathscr{F},P) &\rightarrow (\mathbb{R},\mathscr{B},\mathcal{P}),\\
+\omega &\mapsto x = X(\omega),
+\end{align*}
+e
+\begin{align*}
+f: (\mathbb{R},\mathscr{B},|\cdot|) &\rightarrow
+(\mathbb{R},\mathscr{B},|\cdot|),\\
+x &\mapsto y = f(x)
+\end{align*}
+(ou seja: $f$ é mensurável), então $f\circ X$ é uma variável aleatória.
+
+\end{enumerate}
+
+Finalmente, temos uma anotação um pouco solta que precisa ser esclarecida:
+$B \in \mathscr{B}$, $|B|=0$, $D \subset B$, $D$ não necessariamente em
+$\mathscr{B}$, $D\in\mathscr{L}$, a qual é a $\sigma$-álgebra de Lebesgue, que é
+o completamento, por $|\cdot|$, da $\sigma$-álgebra de Borel.
 
 
 \section{A FDA}

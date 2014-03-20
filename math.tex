@@ -1,0 +1,310 @@
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{textcomp}
+\usepackage{stmaryrd}
+%\usepackage{bm}
+% 
+% package relsize: needed only if you use \mathlarger, \mathsmaller!!!
+%\usepackage{relsize}
+%
+\def\Xint#1{\mathchoice
+{\XXint\displaystyle\textstyle{#1}}%
+{\XXint\textstyle\scriptstyle{#1}}%
+{\XXint\scriptstyle\scriptscriptstyle{#1}}%
+{\XXint\scriptscriptstyle\scriptscriptstyle{#1}}%
+\!\int}
+\def\XXint#1#2#3{{\setbox0=\hbox{$#1{#2#3}{\int}$}
+\vcenter{\hbox{$#2#3$}}\kern-.5\wd0}}
+\def\ddashint{\Xint=}
+\def\dashint{\Xint-}
+
+% ---------------------------------------------------------------------------
+% use Euler Fonts for my own devious ends
+% ---------------------------------------------------------------------------
+\DeclareMathAlphabet\EuScript{U}{eus}{m}{n}
+\SetMathAlphabet\EuScript{bold}{U}{eus}{b}{n}
+
+
+\newcommand{\bbxfamily}{\fontencoding{U}\fontfamily{bbold}\selectfont}
+\newcommand{\textbbx}[1]{{\bbxfamily#1}}
+\DeclareMathAlphabet{\mathbbx}{U}{bbold}{m}{n}
+\DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
+\newcommand{\zapf}{\fontencoding{OT1}\fontfamily{pzc}\fontseries{m}\fontshape{it}\fontsize{16}{16pt}\selectfont}
+% ---------------------------------------------------------------------------
+% math.tex was originally developed as a set of TeX macros.  Here, it
+% is being modified for LaTeX use, so you wil find a mix of TeX and
+% LaTeX commands (sorry...).  At any rate, it provides some useful
+% macros.  Take a look
+%
+% Nelson Lu\'{\i}s Dias
+% 15 apr 1994
+% 27 sep 1996
+% 27 sep 2002
+% ---------------------------------------------------------------------------
+%\newcounter{ItemNumber} %
+% ---------------------------------------------------------------------------
+% the fourier-transform of long expressions is typed as a wide hat after
+% the expression
+% ---------------------------------------------------------------------------
+\newcommand{\aft}{\widehat{\phantom{u}}}
+% ---------------------------------------------------------------------------
+% macros to simplify math typing
+% ---------------------------------------------------------------------------
+\DeclareMathOperator{\sen}{sen}%
+\DeclareMathOperator{\senh}{senh}%
+\DeclareMathOperator{\tg}{tg}%
+\DeclareMathOperator{\tgh}{tgh}%
+\DeclareMathOperator{\cotgh}{cotgh}%
+\DeclareMathOperator{\snl}{snl}
+\DeclareMathOperator{\arcsen}{arcsen}%
+\DeclareMathOperator{\erf}{erf}%
+\DeclareMathOperator{\erfc}{erfc}%
+\DeclareMathOperator{\haversin}{haversin}%
+\DeclareMathOperator{\arcsenh}{arcsenh}%
+\DeclareMathOperator{\arctg}{arctg}%
+\DeclareMathOperator{\arctgyx}{arctg2}%
+\DeclareMathOperator{\cis}{cis}%
+\newcommand{\arctgh}{{\rm arctgh}}%
+\newcommand{\blob}{\; \mbox{\rule{4pt}{4pt}}}%
+\newcommand{\bfvec}[1]{\mathord{\mbox{\bf #1}}}%
+\newcommand{\cotg}{{\rm cotg\,}}%
+\newcommand{\cross}{\vet{\times}}
+\newcommand{\deriva}[2]{\frac{d{#1}}{d{#2}}}%
+\newcommand{\mderiva}[2]{\frac{\md{#1}}{\md{#2}}}%
+\def\dbar{{\raisebox{-0.75pt}{$\mathchar'26$}\mkern-14.5mu\mathrm{d}}} 
+\newcommand{\dimof}[1]{\left\llbracket #1 \right\rrbracket}
+\DeclareMathOperator{\Cov}{Cov}%
+\DeclareMathOperator{\Var}{Var}%
+\DeclareMathOperator{\MSE}{MSE}
+\DeclareMathOperator{\RMSE}{RMSE}
+\DeclareMathOperator{\EMQ}{EMQ}%
+\DeclareMathOperator{\REMQ}{REMQ}
+\DeclareMathOperator{\Exv}{E}%
+\DeclareMathOperator{\Co}{Co}
+\DeclareMathOperator{\Qu}{Qu}
+\DeclareMathOperator{\Rea}{Re}
+\DeclareMathOperator{\Img}{Im}
+% ----------------------------------------------------------------------------
+% \derder must be considered obsolete, but is kept for backward compatibility;
+% \dern is preferable
+% ----------------------------------------------------------------------------
+\newcommand{\derder}[3]{%
+   \frac{d^{#3}{#1}}
+        {d{#2}^{#3}}
+}%
+\newcommand{\dern}[3]{%
+   \frac{d^{#3}{#1}}
+        {d{#2}^{#3}}
+}%
+\newcommand{\mdern}[3]{%
+   \frac{\md^{#3}{#1}}
+        {\md{#2}^{#3}}
+}%
+\newcommand{\dmat}[1]{\frac{ D{#1}}{Dt}}%
+\newcommand{\dmatbar}[1]{\frac{ \overline{D}{#1}}{Dt}}%
+\newcommand{\fof}[1]{\mathord{\mbox{\large\it ff}\,{(#1)}}}%
+\newcommand{\ifonlyif}{{\; \Leftrightarrow \;}}%
+\providecommand{\implies}{\; \Rightarrow \;}%
+\newcommand{\then}{\; \Rightarrow \;}%
+\newcommand{\parder}[2]{ {\frac{\partial {#1}}{\partial{#2}} }}%
+\newcommand{\thermopar}[3]{{\left(\frac{\partial {#1}}{\partial{#2}}\right)_{#3} }}%
+
+\newcommand{\parpar}[3]{\frac{\partial^2 {#1}}{\partial{#2} \partial{#3}}}%
+\newcommand{\parparpar}[4]{\frac{\partial^3 {#1}}{\partial{#2} \partial{#3}\partial{#4}}}%
+\newcommand{\parn}[3]{%
+    \frac{\partial^{#3} {#1}}%
+         {\partial {#2}^{#3}}
+}%
+\newcommand{\parpow}[2]{ {\left( #1 \right) }^{#2} }%
+\newcommand{\such}{\;|\;}%
+\newcommand{\totder}[2]{ {D{#1} \over D{#2} } }%
+\newcommand{\ulvec}[1]{\underline{#1}}
+%\def\well#1{\mathstrut #1}%
+%\def\I{\, \mathord{\sl i}\, }%
+% ---------------------------------------------------------
+% the classic sets
+% ---------------------------------------------------------
+\newcommand{\rea}{\mathbb{R}}%
+\newcommand{\com}{\mathbb{C}}%
+\newcommand{\reb}{\mathbb{R}^2}%
+\newcommand{\ren}{\mathbb{R}^n}
+% ---------------------------------------------------------
+% math formulas, displaystyle, in LR mode
+% ---------------------------------------------------------
+\newcommand{\mathbox}[1]{%
+\mbox{$\displaystyle #1$}%
+}
+\newcommand{\tavg}[1]{\left\langle #1 \right\rangle}
+\newcommand{\tavh}[1]{\langle #1 \rangle}
+% -----------------------------------------------------------------------------
+% e e i
+% -----------------------------------------------------------------------------
+\newcommand{\me}{\mathrm{e}}
+\newcommand{\mi}{\mathrm{i}}
+\newcommand{\md}{\mathrm{d}}
+%% \newcommand{\md}{\mathord{\textsl{d}}}
+%% \newcommand{\mi}{\mathord{\textsl{i}}\,}
+%% \newcommand{\me}{\mathord{\textsl{e}}}
+
+% ---------------------------------------------------------------
+% minha redefinição local de vetor
+% ---------------------------------------------------------------
+%\newcommand{\vet}[1]{\mathbf{#1}}
+\newcommand{\bdot}{\boldsymbol{\cdot}}
+\newcommand{\vet}[1]{\boldsymbol{#1}}
+\newcommand{\vut}[1]{\ensuremath{\mathbf{#1}}}
+\newcommand{\vem}[1]{\underset{\sim}{#1}}
+\newcommand{\ven}[1]{\underset{\approx}{#1}}
+\newcommand{\veg}[1]{\mathord{\mbox{\boldmath $#1$}}}
+%\newcommand{\mat}[1]{\mathord{[\mbox{\boldmath $#1$}]}}
+%\newcommand{\met}[1]{\mathord{\mbox{\boldmath $[#1]$}}}
+\newcommand{\met}[1]{\mbox{$\boldsymbol{[}$} \boldsymbol{#1} \mbox{$\boldsymbol{]}$}}
+\newcommand{\mat}[1]{\mbox{$\boldsymbol{[}$} #1 \mbox{$\boldsymbol{]}$}}
+\newcommand{\mut}[1]{\ensuremath{\mathbf{[#1]}}}
+% --------------------------------------------------------------------
+% mathptmx requires a special treatment
+% --------------------------------------------------------------------
+%\newcommand{\mut}[1]{\mathord{\mbox{       $\bm{[#1]}$}}}
+% --------------------------------------------------------------------
+% 
+% --------------------------------------------------------------------
+\newcommand{\bigmat}[1]{\mbox{$\boldsymbol{\big[}$} #1 \mbox{$\boldsymbol{\big]}$}}
+\newcommand{\Bigmat}[1]{\mbox{$\boldsymbol{\Big[}$} #1 \mbox{$\boldsymbol{\Big]}$}}
+\newcommand{\biggmat}[1]{\mbox{$\boldsymbol{\bigg[}$} #1 \mbox{$\boldsymbol{\bigg]}$}}
+\newcommand{\Biggmat}[1]{\mbox{$\boldsymbol{\Bigg[}$} #1 \mbox{$\boldsymbol{\Bigg]}$}}
+\newcommand{\ten}[1]{\mathbb{#1}}
+\newcommand{\mlin}[1]{[#1]^{\mathsf{\small T}}}
+%\newcommand{\tr} {{\mbox{\tiny$\mathsf{T}$}}}
+\newcommand{\tr} {{\mbox{\tiny$\boldsymbol{\top}$}}}
+\newcommand{\adj}{{\mbox{\tiny$\dagger$}}}
+\newcommand{\tuplet}[1]{({#1}_1,{#1}_2,{#1}_3)}
+\newcommand{\tuplen}[1]{({#1}_1,{#1}_2,\ldots,{#1}_n)}
+\newcommand{\jac}[2]{\frac{\partial\tuplen{#1}}{\partial\tuplen{#2}}}
+% -----------------------------------------------------------------------------
+% latitude, longitude
+% -----------------------------------------------------------------------------
+\newcommand{\latmin}[3]{#1\textdegree\,#2\textquotesingle\,#3}
+\newcommand{\lonmin}[3]{#1\textdegree\,#2\textquotesingle\,#3}
+% -----------------------------------------------------------------------------
+% é função de/ não é função de
+% -----------------------------------------------------------------------------
+%\newcommand{\isfunc}[1]{\mbox{=\textflorin}(#1)}
+\newcommand{\isfunc}[1]{:=\text{f{\kern-0.1em}f}(#1)}
+\newcommand{\isnotfunc}[1]{:\ne\text{f{\kern-0.1em}f}(#1)}
+\newcommand{\isconst}[1]{:=\text{\textcent}}
+\newcommand{\inner}[2]{\langle {#1},{#2} \rangle}
+% ---------------------------------------------------------------------------
+% macros to produce uppercase greek letters
+% ---------------------------------------------------------------------------
+\newcommand{\Alpha}{\mathord{\mathcal{A}}}
+\newcommand{\Beta}{\mathord{\mathcal{B}}}
+\newcommand{\Epsilon}{\mathord{\mathscr{E}}}
+\newcommand{\Zeta}{\mathord{\mathcal{Z}}}
+\newcommand{\Eta}{\mathord{\mathcal{H}}}
+\newcommand{\Iota}{\mathord{\mathcal{I}}}
+\newcommand{\Kappa}{\mathord{\mathcal{K}}}
+\newcommand{\Mu}{\mathord{\mathcal{M}}}
+\newcommand{\Nu}{\mathord{\mathcal{N}}}
+% \newcommand{\omicron}{\mathord{o}}
+\newcommand{\Omicron}{\mathord{\mathcal{O}}}
+%\newcommand{\Rho}{\mathord{\large\mbox{$\wp$}}}
+%\newcommand{\Rho}{\mathord{\mbox{\large{$\wp\!$}}}}
+%\newcommand{\Rho}{{\mbox{\large{$\wp{\kern -.1em}$}}}}
+% ---------------------------------------------------------------------------
+% I don't know how to do this with \newcommand
+% ---------------------------------------------------------------------------
+\def\Rho{%
+\mathchoice%
+      {\mbox{\large{$\wp\kern-0.05em$}}}
+      {\mbox{\large{$\wp$}}}
+      {\scriptstyle\wp}
+      {\scriptscriptstyle\wp}
+}
+
+
+
+% \newcommand{\Rho}{\mathord{\mathcal{P}}}
+\newcommand{\Tau}{\mathord{\mathcal{T}}}
+\newcommand{\Chi}{\mathord{\mathcal{X}}}
+%%\newcommand{\tet}{\mathord{\mbox{\footnotesize$\mathpzc{T}$}}}
+\newcommand{\tet}{\mathord{\mbox{\footnotesize$\EuScript{T}$}}}
+%%\newcommand{\vsp}{\mathord{\mbox{$\mathscr{V}$}}}
+\newcommand{\vsp}{\mathord{\mbox{\small$\mathpzc{V}$}}}
+\newcommand{\Ein}{\EuScript{U}}
+\newcommand{\Hel}{\EuScript{F}}
+\newcommand{\Gib}{\EuScript{G}}
+
+%% -----------------------------------------------------------------------------
+%% neat trick!
+%% -----------------------------------------------------------------------------
+%%\newcommand{\sfbTheta}{\text{{\biolinumGlyph{uni0398}}}}
+%%\newcommand{\varRho}{\text{{\libertineGlyph{uni01A4}}}}
+
+
+
+%% \newcommand{\Alpha}{\mathord{\mbox{\zapf{A}}}}
+%% \newcommand{\Beta}{\mathord{\mbox{\zapf{B}}}}
+%% \newcommand{\Epsilon}{\mathord{\mbox{\zapf{E}}}}
+%% \newcommand{\Zeta}{\mathord{\mbox{\zapf{Z}}}}
+%% \newcommand{\Eta}{\mathord{\mbox{\zapf{H}}}}
+%% \newcommand{\Iota}{\mathord{\mbox{\zapf{I}}}}
+%% \newcommand{\Kappa}{\mathord{\mbox{\zapf{K}}}}
+%% \newcommand{\Mu}{\mathord{\mbox{\zapf{M}}}}
+%% \newcommand{\Nu}{\mathord{\mbox{\zapf{N}}}}
+%% \newcommand{\omicron}{\mathord{\mbox{\zapf{o}}}}
+%% \newcommand{\Omicron}{\mathord{\mbox{\zapf{O}}}}
+%% %%\newcommand{\Rho}{\mathord{\mbox{\zapf{P}\,}}}
+%% \newcommand{\Rho}{\mbox{\Large$\wp$}}
+%% \newcommand{\Tau}{\mathord{\mbox{\zapf{T}}}}
+%% \newcommand{\Chi}{\mathord{\mbox{\zapf{X}}}}
+
+
+% ---------------------------------------------------------------------------
+% macros to produce punctuation inside math mode
+% ---------------------------------------------------------------------------
+%\newcommand{\MathPeriod}{\;{\rm .}}
+%\newcommand{\MathComma}{\;{\rm ,}}
+%\newcommand{\MathSemiColon}{\;{\rm ;}}
+%\newcommand{\MathColon}{\;{\rm :}}
+% --------------------------------------------------------------------------
+% EqnList provides an environment with a list of equations with numbers 
+% like 1-a, 1-b, ...  It works ALMOST like the eqnarray 
+% environment,
+% but preceding each equation you MUST type \EqnItem
+% --------------------------------------------------------------------------
+%\newcommand{\EqnItem}{%
+%   \addtocounter{ItemNumber}{1}%
+%   \addtocounter{equation}{-1}%
+%}%
+%\newenvironment{EqnList}{%
+%   \renewcommand{\theequation}%
+%   {\arabic{equation}-\alph{ItemNumber}}%
+%   \addtocounter{equation}{1}%
+%   \begin{eqnarray}%
+%}%
+%{%
+%   \end{eqnarray}%
+%   %\addtocounter{equation}{-1}%
+%   \setcounter{ItemNumber}{0}%
+%   \renewcommand{\theequation}{\arabic{equation}}%
+%}%
+\newcommand{\mathsci}[1]{\mathord{\mbox{\small\scfamily\itshape #1}}}
+\newlength{\equal}\settowidth{\equal}{$\:=\:$}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
