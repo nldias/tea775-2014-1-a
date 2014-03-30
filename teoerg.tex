@@ -707,7 +707,7 @@ x + y - 1, & x+ y > 1.
 \end{equation}
 Vamos chamar ``$\boxplus$''  de q-soma, para distingui-la da soma usual em $\mathbb{R}$.
 
-O conjunto $(0,1]$ juntamente com a operação $\boxplus$ configura um \emph{grupo
+O conjunto $(0,1]$ juntamente com a operação $\boxplus$ constitui um \emph{grupo
     abeliano}, uma vez que valem as seguintes propriedades:
 
 \begin{enumerate}[1)]
@@ -728,6 +728,10 @@ De fato $\boxplus$ configura uma função:
 \begin{equation}
  (x \boxplus y) \boxplus z = x \boxplus ( y \boxplus z). \label{eq:box-associa}
 \end{equation}
+Uma vez verificada a propriedade associativa, podemos dispensar os parênteses, e
+escrever $x \boxplus y \boxplus z$.
+
+
 \textbf{Precisamos de um voluntário ou voluntária para provar a associatividade.}
 \item Elemento neutro:
 \begin{equation}
@@ -1121,17 +1125,14 @@ $\Omega$ em $\mathbb{R}$.  Tais funções são denominadas \emph{variáveis
   aleatórias}.
 
 Considere, por exemplo, o lançamento de $n$ moedas do exemplo
-\ref{exe:n-moedas}. Se ``caras'' significa $x_i = 0$ e ``coroa'' significa $x_i
-= 1$, a pergunta: qual é o número de coroas obtidas em $n$ lançamentos pode ser
+\ref{exe:n-moedas}. Se ``cara'' significa $x_i = 0$ e ``coroa'' significa $x_i
+= 1$, a pergunta: ``qual é o número de coroas obtidas em $n$ lançamentos?'' pode ser
 respondida com o auxílio da função 
 \begin{align*}
 X : \Omega &\Rightarrow \mathbb{R}, \\
     \omega = (x_1, \ldots, x_n) &\mapsto \sum_{i=1}^n x_i.
 \end{align*}
-$X$ é uma função. A imagem de $X$ é 
-\[
-\text{Im} X = \left\{ 0, 1, \ldots, n\right\} \subset \mathbb{R}.
-\]
+Neste exemplo, $X$ é uma função. A imagem de $X$ é $\text{Im} X = \left\{ 0, 1, \ldots, n\right\} \subset \mathbb{R}.$
 $X$ não é sobrejetiva.
 
 Perguntas similares podem ser respondidas com outras funções, sem que seja
@@ -1167,9 +1168,9 @@ Como é que o contradomínio $\mathbb{R}$ ``percebe'' a tripla de probabilidade $(
 
 Sucede que o que faz sentido é calcular probabilidades dos subconjuntos de
 $\mathbb{R}$ pertencentes à classe $\mathscr{B}$, onde $\mathscr{B}$ é a
-sigma-álgebra de Borel. 
+$\sigma$-álgebra de Borel. 
 
-Lembremo-nos de que $\mathscr{B}$ é a menor sigma-álgebra que contém os
+Lembremo-nos de que $\mathscr{B}$ é a menor $\sigma$-álgebra que contém os
 intervalos $(a,b]$, $a,b \in \mathbb{R}$, os intervalos $(-\infty,b]$,
     $(a,+\infty)$, e também os intervalos $[a,b]$, $(a,b)$, $[a,b)$ e suas
       uniões e interseções, e todos os conjuntos abertos e fechados.
@@ -1179,7 +1180,7 @@ intervalos $(a,b]$, $a,b \in \mathbb{R}$, os intervalos $(-\infty,b]$,
 
 
 Precisamos, portanto, ``ligar'', de alguma forma, $\mathscr{B}$ a $\mathscr{F}$,
-esta última a sigma-álgebra da tripla de probabilidade ``original''. No fim, o
+onde esta última é a $\sigma$-álgebra da tripla de probabilidade ``original''. No fim, o
 que vai funcionar é o seguinte: para qualquer $B \in \mathscr{B}$, vamos definir
 a probabilidade de conjuntos mensuráveis em $\mathscr{B}$ como
 \begin{equation}
@@ -1190,6 +1191,7 @@ mostrar que uma condição suficiente para isso é que
 \begin{equation}
 X^{-1}\bigl( (-\infty,b]\bigr) \in \mathscr{F}.  \label{eq:X-mensuravel}
 \end{equation}
+\textbf{Seria bom enunciar o resultado na forma de um teorema, mesmo que sem demonstração.}
 Dizemos que, se $X$ atende (\ref{eq:X-mensuravel}), $X$ é uma função
 \emph{mensurável}. Portanto,
 
@@ -1212,14 +1214,23 @@ O motivo é técnico: uniões, interseções e complementos \emph{arbitrários} de
 conjuntos $B \in \mathscr{B}$ \emph{permanecem em $\mathscr{B}$}. Da mesma
 forma, é preciso garantir que as pré-imagens dessas uniões, interseções e
 complementos \emph{permaneçam em $\mathscr{F}$}. Dadas as propriedades de
-fechamento de qualquer sigma-álgebra sob essas operações, essa garantia é dada
+fechamento de qualquer $\sigma$-álgebra sob essas operações, essa garantia é dada
 pelas propriedades sempre válidas (dada uma função $X$ qualquer, não
 necessariamente mensurável --- isso é outra parte de nossos requisitos!):
+\begin{align}
+X^{-1}\left(A \cup B\right) &= X^{-1}(A) \cup X^{-1}\left(B\right), \label{eq:permanencia-uniao}\\
+X^{-1}\left(A \cap B\right) &= X^{-1}(A) \cap X^{-1}\left(B\right), \label{eq:permanencia-intersecao}\\
+X^{-1}\left(\overline{A}\right) &= \overline{X^{-1}\left(A\right)}. \label{eq:permanencia-complemento}
+\end{align}
+
+\textbf{2014-03-28T10:07:30 --- aceito agradecidamente verificações se a prova abaixo está certa} Por exemplo:
 \begin{align*}
-X^{-1}\left(A \cup B\right) &= X^{-1}(A) \cup X^{-1}\left(B\right), \\
-X^{-1}\left(A \cap B\right) &= X^{-1}(A) \cap X^{-1}\left(B\right), \\
-X^{-1}\left(\overline{A}\right) &= \overline{X^{-1}\left(A\right)}. \\
+X^{-1}(A \cap B) &= \left\{ \omega: X(\omega) \in A \cap B \right\}\\
+                 &= \left\{ \omega: \left[ X(\omega) \in A \right] \wedge \left[ X(\omega) \in B \right] \right\}\\
+                 &= \left\{ \omega: X(\omega) \in A \right\} \cap \left\{ \omega: X(\omega) \in B \right\} \\
+                 &= X^{-1}(A) \cap X^{-1}(B)\blob
 \end{align*}
+
 As duas primeiras relações podem ser estendidas para uniões e
 interseções arbitrárias (não necessariamente enumeráveis, embora isso
 baste para nossas sigma-álgebras):
@@ -1333,11 +1344,12 @@ satisfaz
 \[
 X^{-1}\bigl( (-\infty,b]\bigr) \in \mathscr{F}.
 \]
-A prova é complicada!  Rosenthal:
-\[
+A prova é complicada!  Ela se baseia no seguinte fato
+(Rosenthal \textbf{2014-03-25T09:44:36 --- Precisamos da referência completa}):
+\begin{equation}
 X^{-1}\bigl( (-\infty,b]\bigr) = 
-\bigcap_{m=1}^\infty \bigcup_{n=1}^\infty \bigcap_{k=n}^\infty X_k^{-1}\left(-\infty, x + \frac{1}{m}\right].
-\]
+\bigcap_{m=1}^\infty \bigcup_{n=1}^\infty \bigcap_{k=n}^\infty X_k^{-1}\left(-\infty, x + \frac{1}{m}\right].\label{eq:mnk-capcupcap}
+\end{equation}
 \item $\max(X,Y)$, $\min(X,Y)$ e $|X|$ são variáveis aleatórias.
 Notando que
 \begin{align*}
@@ -1373,12 +1385,13 @@ Note que $Z_n(\omega)$ é uma função monótona (não-decrescente) de $n$, para cada
 \exists \lim_{n\to\infty} Z_n \equiv \liminf_{n\to\infty} X_n.
 \]
 
-\item Qualquer função contínua $X: \Omega \rightarrow \mathbb{R}$ é uma variável
-  aleatória. Nota: para que o conceito de função contínua faça sentido, é
-  preciso que, no domínio, $\mathscr{F}$ contenha os conjuntos abertos de
-  $\Omega$, ou seja, que $\mathscr{F}$ seja uma $\sigma$-álgebra de Borel em
-  $\Omega$.
-
+\item Seja $X: \Omega \rightarrow \mathbb{R}$ uma variável
+  aleatória, tal que os abertos de $\Omega$ estão em $\mathscr{F}$, ou seja, $\mathscr{F}$ é a $\sigma$-álgebra de Borel
+  de $\Omega$ ou seu completamento. Então:
+   \begin{enumerate}[a)]
+      \item Se $f: \mathbb{R} \to \mathbb{R}$ for contínua, $f \circ X : \Omega
+        \to \mathbb{R}$ é uma variável aleatória
+   \end{enumerate}
 \item Se:
 \begin{align*}
 X : (\Omega,\mathscr{F},P) &\rightarrow (\mathbb{R},\mathscr{B},\mathcal{P}),\\
@@ -1399,6 +1412,333 @@ $B \in \mathscr{B}$, $|B|=0$, $D \subset B$, $D$ não necessariamente em
 $\mathscr{B}$, $D\in\mathscr{L}$, a qual é a $\sigma$-álgebra de Lebesgue, que é
 o completamento, por $|\cdot|$, da $\sigma$-álgebra de Borel.
 
+\textbf{Como a prova de 2014-03-24 foi muito longa, não vou colocá-la dentro da lista
+acima, mas depois.}
+
+\subsection*{Um resultado auxiliar}
+
+\begin{Def}
+Se a sequência $X_k(\omega)$ converge para todo $\omega$, então, pela definição
+de limite, $X_k(\omega) \to X(\omega)$ se, para todo $\epsilon = 1/m$, $\exists
+K(m,\omega)$ tal que:
+\begin{equation}
+\bigl\vert X_k(\omega) - X(\omega)\bigr\vert < \frac{1}{m},\qquad \forall k \ge K(m,\omega).\label{eq:xk-conv}
+\end{equation}
+\end{Def}
+
+\subsection*{Ante-sala da prova}
+
+Vamos agora provar (\ref{eq:mnk-capcupcap}).
+Comece observando que
+\begin{align*}
+\omega \in \bigcap_{m=1}^\infty \bigcup_{n=1}^\infty \bigcap_{k=n}^\infty
+X_k^{-1}\left(-\infty,b+\frac{1}{m}\right] &\Leftrightarrow \forall m \in
+  \mathbb{N},\\
+&\phantom{\Leftrightarrow} \omega \in \bigcup_{n=1}^\infty \bigcap_{k=n}^\infty
+X_k^{-1}\left(-\infty,b+\frac{1}{m}\right], \\
+&\Leftrightarrow \forall m \in \mathbb{N}, \;\exists N(m,\omega) : \\
+&\phantom{\Leftrightarrow} \omega \in \bigcap_{k=N(m,\omega)}^\infty
+  X_k^{-1}\left(-\infty,b+\frac{1}{m}\right], \\
+&\Leftrightarrow \forall m \in \mathbb{N}, \;\exists N(m,\omega) :\\
+&\phantom{\Leftrightarrow}  X_k(\omega) \le b + \frac{1}{m}, \; \forall k \ge N(m,\omega).
+\end{align*}
+É bom parar um pouco e observar que tudo isso aí em cima \emph{ainda é o lado
+  direito} de (\ref{eq:mnk-capcupcap})! Em outras palavras,
+\begin{multline*}
+\bigcap_{m=1}^\infty \bigcup_{n=1}^\infty \bigcap_{k=n}^\infty
+X_k^{-1}\left(-\infty,b+\frac{1}{m}\right] 
+=\\
+\left\{
+\omega: \forall m \in \mathbb{N}, \;\exists N(m,\omega) :
+X_k(\omega) \le b + \frac{1}{m}, \; \forall k \ge N(m,\omega)
+\right\}.
+\end{multline*}
+
+\textbf{Eu gostaria de escrever essa última afirmativa com único ``tal que''
+  ($:$), em vez de dois.}
+
+Novamente, (\ref{eq:mnk-capcupcap}) é da forma
+\[
+D = E
+\]
+onde $D$ e $E$ são conjuntos.  A prova usual da igualdade de dois conjuntos
+segue a lógica:
+\begin{align*}
+\left( \omega \in D \Rightarrow \omega \in E\right) &\Rightarrow D \subseteq E, \\
+\left(\omega \in E \Rightarrow \omega \in D\right)  &\Rightarrow  E \subseteq D,
+\end{align*}
+e portanto $D = E$.
+
+
+\subsection*{Prova}
+
+Somente agora nós vamos realmente provar a primeira linha de implicaturas acima:
+\[
+\omega \in X^{-1}(-\infty,b] \Leftrightarrow X(\omega) \le b.
+\]
+Usando a equação (\ref{eq:xk-conv}), $\forall m \in \mathbb{N}, \exists
+K(m,\omega)$:
+\[
+\bigl\vert X_k(\omega) - X(\omega)\bigr\vert < \frac{1}{m}, \forall k \ge
+K(m,\omega).
+\]
+Em particular,
+\[
+X_k(\omega) < \frac{1}{m} + X(\omega) \le \frac{1}{m} + b,
+\]
+donde
+\[
+X^{-1}(-\infty,b] \subseteq \bigcap_{m=1}^\infty \bigcup_{n=1}^\infty \bigcap_{k=n}^\infty
+X_k^{-1}\left(-\infty,b+\frac{1}{m}\right].
+\]
+
+\textbf{OK, mas até aqui eu ainda acho que devíamos ter usado $N(m,\omega) = K(m,\omega)$ (um único símbolo) na prova.}
+
+A ``segunda linha'' que precisa ser provada, ainda, é:
+\begin{equation}
+\omega \in \bigcap_{m=1}^\infty \bigcup_{n=1}^\infty \bigcap_{k=n}^\infty
+X_k^{-1}\left(-\infty,b+\frac{1}{m}\right] \Rightarrow \omega \in X^{-1}(-\infty,b].\label{eq:segunda-linha}
+\end{equation}
+Já sabemos que o lado esquerdo acima significa que, $\forall m \in\mathbb{N}, \exists K(m,\omega)$:
+\begin{equation}
+X_k(m) \le b + \frac{1}{m}, \forall k \ge K(m,\omega). \label{eq:vai-contradizer}
+\end{equation}
+Por outro lado, suponha, por \textit{reductio ad absurdum}, que
+$X(\omega) > b$, e faça $d = X(\omega) - b$. Mas $X(\omega)$ é o limite de uma
+sequência, e portanto a partir de algum $k \ge N(\epsilon,\omega)$ \textbf{(preciso de ajuda para arrumar $N(m,\omega)$
+  e $K(m,\omega)$)}
+devemos ter
+\[
+X(\omega) - \epsilon < X_k(\omega) < X(\omega) + \epsilon.
+\]
+Escolha
+\[
+\epsilon = \frac{1}{m} < \frac{d}{2} \Leftrightarrow \frac{2}{m} < d;
+\]
+então,
+\begin{align}
+X(\omega) - \epsilon &< X_k(\omega),\nonumber\\
+X(\omega) - b + \left( b - \frac{1}{m}\right) &< X_k(\omega), \nonumber\\
+d + \left( b - \frac{1}{m}\right) &< X_k(\omega), \nonumber\\
+\frac{2}{m} + \left( b - \frac{1}{m}\right) &< d + \left( b - \frac{1}{m}\right) < X_k(\omega),\nonumber\\
+b + \frac{1}{m} &< X_k(\omega).\label{eq:contradisse}
+\end{align}
+Mas (\ref{eq:vai-contradizer}) e (\ref{eq:contradisse}) são contraditórios (um absurdo): a hipótese $X(\omega) > b$
+levou a um absurdo, e portanto temos, como desejávamos
+(\ref{eq:segunda-linha})\blob
+
+\section{2014-03-28T09:49:31 revisão, e a FDA}
+
+Tínhamos
+\begin{align*} 
+X : (\Omega,\mathscr{F}) &\rightarrow (\mathbb{R},\mathscr{B}), \\
+         \omega          &\mapsto       X(\omega),
+\end{align*}
+de tal forma que $X^{-1}(-\infty,b] \in \Omega$, o que equivale a $X^{-1}(B) \in
+  \mathscr{F}, \; \forall B \in \mathscr{B}$. Podemos agora definir:
+\begin{align*}
+\mathcal{P}(B) &= P\left(\underbrace{X^{-1}(B)}_{\in \mathscr{F}}\right)\\
+\mathcal{P}(B) &\ge 0,\\
+\mathcal{P}(\emptyset) &= 0,\\
+\mathcal{P}(\mathbb{R}) &= P\left(X^{-1}(\mathbb{R})\right) = P(\Omega) = 1, \\
+\mathcal{P}\left( \bigsqcup_{i=1}^\infty B_i\right) &= P\left(X^{-1}\left(\bigsqcup_{i=1}^\infty B_i\right)\right)\\
+&= P\left(\bigsqcup_{i=1}^\infty X^{-1}(B_i)\right)\\
+&= \bigsqcup_{i=1}^\infty P\left(X^{-1}(B)\right)\\
+&= \sum_{i=1}^\infty \mathcal{P}(B_i).
+\end{align*}
+Portanto, vale a $\sigma$-aditividade.
+
+Observe que se os $B_i$'s são disjuntos em $\mathscr{B}$, suas pré-imagens são disjuntas em $\mathscr{F}$ (ver (\ref{eq:permanencia-intersecao}):
+\begin{align*}
+X^{-1}(B_i) \cap X^{-1}(B_j) &= X^{-1}\left(B_i \cap B_j\right) \\
+                                              &= \emptyset\blob
+\end{align*}
+
+$\mathcal{P}$ é uma nova medida de probabilidade. Temos uma nova
+tripla, $(\mathbb{R},\mathscr{B},\mathcal{P})$, \emph{diferente} de
+$(\mathbb{R}, \mathcal{B}, |\cdot|)$, onde $|\cdot|$ indica a medida
+de Lebesgue. \textbf{2014-03-28T10:34:14 dúvida: nesta última tripla
+  devemos ter: $\mathscr{B}$ ou $\mathscr{L}$?}
+
+Mudemos agora de notação: os valores de $\mathcal{P}(-\infty,x]$
+  determinam as probabilidades em todos os conjuntos restantes de
+  $\mathscr{B}$. De fato, note que
+\[
+\mathcal{P}\bigl( (a,b]\bigr) = \mathcal{P}\bigl((-\infty,b]\bigr) -
+    \mathcal{P}\bigl((-\infty,a]\bigr)
+\]
+trivialmente (por aditividade finita). A partir de agora, basta gerar
+novos conjuntos $B$ a partir dos intervalos $(a,b]$ usando a estrutura
+  de semi-anel. \textbf{2014-03-28T10:37:42 eu acho que isso poderia
+    ser melhor dito}
+
+Defina agora a FDA:
+\[
+F_X(x) \equiv \mathcal{P}\bigl((-\infty,x]\bigr).
+\]
+Temos que 
+\begin{align*}
+F_X : \mathbb{R} &\rightarrow \mathbb{R}, \\
+             x   &\mapsto \mathcal{P}\bigl((-\infty,x]\bigr) \in
+               [0,1], \forall x \in \mathbb{R}.\\
+F_X(x) &\ge 0, 
+\end{align*}
+$F_X(x)$ é monótona não-decrescente.
+
+\begin{Exe}\label{exe:dist-binom}
+A distribuição binomial é
+\[
+P(X = k) = \binom{n}{k}\left(\frac{1}{2}\right)^k.
+\]
+Um espaço amostral possível é o conjunto das ($2^n$) enuplas
+$(\omega_1, \ldots, \omega_n)$, com $\omega_i = 1$ ou $\omega_i = 0$.
+A variável aleatória associada à distribuição Bernoulli neste caso
+será 
+\begin{align*}
+X : \{ 0,1\} \times \ldots \times \{ 0, 1\} &\rightarrow \mathbb{R},\\
+\omega = (\omega_1, \ldots, \omega_n) &\mapsto X(\omega) =
+\sum_{i=1}^n \omega_i.
+\end{align*}
+A figura \ref{fig:fdafact} mostra a $F_X(x)$ para $n=6$.
+
+\skipend
+\end{Exe}
+
+\begin{figure}\centering
+\includegraphics[width=0.8\textwidth]{fdafact}
+\caption{Função distribuição acumulada da distribuição binomial, $n=6$.\label{fig:fdafact}}
+\end{figure}
+
+São propriedades da FDA:
+\begin{enumerate}
+\item $F_X(x)$ é monótona não-decrescente.
+\item 
+\[
+\lim_{x \to -\infty} F_X(x) = 0.
+\]
+\item 
+\[
+\lim_{x \to +\infty} F_X(x) = 1.
+\]
+\end{enumerate}
+Reciprocamente, se uma função $F_X(x)$ possui as propriedades acima,
+então $F_X(x)$ é a FDA de \emph{alguma} variável aleatória. Assim, 
+\begin{quote}
+Qualquer função $F(x)$ com as propriedades acima define uma medida de
+probabilidade $\mathcal{P}$ em $(\mathbb{R},\mathscr{B})$
+\end{quote}
+
+\begin{Exe}
+Se $\Omega = \{\omega_0, \omega_1, \ldots, \}$ é um conjunto
+enumerável e cada evento $\{\omega_i\}$ é um átomo de $\Omega$ com
+$P\{\omega_i\} = p_i$, então
+\[
+F_X(x) = \sum_{X(\omega_i)\le x} p_i,
+\]
+pois 
+\[
+X^{-1}(-\infty,x] = \{ \omega_i : X(\omega_i) \le x\}.
+\]
+\skipend
+\end{Exe}
+
+\begin{Def} \textbf{Mas isto é mesmo uma definição???}
+A tripla $(\mathbb{R}, \mathscr{B}, \mathcal{P})$ é absolutamente
+contínua em relação a $(\mathbb{R},\mathscr{B},|\cdot|)$ quando
+\[
+|B| = 0 \Rightarrow \mathcal{P}(B) = 0, \; \forall B \in \mathscr{B}.
+\]
+\end{Def}
+
+\begin{Exe} Se $f: \mathbb{R} \rightarrow \mathbb{R}_+$ for integrável segundo
+  Lebesgue, e 
+\[
+   \int_{\mathbb{R}} f(x)\,\md_L{x} = 1,
+\]
+então
+\[
+\mathcal{P}(B) = \int_B f(x)\,\md_L{x} =
+                 \int_\mathbb{R} \mathbb{1}_B(x)f(x)\,\md_L{x}
+\]
+é uma medida de probabilidade, com 
+\[
+F_x(x) = \int_{\infty}^x f(x)\,\md_L{x},
+\]
+e
+\[
+F_x(b) - F_X(a) = \int_a^b f(x)\,\md_L{x}.
+\]
+\textbf{2014-03-30T09:04:06 Por que precisamos escrever explicitamente essa
+  última equação?}.
+
+$f(x)$ é a \emph{função densidade de probabilidade}.
+
+\end{Exe}
+
+\begin{Teo}\label{teo:descont-enum}
+Seja $F_X(x)$ a FDA da variável aleatória $X$.  O conjunto de descontinuidades
+de $F_X(x)$ é enumerável (ou finito). As descontinuidades são de tipo ``salto''.
+\end{Teo}
+\textbf{Ver seção 2.3 de Bartle --- precisamos da referência bibliográfica
+  completa!}
+
+Seja agora $\{ x_1, \ldots, x_n, \ldots \} \subset \mathbb{R}$ o conjunto das
+descontinuidades. Definimos, em cada um desses pontos,
+\[
+p_i \equiv F_X(x_i) - F_X({x_i}_{-})
+\]
+Definimos agora uma função cuja aparência é similar à que obtivemos no exemplo
+\ref{exe:dist-binom}, ilustrada na figura \ref{fig:fdafact}:
+\[
+F_d(x) \equiv \sum_{i: x_i \le x} p_i.
+\]
+
+É importante entendermos o que se está fazendo aqui.  Estamos ``construindo'' a
+parte não-contínua da FDA. Qualquer variável aleatória possui uma FDA que pode
+ser decomposta em 3 componentes.  A parte descontínua é uma delas.  O teorema
+(\ref{teo:descont-enum}) e a definição acima provêem a definição da parte
+descontínua. 
+
+Continuando, o que dizer sobre a parte contínua?  Temos o seguinte fato
+\textbf{(Um outro teorema??  Creio que sim)}
+
+Toda função monótona possui derivada em quase todos os pontos (existe a derivada
+exceto em um subconjunto de medida nula, segundo Lebesgue). Podemos portanto,
+dada uma $F$ com tais características, definir sua FDP:
+\[
+f(x) = \begin{cases} F'(x), & \text{onde ela existe},\\
+         0, & \text{nos demais pontos}
+\end{cases}
+\]
+
+Curiosamente (e estranhamente para mim!), isso não é tudo.   De fato, se
+definirmos
+\[
+F_{ac}(x) \equiv \int_{-\infty}^x f(x)\,\md{x}
+\]
+ainda sobra a ``parte singular'', que definimos:
+\[
+F_S(x) \equiv F_X(x) - F_d(x) - F_{ac}(x).
+\]
+
+O final da aula me deixou em dúvida: por que fazemos o seguinte?
+
+\begin{description}
+\item[Teste discreto] $\exists$ um subconjunto enumerável com probabilidade 1
+  \textbf{(???)}
+\item[Teste contínuo] 
+\[
+|B| = 0 \Rightarrow \mathcal{P}(B) = 0.
+\]
+\textbf{(???)}
+\item[Teste singular] $\mathcal{P}$ é singular em relação a $|\cdot|$ se existe
+$B_0 \in \mathscr{B}$, $|B_0| =0$, mas com 
+$\mathcal{P}(B) = \mathcal{P}(B \cap B_0)$, 
+$\mathcal{P}(B_0) = 1$.
+\end{description}
+
+\textbf{2014-03-30T09:21:14 Vá agora para o final do arquivo, onde eu preparei a
+aula de 2014-03-31}
 
 \section{A FDA}
 
@@ -2281,6 +2621,189 @@ $a_2$ devem obedecer a \citep[eq. 2.54]{bras-rodriguez-iturbe--random}:
 Por exemplo, podemos ter $a_1 = 0{,}8$, e $a_2 = -0{,}2$.
 \end{Proj}
 
+\section{2014-03-31 Moving on to stochastic processes and dynamical systems}
+
+\cite[][Teorema 6.1.1]{rosenthal--first.look}: para qualquer função mensurável $g: \mathbb{R} \rightarrow \mathbb{R}$, 
+\[
+\int_\Omega g(X(\omega))\,\md{P}(\omega) = \int_{\mathbb{R}} g(t) \md{F}_X(t).
+\]
+
+De \cite{todorovic--introduction.stochastic.processes}: Um processso
+estocástico é uma família de variáveis aleatórias $X(t)$, $t \in T$,
+definidas em um espaço \emph{comum} de probabilidade
+$(\Omega,\mathscr{F},P)$, $T \subset \mathbb{R}$:
+\begin{align*}
+X : \Omega \times T &\to \mathbb{R},\\
+    (\omega,t) &\mapsto x = X(\omega,t)
+\end{align*}
+
+Um ponto muito importante é o seguinte:
+\begin{quote}
+Uma vez que $\omega$ tenha sido escolhido, $X(t)$ é
+\emph{determinístico}, ou seja: é uma função ordinária (de $t$) como
+qualquer outra!
+\end{quote}
+
+
+
+\begin{center}
+   \includegraphics[width=0.6\textwidth]{/home/nldias/work/graduacao/matap/aulas/procest}
+   \colorbox{yellow}{A single $\omega$ for each $x(t)$!}
+\end{center}
+
+\textbf{I will now try to re-write my presentation at Santa Maria
+  using only $\omega$ and $\Omega$.  The objective is to work on
+  notation to clean it up as much as possible. I believe that notation
+is important, indeed fundamental: does that make me a formalist?}
+
+Vamos construir funções
+
+\begin{align*}
+   \phi_t : \Omega &\rightarrow \Omega, \\
+             \omega_0 &\mapsto \omega(t) = \phi_t(\omega_0)
+\end{align*}
+O índice $t$ acima é  $t \in T \subset \mathbb{R}$. Ele pode
+representar um sistema discreto ou contínuo. 
+
+Já nesse ponto, a similaridade com a definição de processo estocástico
+é impressionante!  Isso não pode ser coincidência!
+
+Defina
+\[
+\phi_{t+s} = \phi_s \circ \phi_t.
+\]
+
+Um sistema dinâmico agora é a tripla $(\Omega, \mathscr{F}, P)$ com
+$\phi_t$.  Uma coisa importante prá caramba é que $\phi_t$ induz uma
+nova medida de probabilidade em $\Omega$ (desde que $\phi_t$ seja
+mensurável, é claro).  Essa nova medida é definida por
+\[
+P^*(A) \equiv P(\phi_{-t}(A)).
+\]
+O motivo para fazermos a definição ``de trás para frente'' está, como
+sabemos, no conjunto de propriedades 
+(\ref{eq:permanencia-uniao})--(\ref{eq:permanencia-complemento}).
+
+\begin{Def}
+Se
+\begin{equation}
+P(A) = P(\phi_{-t}(A)), \; \forall A \in \mathscr{F}, \label{eq:medida-invariante}
+\end{equation}
+dizemos que $P$ é \emph{invariante} sob $\phi_t$.
+\end{Def}
+
+
+From:
+\begin{center}
+Dynamical Systems and Stochastic Processes
+
+(P. Collet, 2010)
+
+\url{http://escuelainvierno.cimfav.cl/documentos/pdf/NotesP_Collet.pdf}
+\end{center}
+
+\begin{quote}\small
+{Given a probability measure $\mu$ (read $P$) on the phase space $\Omega$ and the time evolution map
+$T$ (or a (semi)-flow) (read $\phi_t$), we are \textbf{exactly} in the setting of stochastic processes.}
+\end{quote}
+This is because, given the dynamical system $\phi_t$, and a measurable function
+$g$ on $\Omega$, we can define a stochastic
+process $X(t)$ by means of
+\[
+X(\omega,t) \equiv g \left(\phi_t(\omega)\right).
+\]
+
+\textbf{Minhas observações: nós precisamos entender direitinho por que
+  precisamos, neste ponto, de $g$ para ``fazer a ponte'' entre
+  sistemas dinâmicos e processos estocásticos}
+
+Yes!
+
+\cite{collet--dynsys.valparaiso}:
+\begin{quote}\small
+The fact which may look a little unusual for a Probabilist is that the
+probability is given on the initial condition, \textbf{and there is no
+  randomness appearing in the time evolution} (my emphasis). However
+the points on the phase space completely characterize the orbits, and
+we can think of $\mu$ (read $P$) as a probability measure on the
+orbits, the time evolution being the shift.
+
+\emph{In that sense, any stochastic process is a dynamical system (a not very useful
+remark in practice).}
+\end{quote}
+
+
+\subsection*{Ergodicity, and Birkhoff's theorem}
+
+\[
+\lim_{T\to\infty} \frac{1}{T} \int_0^T g(\phi_t(\omega_0))\,\md{t} = L
+\stackrel{\text{if ergodic}}{=} \int_\Omega
+g(\omega)\,\md{\omega}
+\]
+
+Remark: $X(x_0,t) = g(\phi_t(\omega_0)) $ is a single realization of a stochastic process from
+  the initial condition $\omega_0$. The rightmost expression is \emph{independent of
+    $\omega_0$, and only then is the process ergodic}.
+
+Moreover, \citep{lebowitz.penrose--modern.ergodic}:
+\begin{quote}\small
+Stated precisely, this means that a system is ergodic on $S$ (read $\Omega$) if
+and only if \emph{all} regions $R$ of $S$ (read $\Omega$) left invariant by the
+time evolution, $\phi_t(R) = R$ either have zero area or have an area equal to
+the area of $S$ (read either have zero probability measure, or have $P(R) = 1$).
+\end{quote}
+
+\subsection*{Being more accurate,}
+
+However, the equality $\phi_t(R) = R$ in \cite{lebowitz.penrose--modern.ergodic}'s statement is somewhat
+\emph{imprecise}!
+Given the \emph{symmetric difference} between two sets, 
+\[
+A \;\triangle\; B \equiv (A \cup B)  - ( A \cap B),
+\]
+then, in terms of probability measure, the corresponding statement is.
+\[
+P\left(A \;\triangle\; \phi_{-t}(A)\right) = 0 \Leftrightarrow P(A) = 0 \; \text{or}
+\; P(A) = 1.
+\]
+My simple-minded interpretation: in an ergodic system, the map $\phi_t$ makes
+any realization eventually wander over \emph{almost all} of $\Omega$ ($P(A)=1$),
+or \emph{almost none} of it at all ($P(A)=0$).
+
+\subsection*{A word of caution on the terminology}
+
+\cite[p. 40]{collet--dynsys.valparaiso}:
+\begin{quote}
+Birkhoff's ergodic theorem does not prove ergodicity .
+It may be a very useful tool in proving ergodicity but as such it does not
+claim it. In particular it applies in non-ergodic cases. Birkhoff's ergodic applies
+as soon as you have an invariant measure. You have to work more to decide
+whether or not the measure is ergodic.
+\end{quote}
+
+(I want to remove this remark for the final version for Santa Maria)
+
+
+\subsection*{The mixing condition}
+
+implies (is a sufficient condition for) ergodicity:
+\[
+\lim_{\tau\to\infty} \int_\Omega f(x) g(\phi_{\tau}(x))\,\md{P}(x) = \int_\Omega f(x)\,\md{P}(x)
+                                                                   \int_\Omega g(x)\,\md{P}(x)
+\]
+But
+\[
+C_{fg}(\tau) \equiv \tavg{f(x)g(\phi_\tau(x))} - \tavg{f(x)}\tavg{g(x)}
+\]
+is the $\tau$-covariance function; therefore,
+\begin{quote}
+If the $\tau$-covariance function goes go to zero, the process is ergodic.
+\end{quote}
+But this does not even guarantee that the process has finite variance.  For more
+regularity, more conditions are needed.  
+
+The most common is the existence of
+integral scales.
 
 
 \bibliography{all}
