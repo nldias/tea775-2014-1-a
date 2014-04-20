@@ -34,6 +34,15 @@
  \theoremprework{\needspace{1cm}\bigskip\hrule height1pt\leavevmode}
  \newtheorem{Exe}{Exemplo}[chapter]
 }
+
+
+\newcommand{\skipsol}{\vspace*{0.1cm}
+%\hrule
+\vspace*{0.1cm}
+\noindent SOLUÇÃO
+}
+
+
 \newcommand{\skipend}{\vspace*{1ex}\hrule width5cm height1pt}
 \newenvironment{Def}{
 \abovedisplayskip=18pt plus 3pt minus 9pt
@@ -2731,6 +2740,232 @@ orbits, the time evolution being the shift.
 \emph{In that sense, any stochastic process is a dynamical system (a not very useful
 remark in practice).}
 \end{quote}
+
+\chapter{Processos estocásticos a partir de sistemas dinâmicos}
+
+Este capítulo formaliza as observações de Collet coletadas ao fim do capítulo
+anterior.
+
+\section{Definições}
+
+Seja $\Omega$ o espaço de fase, ou espaço amostral.  A partir de agora, esses
+dois termos devem ser sinônimos. Seja
+\begin{align*}
+\phi_t : \Omega &\rightarrow \Omega \\
+                 \omega &\mapsto \phi_t(\omega)
+\end{align*}
+o \emph{fluxo}, com $t \in \mathscr{T}$, onde $\mathscr{T} = \mathbb{R}$ ou $\mathbb{R}^+$ ou
+$\mathbb{Z}$ ou $\mathbb{Z}^+$. Como sabemos, $\mathscr{T}$ é o domínio
+``temporal'' de evolução do fluxo. Nada impede que se generalize $\phi_t$ para
+funções do tempo e do espaço físico, ou para funções de frequência e número de
+onda, etc..
+
+O fluxo deve atender a 
+\begin{align}
+\phi_t \circ \phi_s &= \phi_{t+s}, \\
+\phi_0 &= \mathbbm{I_d},
+\end{align}
+onde $\mathbbm{I_d}$ é a identidade.
+
+Se $\mathscr{T} = \mathbb{R}$ ou $\mathbb{R}^+$, temos um sistema dinâmico
+contínuo. Se $\mathscr{T} = \mathbb{Z}$ ou $\mathbb{Z}^+$, temos um sistema
+dinâmico discreto.
+
+Dado um sistema dinâmico contínuo, podemos obter, a partir dele, um sistema
+dinâmico discreto restringindo $\mathscr{T}$ a $\mathbb{R} \cap \mathbb{Z}$
+\textbf{(não entendo $\mathbb{R} \cap h\mathbb{Z}$)} (ou $\mathbb{R}^+ \cap
+\mathbb{Z}^+$) e redefinindo o fluxo: dado $h > 0 \in \mathbb{R}$ constante, fazemos
+\begin{equation}
+T^k(\omega) \equiv \phi_{hk}(\omega), \; k \in \mathbb{Z} \, \text{ou} \,
+\mathbb{Z}^+.
+\end{equation}
+
+\begin{Def}
+O conjunto $\{\phi_t(\omega_0)\}_{t\in\mathscr{T}}$  é a trajetória, ou a
+órbita, de $\omega_0$.
+\end{Def}
+
+Outra forma de obter um sistema dinâmico discreto a partir de um sistema
+dinâmico contínuo é via mapa de Poincaré: obtém-se a interseção da órbita com
+uma superfície (variedade) transversal a ela e os pontos de interseção formam o
+mapa na superfície. \textbf{Não tive disposição de fazer a figura em pstricks!
+  voluntários?}
+
+\section{Medidas invariantes}\label{sec:medidas-invariantes}
+
+\begin{Def}
+O suporte de uma medida não identicamente nula é o menor conjunto fechado cujo
+complemento tem medida zero.
+\end{Def}
+
+\begin{Exe}
+A medida de probabilidade do exemplo \ref{exe:dist-binom} tem suporte
+$\{0,1,2,3,4,5,6\}$
+\skipend
+\end{Exe}
+
+\textbf{Pergunta: nós precisamos \emph{mesmo} da definição de suporte aqui? O
+  que isso contribui para conceitualizarmos e entendermos medidas invariantes?}
+
+\begin{Exe}
+Dado o intervalo $[0,1]$ e a medida de Lebesgue: $\exists A$ fechado, $A \ne
+[0,1]$, tal que $\overline{A}$ (aberto) possui medida de Lebesgue nula?
+
+\skipsol
+
+Dado $\overline{A}$ aberto contido em $[0,1]$, $\overline{A} \ne \emptyset$, deve
+haver algum intervalo não vazio contido nele. Como os intervalos possuem medida
+de Lebesgue diferente de zero, $|\overline{A}| \ne 0$, e portanto $A$ não pode
+ser o suporte.  Segue-se que o suporte da medida de Lebesgue em $[0,1]$ é o
+próprio $[0,1]$.
+\skipend
+
+\end{Exe}
+
+Considere agora o espaço de fase do sistema dinâmico no instante $t =
+0$. Suponha que, nesse instante, haja uma \emph{distribuição de probabilidade} $\mu$
+associada, ou seja: suponha que haja uma \emph{configuração} inicial. A pergunta
+óbvia é: qual é a distribuição de probabilidade após um avanço $t$ do sistema?
+
+\textbf{Em toda a aula, usamos $\mu$ e não $P$.  Acho que devemos tentar
+  uniformizar para $P$ (ou $\mu$) em todo o texto.}
+
+É mais ou menos óbvio que, para responder a essa pergunta, é necessário que
+$\phi_t$ seja \emph{mensurável} segundo $\mu$: lembremo-nos do que isso
+significa: dada a tripla $(\Omega,\mathscr{B},\mu)$, 
+\[
+\forall A \in \mathscr{B} \Rightarrow \phi_t^{-1}(A) \in \mathscr{B}.
+\]
+Se $\mathscr{T} = \mathbb{R} \,\text{ou}\, \mathbb{Z}$, podemos substituir por
+\[
+\forall A \in \mathscr{B} \Rightarrow \phi_{-t}(A) \in \mathscr{B}.
+\]
+
+Note que $\phi_t$ deve fazer a medida $\mu$ da configuração inicial ``evoluir''
+até uma medida $\nu$ no instante $t_0$. Isso significa que $\nu$ precisa ser
+definida a partir de $\mu$.  A maneira natural de fazer isso é
+\[
+\nu_{t_0}(A) \equiv \mu(\phi_{t_0}^{-1}(A)).
+\]
+
+A notação $\phi_{t_0}^{-1}(A)$ denota a \emph{imagem inversa}. Nem sempre isso
+significa uma função inversa.  No entanto, quando $\mathscr{T}=\mathbb{R}$ ou
+$\mathscr{T}=\mathbb{Z}$, temos
+\begin{align*}
+\phi_{t_0}^{-1} &= \phi_{-t_0}, \\
+\phi_{-t}\circ\phi_{t} &= \phi_{-t + t} = \phi_0 = \mathbbm{I_d}
+\end{align*}
+e, nesses casos, $\phi_{t_0}^{-1}$ de fato é a função inversa.
+
+\textbf{Favor confirmar a afirmação acima.}
+
+\section{\textit{Push-forward}, \textit{Pull-back}}\label{sec:push-pull}
+
+É conveniente, notacionalmente, escrever:
+\[
+\md{\nu}_{t_0} = \md {\phi_{t_0}}_*\mu
+\]
+e chamar o resultado de \textit{push-forward} de $\mu$ por $\phi_{t_0}$.
+
+O que precisamos aqui é a definição
+\[
+\md f_*\mu(A) \equiv \md \mu\bigl( f^{-1}(A)\bigr).
+\]
+
+Tentemos:
+\begin{align*}
+\nu_{t_0}(A) &= \int_A \md\nu_{t_0}(A) \\
+             &= \int_A \md\mu\bigl(\phi_{t_0}^{-1}(A)\bigr)\\
+             &= \int_A \md {\phi_{t_0}}_* \mu\\
+             &= \int_A \phi_{t_0}(\omega)\md{\mu} \; \text{\textbf{Não entendo isso!}}\\
+\end{align*}
+
+Para entender a última linha:
+\[
+\{ \omega: \phi_{t_0}(\omega) \in A \} \equiv \{\omega: \omega \in \phi_{t_0}^{-1}(A) \}
+\]
+
+Segue-se que (\textbf{isso é difícil!}):
+
+\[
+\int_{\omega \in A} \phi_{t_0}(\omega)\md\mu = \int_{\phi_{t_0}^{-1}(A)}\md\mu =
+\mu(\phi_{t_0}^{-1}(A)) = \nu_{t_0}(A).
+\]
+
+\textbf{Sinceramente, eu copiei, mas não entendi: isso precisa ser revisto.  Em
+  particular, preciso confirmar o índice da primeira integral acima, à esquerda.}
+
+\begin{Def}
+Uma medida $\mu$ definida na $\sigma$-álgebra $\mathscr{B}$ é invariante sob o
+fluxo $\phi_t$, $t \in \mathscr{T}$ se, para todo $A\in\mathscr{B}$ vale
+\begin{equation}
+\mu\bigl(\phi_t^{-1}(A)\bigr) = \mu(A).
+\end{equation}
+\end{Def}
+
+Estamos agora prontos para definirmos (mais uma vez?) um processo estocástico:
+\begin{Def}
+Seja $g: \Omega \rightarrow \mathbb{R}$ uma função mensurável (por exemplo, $g =
+\mathbbm{1}_A$, ou uma componente de uma grandeza física, etc.).  Dado o ssitema
+dinâmico $(\Omega, \phi_t, t\in\mathscr{T},\mathscr{B},\mu)$, um \emph{processo
+  estocástico} $X_t$ é
+\[
+   X_t(\omega) \equiv g\circ\phi_t(\omega).
+\]
+Vemos que $X_t$ é uma família de variáveis aleatórias no parâmetro $t$
+\end{Def}
+
+Seja agora $\mu$ uma medida invariante sob o fluxo $\phi_t$.  Então,
+
+\begin{Teo}
+Se $(\Omega, \phi_t, t\in\mathscr{T},\mathscr{B},\mu)$ é um sistema dinâmico com
+$\Omega \in \mathbb{R}^n$ compacto com interior não vazio, e se $\phi(\omega,t)$
+é uma função contínua em $\Omega \times \mathscr{T}$, então 
+$\mu$ é invariante sob o fluxo $\phi_t$ se e somente se para qualquer $g$
+contínua e limitada vale
+\[
+\int_{??} g\circ\phi_t\md\mu = \int_{??} g\md\mu.
+\]
+\end{Teo}
+
+\textbf{Aparentemente, não vamos provar esse teorema, certo?. Mas seria bom
+  explicar a sua função no texto.}
+
+\begin{Teo}
+Se $\mu$ é uma medida invariante sob $\phi_t$, $X_t$ é um processo estocástico estacionário.
+\end{Teo}
+
+Prova: considere o conjunto de instantes $p_0, p_1, \ldots, p_n$ e a defasagem
+$t_0 = 0, t_1 = p_1 - p_0, \ldots, t_n = p_n - p_0$. 
+Acho que é preciso deixar explícito o resultado
+\[
+\left[ g \circ \phi\right]^{-1}(A) = \left[\phi^{-1}\circ g^{-1}\right](A).
+\]
+\textbf{(CERTO???)}
+
+
+Agora,
+
+\begin{multline*}
+P\bigl( X_{p_0} \in A_0, X_{p_1} \in A_1, \ldots, X_{p_n} \in A_n\bigr) = \\
+P\bigl( g\circ\phi_{p_0}\in A_0, g\circ\phi_{p_1}\in A_1, \ldots, g\circ\phi_{p_n}\in
+A_n\bigr) =\\
+\mu\left( \left[g\circ\phi_{p_0}\right]^{-1}(A_0) \cup \left[g\circ\phi_{p_1}\right]^{-1}(A_1) \cup \ldots
+\cup \left[g\circ\phi_{p_n}\right]^{-1}(A_n)\right)=\\
+\mu\left( \left[\phi_{p_0}^{-1}\circ g^{-1}\right](A_0) \cup \left[\phi_{p_1}^{-1}\circ g^{-1}\right](A_1)
+\cup \ldots \cup \left[\phi_{p_n}^{-1} \circ g^{-1}\right](A_n)\right) =\\
+\mu\left( \left[\phi_{p_0}^{-1}\circ g^{-1}(A_0)\right] \cup \left[\phi_{p_0}^{-1}\circ \phi_{t_1}^{-1}\circ g^{-1}(A_1)\right]
+\cup \ldots \cup \left[\phi_{p_0}^{-1}\circ \phi_{t_n}^{-1} \circ g^{-1}\right](A_n)\right) \\
+= \mu\left( \phi_{p_0}^{-1}\left(g^{-1}(A_0)\cup g^{-1}(A_1) \cup \ldots \cup
+g^{-1}(A_n)\right)\right)\\
+= \mu\left( g^{-1}(A_0) \cup g^{-1}(A_1) \cup \ldots \cup g^{-1}(A_n)\right)\\
+= P(X_{t_0} \in A_0, X_{t_1}\in A_1, \ldots , x_{t_n}\in A_n)\blob
+\end{multline*}
+
+\textbf{Não sei se copiei corretamente: precisamos polir.}
+
+\chapter{Ergodicity}
+
 
 
 \subsection*{Ergodicity, and Birkhoff's theorem}
