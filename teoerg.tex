@@ -74,7 +74,7 @@
 
 
 \title{Lições de Teoria Ergódica, Processos Estocásticos e Sistemas Dinâmicos}
-\author{Nelson Luís Dias}
+\author{Ailín Ruiz de Zárate\\Nelson Luís Dias}
 \date{\today}
 
 \begin{document}
@@ -2937,12 +2937,23 @@ Se $\mu$ é uma medida invariante sob $\phi_t$, $X_t$ é um processo estocástico e
 
 Prova: considere o conjunto de instantes $p_0, p_1, \ldots, p_n$ e a defasagem
 $t_0 = 0, t_1 = p_1 - p_0, \ldots, t_n = p_n - p_0$. 
-Acho que é preciso deixar explícito o resultado
-\[
-\left[ g \circ \phi\right]^{-1}(A) = \left[\phi^{-1}\circ g^{-1}\right](A).
-\]
-\textbf{(CERTO???)}
+Acho que é preciso deixar explícitos os resultados
+\begin{align*}
+\left[ g \circ \phi\right]^{-1}(A) &= \phi^{-1} \left( g^{-1}\left(A\right)\right) , \\
+\left[ \phi_t \circ \phi_p\right]^{-1}(g^{-1}(A)) &= \phi_p^{-1}\left( \phi_t^{-1}\left(g^{-1}(A)\right)\right).
+\end{align*}
 
+
+\textbf{(ESTÁ CERTO AGORA???)}
+
+\textbf{MAIS UMA DÚVIDA}
+
+Em Probabilidades, a sentença ``probabilidade de A e B'' é interpretada como uma interseção:
+\begin{align*}
+P\left( \left[X_{t_1} \in A_1\right] \wedge \left[ X_{t_2}(\omega) \in A_2 \right] \right) &= 
+P\left( \left[X_{t_1} \in A_1\right] \cap \left[X_{t_2} \in A_2\right]\right).
+\end{align*}
+No entanto, na dedução a seguir nós usamos uniões: está certo mesmo??
 
 Agora,
 
@@ -2952,17 +2963,319 @@ P\bigl( g\circ\phi_{p_0}\in A_0, g\circ\phi_{p_1}\in A_1, \ldots, g\circ\phi_{p_
 A_n\bigr) =\\
 \mu\left( \left[g\circ\phi_{p_0}\right]^{-1}(A_0) \cup \left[g\circ\phi_{p_1}\right]^{-1}(A_1) \cup \ldots
 \cup \left[g\circ\phi_{p_n}\right]^{-1}(A_n)\right)=\\
-\mu\left( \left[\phi_{p_0}^{-1}\circ g^{-1}\right](A_0) \cup \left[\phi_{p_1}^{-1}\circ g^{-1}\right](A_1)
-\cup \ldots \cup \left[\phi_{p_n}^{-1} \circ g^{-1}\right](A_n)\right) =\\
-\mu\left( \left[\phi_{p_0}^{-1}\circ g^{-1}(A_0)\right] \cup \left[\phi_{p_0}^{-1}\circ \phi_{t_1}^{-1}\circ g^{-1}(A_1)\right]
-\cup \ldots \cup \left[\phi_{p_0}^{-1}\circ \phi_{t_n}^{-1} \circ g^{-1}\right](A_n)\right) \\
-= \mu\left( \phi_{p_0}^{-1}\left(g^{-1}(A_0)\cup g^{-1}(A_1) \cup \ldots \cup
-g^{-1}(A_n)\right)\right)\\
-= \mu\left( g^{-1}(A_0) \cup g^{-1}(A_1) \cup \ldots \cup g^{-1}(A_n)\right)\\
-= P(X_{t_0} \in A_0, X_{t_1}\in A_1, \ldots , x_{t_n}\in A_n)\blob
+\mu\left( \phi_{p_0}^{-1}\left( g^{-1}\left( A_0\right)\right)\cup
+          \phi_{p_1}^{-1}\left( g^{-1}\left( A_1\right)\right)\cup 
+                                                       \ldots \cup 
+          \phi_{p_n}^{-1}\left( g^{-1}\left( A_n\right)\right)\right).
 \end{multline*}
+Mas:
+\begin{align*}
+\phi_{p_k} &= \phi_{t_k + p_0} = \phi_{t_k} \circ \phi_{p_0};\\
+\phi_{p_k}^{-1}\left(g^{-1}\left(A_k\right)\right) &= \phi_{p_0}^{-1}\left( \phi_{t_k}^{-1}\left(g^{-1}\left( A_k\right)\right)\right).
+\end{align*}
+Portanto, agora temos:
+\begin{multline*}
+P\bigl( X_{p_0} \in A_0, X_{p_1} \in A_1, \ldots, X_{p_n} \in A_n\bigr) = \\
+\mu\left( \phi_{p_0}^{-1}\left(                     g^{-1}\left(A_0\right)\right)\cup
+          \phi_{p_0}^{-1}\left(\phi_{t_1}^{-1}\left(g^{-1}\left(A_1\right)\right)\right)\cup
+                                                                           \ldots\cup
+          \phi_{p_0}^{-1}\left(\phi_{t_n}^{-1}\left(g^{-1}\left(A_n\right)\right)\right)\right)=\\
+\mu\left(                      g^{-1}\left(A_0\right)\cup
+          \phi_{t_1}^{-1}\left(g^{-1}\left(A_1\right)\right)\cup
+                                                                           \ldots\cup
+          \phi_{t_n}^{-1}\left(g^{-1}\left(A_n\right)\right)\right)=\\
+P\bigl( X_{t_0=0} \in A_0, X_{t_1} \in A_1, \ldots, X_{t_n} \in A_n\bigr)\blob
+\end{multline*}
+A penúltima igualdade acima é uma decorrência da invariância de $\mu$ sob $\phi$. O que nós provamos é que, quando
+fazemos uma defasagem $p_0$, a probabilidade conjunta não se altera.  Isso é \emph{exatamente} a definição de
+estacionariedade estrita de um processo estocástico usada por \cite[][Definição
+  1.5.6]{todorovic--introduction.stochastic.processes}.
 
-\textbf{Não sei se copiei corretamente: precisamos polir.}
+
+
+Usando uma notação mais ``minha'':
+\[
+P\bigl(X_{t_0} \in A_0, \ldots , X_{t_n} \in A_n\bigr)=
+P\bigl(X_{t_0+\Delta} \in A_0, \ldots , X_{t_n+\Delta} \in A_n\bigr).
+\]
+
+\chapter{2014-04-28: O Teorema Ergódico de von Neumann}
+
+
+Agora nós precisamos introduzir a idéia de normas, e de espaços
+normados. Em geral, a norma $L_p$ de uma função $f(\omega)$ é definida por 
+\begin{equation}
+\Vert f \Vert_p \equiv \left[ \int_\Omega \bigl|f(\omega)\bigr|^p \,\md{\mu} \right]^{1/p}.\label{eq:norma-p}
+\end{equation}
+A melhor norma do mundo é a $L_2$, que é obtida da definição
+(\ref{eq:norma-p}) para $p = 2$, obviamente. O que $L_2$ traz de
+diferente é a definição do produto interno:
+\begin{equation}
+\tavg{f,g} \equiv \int_\Omega f^*(\omega) g(\omega)\,\md{\mu}.\label{eq:def-prod-interno}
+\end{equation}
+O conjunto das $f$ (mensuráveis) em $\Omega$ com o produto interno
+(\ref{eq:def-prod-interno}), denotado $(\Omega, \Vert \cdot\Vert_2)$,
+é um espaço de Hilbert.
+
+Em resumo, o Teorema Ergódico de von Neumann vai afirmar que:
+\[
+\frac{1}{N}\sum_{k=0}^{N-1}f\circ T^k \xrightarrow[N\to\infty]{L_2} \overline{f}(\omega).
+\]
+O lado esquerdo é uma média temporal no parâmetro $k$ ($k$ é o tempo
+discreto). A convergência acima deve ser entendida como uma
+convergência na média quadrática:
+\begin{equation}
+\lim_{N\to\infty} \left\Vert \frac{1}{N}\sum_{k=0}^{N-1}f\circ T^k -
+\overline{f}\right\Vert_2 = 0. \label{eq:pre-teoerg}
+\end{equation}
+
+A idéia da demonstração é considerar 3 ``grupos'' de funções:
+\begin{enumerate}[i)]
+\item O conjunto das funções 
+\[
+\mathscr{C} = \left\{ f_{\text{i}}(\omega) = g  - g\circ T, g \in L_2\right\}.
+\]
+\item O \emph{fecho} do grupo i, denominado $\overline{\mathscr{C}}$.
+\item O conjunto \emph{ortogonal} a $\overline{\mathscr{C}}$,
+  denominado $\overline{\mathscr{C}}^\perp$.
+\end{enumerate}
+
+Lembremo-nos do que é uma variável aleatória:
+\begin{align*}
+   g: (\Omega,\mathscr{F},\mu) &\rightarrow (\mathbb{R},\mathscr{B},P)\\
+   \omega                      &\mapsto g(\omega).
+\end{align*}
+
+
+\textbf{Observação:} Claramente, a notação está uma bagunça. Minha
+visão ingênua continua a ser a de que a função mensurável $g$ induz a
+sigma-álgebra $\mathscr{B}$ em $\mathbb{R}$ a partir da sigma-álgebra
+$\mathscr{F}$ no espaço
+``original''. \textbf{Correct me!}
+
+Juntamente com o sistema dinâmico $\phi_t$,
+\begin{align*}
+   \phi_t: (\Omega,\mathscr{F}\mu) &\rightarrow (\Omega,\mathscr{F}\mu),\\
+            \omega &\mapsto \phi_t(\omega),
+\end{align*}
+já sabemos que isso produz o processso estocástico 
+\[
+X_t(\omega) \equiv g \circ \phi_t(\omega).
+\]
+
+Considere a tripla usual $(\Omega,\mathscr{F},\mu)$ e um fluxo discreto $T$, onde $\mu$ é invariante sob $T$. O
+significado disso já deve ter sido explicado anteriormente:
+\[
+\mu\left(T^{-1}\left(A\right)\right) = \mu\left(A\right), \; \forall A \in \mathscr{F}.
+\]
+
+Isso significa, para mim, tão-somente que:
+\[
+\int_{T^{-1}(A)} \md{\mu} = \int_{A} \md{\mu}
+\]
+Uma coisa totalmente diferente, e nova, é a afirmativa: 
+
+\begin{Teo}\label{teo:ginv-mu}
+Se $\mu$ é invariante sob $T$, então, para qualquer função $g(\omega)$ contínua e limitada,
+\[
+\int_{\Omega} g(T(\omega))\,\md{\mu} = \int_\Omega g(\omega)\,\md{\mu}.
+\]
+\end{Teo}
+
+\textbf{A prova não está clara para mim: onde está a prova?} 
+
+De qualquer modo, o teorema \ref{teo:ginv-mu} será crucial
+na prova da validade do Teorema ergódico para as funções do grupo i. Sejam então as $f$'s de $L_2$ tais que
+$ f = g - g\circ T$. Adivinhando, façamos $\overline{f} = 0$ em quase todos os pontos (qtp) de $\Omega$. Agora, observe
+que:
+
+
+\newlength{\somespc}
+\settowidth{\somespc}{$\displaystyle = {\big(}$\hspace*{4pt}}
+\newlength{\zomespc}
+\settowidth{\zomespc}{$\displaystyle\lim_{\Delta x, \Delta y, \Delta z \to 0}\biggl[$}
+
+
+
+\begin{align*}
+\sum_{k=0}^{N-1} f\circ T^k &= \sum_{k=0}^{N-1} \left( g - g\circ T\right)\circ T^k \\
+                            &= \big( g - g\circ T + \\
+                            &\mbox{\hspace*{\somespc}} g\circ T  - g\circ T^2 + \\
+                            &\mbox{\hspace*{\somespc}} g\circ T^2 - g\circ T^3 + \ldots \\
+                            &\mbox{\hspace*{\somespc}} \vdots\\
+                            &\mbox{\hspace*{\somespc}} g\circ T^{N-1} - g\circ T^N \big)\\
+                            &= \left( g - g\circ T^N \right).
+\end{align*}
+
+Segue-se que
+\begin{align*}
+\left\Vert \frac{1}{N} \sum_{k=0}^{N-1} f\circ T^k - 0\right\Vert_2 &=
+   \left\Vert \frac{1}{N}\left( g - g\circ T^N\right)\right\Vert_2 \\
+&= \frac{1}{N} \left\Vert g - g\circ T^N\right\Vert_2 \\
+&\le \frac{1}{N} \left[ \left\Vert g \right\Vert_2 + \left\Vert g\circ T^N\right\Vert_2\right]\\
+&= \frac{2}{N} \left\Vert g \right\Vert_2 \xrightarrow{N\to\infty} 0.
+\end{align*}
+
+A demonstração de que o Teorema Ergódico vale para as funções do grupo
+ii é a mais técnica de todas. Observe que a afirmativa $f \in
+\overline{C}$ significa que $f$ deve estar ``próxima'' de $g - g\circ
+T$.  Em linguagem de epsilons:
+\[
+f \in \overline{\mathscr{C}} \Rightarrow \forall \epsilon > 0, \exists h_\epsilon \in \mathscr{C} : \Vert f -
+h_\epsilon \Vert_2 < \epsilon.
+\]
+Em particular, o teorema é válido para $h_\epsilon$:
+\[
+\lim_{N\to\infty} \left\Vert \frac{1}{N}\sum_{k=0}^N h_\epsilon \circ
+T^k\right\Vert_2 = 0.
+\]
+Mas isso é o mesmo que dizer que, $\forall \epsilon > 0$, $\exists
+N_\epsilon$ tal que
+\[
+N > N_\epsilon \Rightarrow \left\Vert \frac{1}{N}\sum_{k=0}^N h_\epsilon \circ
+T^k\right\Vert_2 < \epsilon.
+\]
+Portanto, para qualquer $f \in \overline{\mathscr{C}}$, fixado um
+$\epsilon > 0$, existem $h_\epsilon \in \mathscr{C}$ e $N_\epsilon$ tais que, para
+todo $N > N_\epsilon$, valem ambas as desigualdades abaixo:
+\begin{align}
+\left\Vert f - h_\epsilon \right\Vert_2 &< \epsilon, \label{eq:ineq-f-h}\\
+\left\Vert \frac{1}{N}\sum_{k=0}^{N-1} h_\epsilon \circ
+T^k\right\Vert_2 &< \epsilon.\label{eq:ineq-h-T}
+\end{align}
+Se $\overline{f} = 0$ também para as funções $f$ do grupo ii (o que é uma
+suposição razoável), desejamos provar que
+\[
+\left\Vert \frac{1}{N}\sum_{k=0}^{N-1} f \circ
+T^k - 0\right\Vert_2 \rightarrow 0.
+\]
+
+Segue-se um longo e tenebroso inverno:
+\begin{align*}
+\left\Vert \frac{1}{N}\sum_{k=0}^N f \circ
+T^k \right\Vert_2  &= \left\Vert \frac{1}{N}\sum_{k=0}^N \left(f -
+h_\epsilon + h_\epsilon\right) \circ
+T^k \right\Vert_2 \\
+&= \frac{1}{N} \left\Vert \sum_{k=0}^{N-1} \left[ \left(f -
+h_\epsilon\right)\circ T^k  + h_\epsilon \circ T^k
+\right]\right\Vert_2\\
+&\le \frac{1}{N} 
+\left\Vert \sum_{k=0}^{N-1} \left(f - h_\epsilon\right)\circ T^k \right\Vert_2 + \frac{1}{N}\left\Vert \sum_{k=0}^{N-1} h_\epsilon \circ T^k
+\right\Vert_2
+\\
+&\le \frac{1}{N} 
+\sum_{k=0}^{N-1} \left\Vert \left(f - h_\epsilon\right)\circ T^k \right\Vert_2 + \frac{1}{N}\left\Vert \sum_{k=0}^{N-1} h_\epsilon \circ T^k
+\right\Vert_2\\
+&= \frac{1}{N} 
+\sum_{k=0}^{N-1} \left\Vert \left(f - h_\epsilon\right) \right\Vert_2 + \left\Vert \frac{1}{N}\sum_{k=0}^{N-1} h_\epsilon \circ T^k
+\right\Vert_2\\
+&\le \frac{1}{N} N\epsilon + \epsilon \; \text{(devido a (\ref{eq:ineq-f-h}) e (\ref{eq:ineq-h-T}))}\\
+&= 2\epsilon
+\end{align*}
+
+Portanto, dado $\epsilon_0 > 0$, existe $M = N_{\epsilon_0/2}$ tal
+que, para todo $N > M$, e para toda $f \in \overline{\mathscr{C}}$,
+\[
+\left\Vert \frac{1}{N}\sum_{k=0}^N f \circ
+T^k \right\Vert_2 < \epsilon_0.
+\]
+Isso prova o teorema também para as funções pertencentes a $\overline{\mathscr{C}}$.
+
+A prova para o grupo iii é mais clássica, e menos
+demandante. Considere o conjunto ortogonal a $\overline{\mathscr{C}}$:
+\[
+\overline{\mathscr{C}}^\perp = 
+\left\{
+f: \tavg{f,w}= 0, \forall w \in \overline{\mathscr{C}} 
+\right\}.
+\]
+Provemos agora o seguinte:
+\begin{equation}
+f \in \overline{\mathscr{C}}^\perp \Leftrightarrow \left\Vert f - f\circ T
+\right\Vert_2 = 0.\label{eq:feqfoT}
+\end{equation}
+
+Por simplicidade, suporemos $f(\omega) \in \mathbb{R}$:
+
+\begin{align*}
+\left\Vert f - f\circ T
+\right\Vert_2 &= \tavg{f - f\circ T,f-f\circ T}\\
+&= \tavg{f,f} - \tavg{f\circ T,f} - \tavg{f,f\circ T} + \tavg{f\circ
+  T,f\circ T}\\
+&= \left\Vert f\right\Vert_2^2 - 2 \tavg{f,f\circ T} + \left\Vert
+f\circ T\right\Vert_2^2\\
+&= \left\Vert f\right\Vert_2^2 - 2 \tavg{f,f\circ T} + \left\Vert
+f\right\Vert_2^2.
+\end{align*}
+Na última linha acima, usamos mais uma vez a invariância de $\mu$ sob
+$T$. O termo central do lado direito é
+\begin{align*}
+\tavg{f, f\circ T} &= \tavg{f, f - f + f\circ T}\\
+                   &= \tavg{f, f + \underbrace{\left[ f\circ T -
+      f\right]}_{\perp f}}\\
+                   &= \tavg{f,f} + \tavg{f, f\circ T - f}\\
+                   &= \left\Vert f\right\Vert_2^2 + 0.
+\end{align*}
+
+Na chave horizontal acima, observe que $\left[f\circ T - f \right] \in
+\mathscr{C}$, e que portanto é perpendicular à própria $f$. Juntando
+tudo:
+\[
+\left\Vert f - f\circ T
+\right\Vert_2 = 0.
+\]
+
+A demonstração é uma sequência de igualdades: vale portanto
+$\Leftrightarrow$ em (\ref{eq:feqfoT}).
+
+Com esse resultado auxiliar, faça agora $\overline{f} = f$ para o
+grupo iii ($f \in \overline{\mathscr{C}}^\perp$).  Precisamos também
+do fato 
+\begin{equation}
+f \circ T^k = f, \; \forall k \in \mathbb{N}. \label{eq:foTback}
+\end{equation}
+Isso pode ser feito por indução. (\ref{eq:foTback}) é trivial para $k
+= 0$, e foi provado em (\ref{eq:feqfoT}) (na média quadrática) para $k=1$. Suponha que seja verdade para $k-1$; então,
+\[
+f \circ T^k = f \circ T^{k-1}\circ T = f \circ T = f;
+\]
+e o resultado também vale para $k$, o que completa a prova por indução finita\blob
+
+O teorema ergódico para as funções do grupo iii será:
+\begin{align*}
+\lim_{N\to\infty}
+   \left\Vert \frac{1}{N}\sum_{k=0}^{N-1} f\circ T^k -
+   \overline{f}\right\Vert_2 &= \lim_{N\to\infty}\left\Vert \frac{1}{N}\sum_{k=0}^{N-1}
+   f\circ T^k - f\right\Vert_2\\
+&= \lim_{N\to\infty}\frac{1}{N}\left\Vert \sum_{k=0}^{N-1}   \left[f\circ T^k -
+     f\right]\right\Vert_2\\
+&\le \lim_{N\to\infty}\frac{1}{N} \sum_{k=0}^{N-1} \left\Vert f\circ T^k -
+   f\right\Vert_2 = 0.
+\end{align*}
+
+\textbf{Atenção: as funções do grupo iii parecem dispensar o limite!
+  Isso tem alguma utilidade???}
+
+\textbf{2014-04-30}
+
+Infelizmente, ainda não definimos ergodicidade!
+
+\begin{Def}
+O sistema dinâmico $(\Omega, \mathscr{F}, \mu, T)$ (onde $\mu$ é
+invariante sob $T$) é ergódico se, para todo $A \in \mathscr{F}$,
+\[
+\mu(A) = 0 \qquad \text{ou} \qquad \mu(\overline{A}) = 0.
+\]
+\end{Def}
+
+Nós não conseguimos ainda provar:
+\begin{Teo} (O Teorema Ergódico de von Neumann) \label{teo:teoerg}
+Se $(\Omega, \mathscr{F}, \mu, T)$ é ergódico, então, em (\ref{eq:pre-teoerg}),
+\[
+\overline{f}(\omega) = \int_\Omega f(\omega)\,\md{\mu} = \text{constante}.
+\]
+\end{Teo}
+
 
 \chapter{Ergodicity}
 
