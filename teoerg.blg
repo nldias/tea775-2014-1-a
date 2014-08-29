@@ -3,44 +3,44 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: teoerg.aux
 The style file: belllike.bst
 Database file #1: all.bib
-You've used 1 entry,
+You've used 26 entries,
             1975 wiz_defined-function locations,
-            566 strings with 4957 characters,
-and the built_in function-call counts, 296 in all, are:
-= -- 26
-> -- 7
-< -- 1
-+ -- 2
-- -- 2
-* -- 18
-:= -- 59
-add.period$ -- 3
-call.type$ -- 1
-change.case$ -- 5
-chr.to.int$ -- 1
-cite$ -- 1
-duplicate$ -- 14
-empty$ -- 24
-format.name$ -- 3
-if$ -- 56
-int.to.chr$ -- 1
+            724 strings with 8325 characters,
+and the built_in function-call counts, 8450 in all, are:
+= -- 840
+> -- 217
+< -- 26
++ -- 75
+- -- 64
+* -- 639
+:= -- 1512
+add.period$ -- 77
+call.type$ -- 26
+change.case$ -- 136
+chr.to.int$ -- 23
+cite$ -- 26
+duplicate$ -- 359
+empty$ -- 667
+format.name$ -- 98
+if$ -- 1649
+int.to.chr$ -- 4
 int.to.str$ -- 0
-missing$ -- 2
-newline$ -- 8
-num.names$ -- 3
-pop$ -- 7
+missing$ -- 36
+newline$ -- 132
+num.names$ -- 78
+pop$ -- 131
 preamble$ -- 1
-purify$ -- 6
+purify$ -- 162
 quote$ -- 0
-skip$ -- 11
+skip$ -- 274
 stack$ -- 0
-substring$ -- 12
-swap$ -- 1
-text.length$ -- 0
+substring$ -- 625
+swap$ -- 26
+text.length$ -- 1
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 4
+type$ -- 134
 warning$ -- 0
-while$ -- 2
+while$ -- 76
 width$ -- 0
-write$ -- 15
+write$ -- 336
